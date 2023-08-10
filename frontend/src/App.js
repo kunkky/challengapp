@@ -1,11 +1,11 @@
 import React from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import Home from './Pages/Home'
-import SignUp from 'Pages/SignUp'
-import Signin from 'Pages/Signin'
-import Profile from 'Pages/Profile'
-import ErrorPage from 'Pages/ErrorPage'
-import Dashboard from 'Pages/Dashboard'
+import SignUp from './Pages/SignUp'
+import Signin from './Pages/SignIn'
+import Profile from './Pages/Profile'
+import ErrorPage from './Pages/ErrorPage'
+import Dashboard from './Pages/Dashboard'
 
 
 
