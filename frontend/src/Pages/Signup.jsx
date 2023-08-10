@@ -5,8 +5,24 @@ const Signup = () => {
     const [userEmail, setUserEmail] = useState('')
     const [userPassword, setUserPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
+    const [ConfirmPasswordEyes, setConfirmPasswordEyes] = useState('visibility')
+    const [confirmPasswordType, setconfirmPasswordType] = useState('password')
+    const [PasswordEyes, setPasswordEyes] = useState('visibility')
+    const [PasswordType, setPasswordType] = useState('password')
+
 //collect user input using state
 
+    const togglePassword = () => {
+        if (PasswordEyes === 'visibility') {
+            setPasswordEyes('visibility_off');
+            setPasswordType('text')
+        }
+        else {
+            setPasswordEyes('visibility');
+            setPasswordType('password')
+
+        }
+    }
 //
 
     return (
