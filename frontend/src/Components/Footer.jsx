@@ -30,32 +30,33 @@ const Footer = () => {
             Let's keep in touch!
           </h4>
           <h5 className="text-lg mt-0 mb-2 text-gray-700">
-            Find us on any of these platforms, we respond 1-2 business days.
+            Contact us Via the form above. We respond 1-2 business days.
           </h5>
           <div className="mt-6">
             <button
               className="bg-white text-blue-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 p-3"
               type="button"
             >
-              <i className="flex fab fa-twitter"></i>
+                <i class="flex bi bi-twitter"></i>
+               
             </button>
             <button
               className="bg-white text-blue-600 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 p-3"
               type="button"
             >
-              <i className="flex fab fa-facebook-square"></i>
+                <i class="flex bi bi-facebook"></i>
             </button>
             <button
-              className="bg-white text-pink-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 p-3"
+              className="bg-white text-blue-700 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 p-3"
               type="button"
             >
-              <i className="flex fab fa-dribbble"></i>
+                <i class="flex bi bi-linkedin"></i>
             </button>
             <button
               className="bg-white text-gray-900 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 p-3"
               type="button"
             >
-              <i className="flex fab fa-github"></i>
+                <i class="flex bi bi-github"></i>
             </button>
           </div>
         </div>
@@ -124,13 +125,8 @@ const Footer = () => {
       <div className="flex flex-wrap items-center md:justify-between justify-center">
         <div className="w-full md:w-4/12 px-4 mx-auto text-center">
           <div className="text-sm text-gray-600 font-semibold py-1">
-            Copyright © {new Date().getFullYear()}{" "}Tailwind Starter Kit by{" "}
-            <a
-              href="https://www.creative-tim.com"
-              className="text-gray-600 hover:text-gray-900"
-            >
-              Creative Tim
-            </a>.
+            Copyright © {new Date().getFullYear()}{" "}Our Team Name
+            
           </div>
         </div>
       </div>

@@ -63,7 +63,7 @@ const Home = () => {
               <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg">
                 <div className="px-4 py-5 flex-auto">
                   <div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-red-400">
-                    <i className="fas fa-award"></i>
+                      <i class="bi bi-braces"></i>
                   </div>
                   <h6 className="text-xl font-semibold">Awarded Agency</h6>
                   <p className="mt-2 mb-4 text-gray-600">
@@ -77,7 +77,7 @@ const Home = () => {
               <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg">
                 <div className="px-4 py-5 flex-auto">
                   <div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-blue-400">
-                    <i className="fas fa-retweet"></i>
+                      <i class="bi bi-journal-code"></i>
                   </div>
                   <h6 className="text-xl font-semibold">
                     Free Revisions
@@ -93,7 +93,7 @@ const Home = () => {
               <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg">
                 <div className="px-4 py-5 flex-auto">
                   <div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-green-400">
-                    <i className="fas fa-fingerprint"></i>
+                      <i class="bi bi-code-slash"></i>
                   </div>
                   <h6 className="text-xl font-semibold">
                     Verified Company
@@ -110,7 +110,7 @@ const Home = () => {
           <div className="flex flex-wrap items-center mt-32">
             <div className="w-full md:w-5/12 px-4 mr-auto ml-auto">
               <div className="text-gray-600 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-gray-100">
-                <i className="fas fa-user-friends text-xl"></i>
+                  <i class="bi bi-terminal"></i>
               </div>
               <h3 className="text-3xl mb-2 font-semibold leading-normal">
                 Working with us is a pleasure
@@ -206,7 +206,7 @@ const Home = () => {
             <div className="w-full md:w-5/12 ml-auto mr-auto px-4">
               <div className="md:pr-12">
                 <div className="text-pink-600 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-pink-300">
-                  <i className="fas fa-rocket text-xl"></i>
+                    <i class="bi bi-braces-asterisk"></i>
                 </div>
                 <h3 className="text-3xl font-semibold">
                   A growing company
@@ -282,16 +282,16 @@ const Home = () => {
               <div className="px-6">
                 <img
                   alt="..."
-                  src={require("../assets/img/team-1-800x800.jpg").default}
+                    src="https://scontent.flos2-2.fna.fbcdn.net/v/t39.30808-6/343324053_757820185794519_2169248705563550875_n.jpg?_nc_cat=106&cb=99be929b-59f725be&ccb=1-7&_nc_sid=be3454&_nc_eui2=AeG6f7nrQaXNec7ktxHAMJaEpaOMy7Ft786lo4zLsW3vznxZqvgGb5XcTeoiO6guPsbkiZdIVcHM3fZaLYY1B84_&_nc_ohc=kp89VnBvJYUAX-oMYEN&_nc_ht=scontent.flos2-2.fna&oh=00_AfDjs_0KSQXKk9IsiWBHEISjCCvWsTB9Pes_uBZF0OnVCQ&oe=64DAA01E"
                   className="shadow-lg rounded-full max-w-full mx-auto"
                   style={{ maxWidth: "120px" }}
                 />
                 <div className="pt-6 text-center">
                   <h5 className="text-xl font-bold">
-                    Ryan Tompson
+                   Ademuyiwa Adekunle
                   </h5>
                   <p className="mt-1 text-sm text-gray-500 uppercase font-semibold">
-                    Web Developer
+                    Fullstack Web Developer
                   </p>
                   <div className="mt-6">
                     <button
@@ -306,12 +306,7 @@ const Home = () => {
                     >
                       <i className="fab fa-facebook-f"></i>
                     </button>
-                    <button
-                      className="bg-pink-500 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
-                      type="button"
-                    >
-                      <i className="fab fa-dribbble"></i>
-                    </button>
+                    
                   </div>
                 </div>
               </div>
@@ -456,55 +451,8 @@ const Home = () => {
         </div>
 
         <div className="container mx-auto px-4 lg:pt-24 lg:pb-64">
-          <div className="flex flex-wrap text-center justify-center">
-            <div className="w-full lg:w-6/12 px-4">
-              <h2 className="text-4xl font-semibold text-white">
-                Build something
-              </h2>
-              <p className="text-lg leading-relaxed mt-4 mb-4 text-gray-500">
-                Put the potentially record low maximum sea ice extent tihs year down to low ice.
-                According to the National Oceanic and Atmospheric Administration, Ted, Scambos.
-              </p>
-            </div>
-          </div>
-          <div className="flex flex-wrap mt-12 justify-center">
-            <div className="w-full lg:w-3/12 px-4 text-center">
-              <div className="text-gray-900 p-3 w-12 h-12 shadow-lg rounded-full bg-white inline-flex items-center justify-center">
-                <i className="fas fa-medal text-xl"></i>
-              </div>
-              <h6 className="text-xl mt-5 font-semibold text-white">
-                Excelent Services
-              </h6>
-              <p className="mt-2 mb-4 text-gray-500">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
-              </p>
-            </div>
-            <div className="w-full lg:w-3/12 px-4 text-center">
-              <div className="text-gray-900 p-3 w-12 h-12 shadow-lg rounded-full bg-white inline-flex items-center justify-center">
-                <i className="fas fa-poll text-xl"></i>
-              </div>
-              <h5 className="text-xl mt-5 font-semibold text-white">
-                Grow your market
-              </h5>
-              <p className="mt-2 mb-4 text-gray-500">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
-              </p>
-            </div>
-            <div className="w-full lg:w-3/12 px-4 text-center">
-              <div className="text-gray-900 p-3 w-12 h-12 shadow-lg rounded-full bg-white inline-flex items-center justify-center">
-                <i className="fas fa-lightbulb text-xl"></i>
-              </div>
-              <h5 className="text-xl mt-5 font-semibold text-white">
-                Launch time
-              </h5>
-              <p className="mt-2 mb-4 text-gray-500">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
-              </p>
-            </div>
-          </div>
+          
+          
         </div>
       </section>
       <section className="relative block py-24 lg:pt-0 bg-gray-900">
