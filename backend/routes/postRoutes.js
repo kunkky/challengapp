@@ -1,5 +1,7 @@
 const express = require("express");
 const { Questions } = require('../model/question');
+const dbConnection = require('mongoose')
+
 const Joi = require("joi");
 const bodyParse = require("body-parser");
 
@@ -13,6 +15,7 @@ router.get("/",(req,res)=>{
         data: "no data Sent"
     });
 })
+
 
 //admin Routes
 router.post('/createQuestions', bodyParse.json(), async (req, res) => {
@@ -35,35 +38,41 @@ router.post('/createQuestions', bodyParse.json(), async (req, res) => {
 
     }
     const { questionType, questionLevel, question, solution,author } = req.body;
+    
+   
     try {
         //save in database
         const newQuestion = new Questions({
-             questionType, questionLevel, question, solution, author,
-            dateCreated: new Date().toJSON(), dateUpdated: new Date().toJSON()
+            questionType, questionLevel, question, solution, author,
+            dateCreated: new Date().toJSON()
         });
         
-        await newQuestion.save()
+        const result = await newQuestion.save();
+        console.log(
+            `A document was inserted with the _id: ${result.insertedId}`,
+        );
         res.status(200).send({
             responseCode: "00",
             responseMessage: "Question created successfully",
-            data: newQuestion
+            data: `A document was inserted with the _id: ${result.insertedId}`
         })
     } catch (error) {
         res.status(500).send({
             responseCode: "96",
             responseMessage: "Internal server error",
-            data: null
+            data: 'null'+error
         })
         
     }
 })
-
+//done Question fecting works
 router.get('/getAllQuestions', async(req, res)=>{
     try{
+       
         const question = await Questions.find();
         res.status(200).send({
             responseCode: "00",
-            responseMessage: "Post Fetch Successfully",
+            responseMessage: "Question Fetch Successfully",
             data: question
         })
     }catch(error){
@@ -142,31 +151,7 @@ router.delete('/deleteQuestionsById', bodyParse.json(), async (req, res) => {
 
     }
     const { title, content, author } = req.body;
-    try {
-        let question = await Questions.findOne({ title })
-        if (question) {
-            return res.status(400).send({
-                responseCode: "96",
-                responseMessage: "No Post Found with Id",
-                data: null
-            });
-        } else {
-            //save back to db
-            question = { title, content, author, dateUpdated: new Date().toJSON() }
-            await question.save()
-            return res.status(200).send({
-                responseCode: "00",
-                responseMessage: "Post Updated Successfully",
-                data: question
-            });
-        }
-    } catch (error) {
-        return res.status(400).send({
-            responseCode: "96",
-            responseMessage: error.details[0].message,
-            data: null
-        });
-    }
+
 })
 
 

@@ -30,4 +30,4 @@ const postSchema =new mongoose.Schema({
 })
 
 const Questions =mongoose.model('questions', postSchema);
-module.exports.Posts = Questions
+module.exports.Questions = Questions
