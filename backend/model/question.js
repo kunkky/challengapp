@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const postSchema =new mongoose.Schema({
+const questionSchema =new mongoose.Schema({
    
     author: {
         type: String
@@ -29,5 +29,5 @@ const postSchema =new mongoose.Schema({
 
 })
 
-const Questions =mongoose.model('questions', postSchema);
+const Questions = mongoose.model('questions', questionSchema);
 module.exports.Questions = Questions
