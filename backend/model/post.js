@@ -16,6 +16,7 @@ const postSchema =new mongoose.Schema({
     dateUpdated: {
         type: String, default: new Date()
     }
+    
 
 })
 
