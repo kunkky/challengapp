@@ -227,6 +227,25 @@ router.put('/updateQuestionsById', bodyParse.json(), async (req, res) => {
         });
     }
 })
+//Get all users
+router.get('/getAllUsers', async (req, res) => {
+    try {
+
+        const question = await Users.find();
+        res.status(200).send({
+            responseCode: "00",
+            responseMessage: "Users Fetch Successfully",
+            data: question
+        })
+    } catch (error) {
+        res.status(500).send({
+            responseCode: "96",
+            responseMessage: "internal Server erroe",
+            data: null
+        })
+    }
+})
+
 
 //user registration
 router.put('/registeration', bodyParse.json(), async (req, res) => {
