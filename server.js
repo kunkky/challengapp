@@ -4,7 +4,6 @@ const dotenv =require ("dotenv");
 const mongoose = require('mongoose')
 const cors = require('cors');
 const { questionRouter } = require("./routes/questionRoutes");
-// const { userRouter } = require("./routes/userRouter");
 
 //user the api created 
 app.use(cors());
