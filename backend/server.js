@@ -18,7 +18,7 @@ console.log(`Your App Works on PORT ${PORT}`);
  
 
 //conect to database
-let MONGOL = process.env.MONGOL || "mongodb://0.0.0.0:27017"
+let MONGOL = process.env.MONGO_URL || "mongodb://0.0.0.0:27017"
 mongoose.connect(MONGOL).then(()=>{
 console.log("Database Connection Successful");
 }).catch((err)=>{
