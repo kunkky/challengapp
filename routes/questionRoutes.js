@@ -5,7 +5,14 @@ const Joi = require("joi");
 const bodyParse = require("body-parser");
 const router = express.Router()
 const bcrypt = require('bcrypt');
+const jwt = require("jsonwebtoken")
 const checkPasswordValidation = require('../passwordValidator');
+
+const createToken = (id, payload )=>{
+    const expDate= 24*60*60;
+    return token = jwt.sign(payload, id, { expiresIn: expDate });
+ 
+}
 
 //default Get
 router.get("/",(req,res)=>{
@@ -287,8 +294,13 @@ router.put('/registeration', bodyParse.json(), async (req, res) => {
                     , hashedPassword,phone,
                     dateCreated: new Date().toJSON(), dateUpdated: new Date().toJSON()
                 });
-            
-                await newUser.save()
+            //save user to db
+               const createUser= await newUser.save()
+               //create Token for user
+            const token = createToken(newUser._id.toString(), createUser.toObject())
+                res.cookie('Token', token, { httpOnly: true, maxAge:3*24*60*60*1000});
+
+                //send info to user
                 res.status(200).send({
                     responseCode: "00",
                     responseMessage: "User Registrating successfully",
@@ -317,12 +329,73 @@ router.put('/registeration', bodyParse.json(), async (req, res) => {
 
 
 //user Login
-router.post("/login", (req, res) => {
-    return res.status(200).send({
-        responseCode: "00",
-        responseMessage: "You are connected Challenge app api",
-        data: "no data Sent"
+router.post('/login', bodyParse.json(), async (req, res) => {
+    const Schema = Joi.object({
+        password: Joi.string().required(),
+        email: Joi.string().required().email().max(50)
+
     });
+    //check error and return error
+    const { error } = Schema.validate(req.body);
+    if (error) {
+        console.log(error);
+        return res.status(400).send({
+            responseCode: "96",
+            responseMessage: error.details[0].message,
+            data: null
+        });
+
+    }
+    const { email, password } = req.body;
+    try {
+        //check if data exist
+        const existUser = await Users.findOne({ email });
+        if (existUser === null) {
+            //return error user doesnt exist
+          return  res.status(400).send({
+                responseCode: "96",
+                responseMessage: "Email Not Registered",
+              data: null
+            })
+        }
+        else {
+
+            //check if password equals
+            const Auth = await bcrypt.compare(password, existUser.hashedPassword )
+            if (Auth===true){
+                //create Token for user
+                const token = createToken(existUser._id.toString(), existUser.toObject())
+                res.cookie('Token', token, { httpOnly: true, maxAge: 3 * 24 * 60 * 60 * 1000 });
+
+                //send info to user
+                res.status(200).send({
+                    responseCode: "00",
+                    responseMessage: "User Signed in successfully",
+                    data: existUser
+                })
+
+
+            }
+            else{
+                res.status(400).send({
+                    responseCode: "96",
+                    responseMessage: "Wrong Password",
+                    data: null
+                })
+            
+            
+            }
+
+        }
+
+    } catch (error) {
+        res.status(500).send({
+            responseCode: "96",
+            responseMessage: "Internal server error",
+            data: 'null' + error
+        })
+
+    }
 })
 
 //user logout
