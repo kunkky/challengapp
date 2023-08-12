@@ -18,7 +18,8 @@ console.log(`Your App Works on PORT ${PORT}`);
  
 
 //conect to database
-mongoose.connect("mongodb://0.0.0.0:27017").then(()=>{
+let MONGOL = process.env.MONGOL || "mongodb://0.0.0.0:27017"
+mongoose.connect(MONGOL).then(()=>{
 console.log("Database Connection Successful");
 }).catch((err)=>{
 console.log("database connection failed " + err);
