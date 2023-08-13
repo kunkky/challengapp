@@ -19,7 +19,17 @@ let PORT = process.env.PORT || 8080
 app.listen(PORT, ()=>{
 console.log(`Your App Works on PORT ${PORT}`);
 })
- 
+
+//servefrontend
+app.use(express.static(path.join(__dirname, "./frontend/build")))
+app.get("*",function(_,res){
+    res.sendFile(
+        path.join(__dirname, "./frontend/build/index.html"),
+        function(err){
+            res.status(500).send(err)
+        }
+    )
+})
 
 //conect to database
 let MONGOL = process.env.MONGO_URL || "mongodb://0.0.0.0:27017"
