@@ -34,6 +34,30 @@ router.get("/",(req,res)=>{
     });
 })
 
+//default Get
+router.get('/logout', bodyParse.json(), async (req, res) => {
+    //check error and return error
+        try {
+            //delete Token
+            res.cookie('token', 'Bye', { httpOnly: true, maxAge: 1 });            
+            return res.status(200).send({
+                responseCode: "00",
+                responseMessage: " Logged out successfully",
+                data: null
+            });
+
+        } catch (error) {
+            console.log(error);
+            return res.status(400).send({
+                responseCode: "96",
+                responseMessage: "Failed to logout",
+                data: null
+
+            });
+        }
+
+
+})
 //done Question fecting works for admin
 router.get('/getAllQuestions', requireAuth, async (req, res) => {
     try {
@@ -655,7 +679,7 @@ router.put('/registeration', bodyParse.json(), async (req, res) => {
                const createUser= await newUser.save()
                //create Token for user
             const token = createToken(newUser._id.toString()+ newUser.fullname.toString()+ newUser.phone.toString(), "user")
-                res.cookie('token', token, { httpOnly: true, maxAge:3*24*60*60*1000});
+            res.cookie(type+'token', token, { httpOnly: true, maxAge:3*24*60*60*1000});
 
                 //send info to user
                 res.status(200).send({
@@ -725,7 +749,7 @@ router.post('/login', bodyParse.json(), async (req, res) => {
                 if (existUser.type.toString() === type){
                     //create Token for user
                     const token = createToken(existUser._id.toString() + existUser.fullname.toString() + existUser.phone.toString(), type)
-                    res.cookie('token', token, { httpOnly: true, maxAge: 3 * 24 * 60 * 60 * 1000 });
+                    res.cookie(type+'token', token, { httpOnly: true, maxAge: 3 * 24 * 60 * 60 * 1000 });
 
                     //send info to user
                     res.status(200).send({

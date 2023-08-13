@@ -1,9 +1,10 @@
 const jwt = require('jsonwebtoken');
 
 const requireAuth = (req, res, next) => {
-    if (req.cookies && req.cookies.token) {
-        const token = req.cookies.token;
-        jwt.verify(token, 'Challenge App | kunkkybaba was here doing wonders', (err, decodedToken) => {
+    if (req.cookies && req.cookies.admintoken) {
+        console.log(req.cookies.admintoken);
+        const admintoken = req.cookies.admintoken;
+        jwt.verify(admintoken, 'Challenge App | kunkkybaba was here doing wonders', (err, decodedToken) => {
             if (err) {
                 console.log(err.message);
                 res.status(401).send({

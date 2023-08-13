@@ -1,10 +1,10 @@
 const jwt = require('jsonwebtoken');
 
 const requireuserAuth = (req, res, next) => {
-    if (req.cookies && req.cookies.token) {
-        const token = req.cookies.token;
+    if (req.cookies && req.cookies.usertoken) {
+        const usertoken = req.cookies.usertoken;
 
-        jwt.verify(token, 'Challenge App | kunkkybaba was here doing wonders for users', (err, decodedToken) => {
+        jwt.verify(usertoken, 'Challenge App | kunkkybaba was here doing wonders for users', (err, decodedToken) => {
             if (err) {
                 console.log(err.message);
                 res.status(401).send({
