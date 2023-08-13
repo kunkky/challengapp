@@ -4,6 +4,11 @@ const dotenv =require ("dotenv");
 const mongoose = require('mongoose')
 const cors = require('cors');
 const { questionRouter } = require("./routes/questionRoutes");
+const cookieParser = require('cookie-parser'); // Require cookie-parser
+
+
+app.use(cookieParser()); // Use cookie-parser middleware
+
 
 //user the api created 
 app.use(cors());

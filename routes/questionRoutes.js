@@ -6,11 +6,14 @@ const bodyParse = require("body-parser");
 const router = express.Router()
 const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken")
+const  requireAuth = require("../middleware/authMiddleware")
+
 const checkPasswordValidation = require('../passwordValidator');
 
-const createToken = (id, payload )=>{
-    const expDate= 24*60*60;
-    return token = jwt.sign(payload, id, { expiresIn: expDate });
+const createToken = (id )=>{
+    const expDate = 3 * 24 * 60 * 60;
+    return token = jwt.sign({id}, 'Challenge App | kunkkybaba was here doing wonders', { expiresIn: expDate});
+
  
 }
 
@@ -24,9 +27,8 @@ router.get("/",(req,res)=>{
 })
 
 //done Question fecting works
-router.get('/getAllQuestions', async (req, res) => {
+router.get('/getAllQuestions', requireAuth, async (req, res) => {
     try {
-
         const question = await Questions.find();
         res.status(200).send({
             responseCode: "00",
@@ -297,8 +299,8 @@ router.put('/registeration', bodyParse.json(), async (req, res) => {
             //save user to db
                const createUser= await newUser.save()
                //create Token for user
-            const token = createToken(newUser._id.toString(), createUser.toObject())
-                res.cookie('Token', token, { httpOnly: true, maxAge:3*24*60*60*1000});
+            const token = createToken(newUser._id.toString()+ newUser.fullname.toString()+ newUser.phone.toString())
+                res.cookie('token', token, { httpOnly: true, maxAge:3*24*60*60*1000});
 
                 //send info to user
                 res.status(200).send({
@@ -364,8 +366,8 @@ router.post('/login', bodyParse.json(), async (req, res) => {
             const Auth = await bcrypt.compare(password, existUser.hashedPassword )
             if (Auth===true){
                 //create Token for user
-                const token = createToken(existUser._id.toString(), existUser.toObject())
-                res.cookie('Token', token, { httpOnly: true, maxAge: 3 * 24 * 60 * 60 * 1000 });
+                const token = createToken(existUser._id.toString())
+                res.cookie('token', token, { httpOnly: true, maxAge: 3 * 24 * 60 * 60 * 1000 });
 
                 //send info to user
                 res.status(200).send({
