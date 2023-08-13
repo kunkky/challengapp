@@ -60,7 +60,6 @@ router.post('/getQuestionById', requireAuth, bodyParse.json(), async (req, res) 
     const { error } = Schema.validate(req.body);
 
     if (error) {
-        console.log(error);
         return res.status(400).send({
             responseCode: "96",
             responseMessage: error.details[0].message,
@@ -230,7 +229,7 @@ router.delete('/deleteQuestionsById', requireAuth, bodyParse.json(), async (req,
     const { error } = Schema.validate(req.body);
 
     if (error) {
-        console.log(error);
+        console.log("error");
         return res.status(400).send({
             responseCode: "96",
             responseMessage: error.details[0].message,
@@ -241,7 +240,6 @@ router.delete('/deleteQuestionsById', requireAuth, bodyParse.json(), async (req,
     else{
         //check if id exists
         const { _id } = req.body;
-
         //Delete
         const result = await Questions.deleteOne({ _id });
         console.log(result);
@@ -256,6 +254,7 @@ router.delete('/deleteQuestionsById', requireAuth, bodyParse.json(), async (req,
         }
         else{
             //question does not exist
+            console.log(error);
             return res.status(400).send({
                 responseCode: "00",
                 responseMessage: "Question Does Not Exist",
@@ -479,7 +478,7 @@ router.post('/login', bodyParse.json(), async (req, res) => {
                     res.status(400).send({
                         responseCode: "96",
                         responseMessage: "You are not an admin",
-                        data: existUser
+                        data: null
                     })
                 
                 }
