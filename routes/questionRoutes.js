@@ -3,16 +3,22 @@ const { Questions } = require('../model/question');
 const { Users } = require('../model/user');
 const Joi = require("joi");
 const bodyParse = require("body-parser");
-const router = express.Router()
+const router = express.Router();
 const bcrypt = require('bcrypt');
-const jwt = require("jsonwebtoken")
-const  requireAuth = require("../middleware/authMiddleware")
+const jwt = require("jsonwebtoken");
+const requireAuth = require("../middleware/authMiddleware");
+const requireuserAuth = require("../middleware/userAuthMiddleware");
+
 
 const checkPasswordValidation = require('../passwordValidator');
 
-const createToken = (id )=>{
+const createToken = (id,type )=>{
+    let signature = "Challenge App | kunkkybaba was here doing wonders";
+    if (type==='user'){
+        signature +=' for users';
+    }
     const expDate = 3 * 24 * 60 * 60;
-    return token = jwt.sign({id}, 'Challenge App | kunkkybaba was here doing wonders', { expiresIn: expDate});
+    return token = jwt.sign({ id }, signature, { expiresIn: expDate});
 
  
 }
@@ -26,7 +32,7 @@ router.get("/",(req,res)=>{
     });
 })
 
-//done Question fecting works
+//done Question fecting works for admin
 router.get('/getAllQuestions', requireAuth, async (req, res) => {
     try {
         const question = await Questions.find();
@@ -46,7 +52,7 @@ router.get('/getAllQuestions', requireAuth, async (req, res) => {
 
 
 //Get Question by id 
-router.post('/getQuestionById', bodyParse.json(), async (req, res) => {
+router.post('/getQuestionById', requireAuth, bodyParse.json(), async (req, res) => {
     const Schema = Joi.object({
         _id: Joi.string()
     });
@@ -78,10 +84,98 @@ router.post('/getQuestionById', bodyParse.json(), async (req, res) => {
     }
 
 })
+//user Routes userAuthMiddleware
+router.get('/getAllUserQuestions', requireuserAuth, async (req, res) => {
+    try {
+        const question = await Questions.find();
+        res.status(200).send({
+            responseCode: "00",
+            responseMessage: "Question Fetch Successfully",
+            data: question
+        })
+    } catch (error) {
+        res.status(500).send({
+            responseCode: "96",
+            responseMessage: "internal Server erroe",
+            data: null
+        })
+    }
+})
+
+
+//Get Question by id 
+router.post('/getUserQuestionById', requireuserAuth, bodyParse.json(), async (req, res) => {
+    const Schema = Joi.object({
+        _id: Joi.string()
+    });
+    //check error and return error
+    const { error } = Schema.validate(req.body);
+
+    if (error) {
+        console.log(error);
+        return res.status(400).send({
+            responseCode: "96",
+            responseMessage: error.details[0].message,
+            data: null
+        });
+
+    }
+    else {
+        //check if id exists
+        const { _id } = req.body;
+
+        const question = await Questions.findOne({ _id });
+        console.log(question);
+        return res.status(200).send({
+            responseCode: "00",
+            responseMessage: "Question Retrieved successfully",
+            data: question
+        });
+
+
+    }
+
+})
+
+//Get Question by id 
+router.post('/getUserQuestionByLevel', requireuserAuth, bodyParse.json(), async (req, res) => {
+    const Schema = Joi.object({
+        _id: Joi.string()
+    });
+    //check error and return error
+    const { error } = Schema.validate(req.body);
+
+    if (error) {
+        console.log(error);
+        return res.status(400).send({
+            responseCode: "96",
+            responseMessage: error.details[0].message,
+            data: null
+        });
+
+    }
+    else {
+        //check if id exists
+        const { searchKey } = req.body;
+
+        const question = await Questions.find( req.body );
+        console.log(question);
+        return res.status(200).send({
+            responseCode: "00",
+            responseMessage: "Question Retrieved successfully",
+            data: question
+        });
+
+
+    }
+
+})
+
+
 //admin Routes
 
 //createQuestions Api
-router.post('/createQuestions', bodyParse.json(), async (req, res) => {
+router.post('/createQuestions', requireAuth, bodyParse.json(), async (req, res) => {
     const Schema = Joi.object({
         questionType: Joi.string().min(3).max(20).required(),
         questionLevel: Joi.string().min(3).max(20).required(),
@@ -128,7 +222,7 @@ router.post('/createQuestions', bodyParse.json(), async (req, res) => {
 })
 
 //delete Post 
-router.delete('/deleteQuestionsById', bodyParse.json(), async (req, res) => {
+router.delete('/deleteQuestionsById', requireAuth, bodyParse.json(), async (req, res) => {
     const Schema = Joi.object({
         _id: Joi.string()
     });
@@ -175,7 +269,7 @@ router.delete('/deleteQuestionsById', bodyParse.json(), async (req, res) => {
 
 })
 
-router.put('/updateQuestionsById', bodyParse.json(), async (req, res) => {
+router.put('/updateQuestionsById', requireAuth, bodyParse.json(), async (req, res) => {
         const Schema = Joi.object({
         questionType: Joi.string().min(3).max(20).required(),
         questionLevel: Joi.string().min(3).max(20).required(),
@@ -237,7 +331,7 @@ router.put('/updateQuestionsById', bodyParse.json(), async (req, res) => {
     }
 })
 //Get all users
-router.get('/getAllUsers', async (req, res) => {
+router.get('/getAllUsers', requireAuth, async (req, res) => {
     try {
 
         const question = await Users.find();
@@ -267,7 +361,7 @@ router.put('/registeration', bodyParse.json(), async (req, res) => {
             'string.pattern.base': 'Password must include at least one uppercase letter, one lowercase letter, and one digit',
         }),
         email: Joi.string().required().email().min(3).max(50),
-        phone: Joi.string().required().min(3).max(15)
+        phone: Joi.string().required().min(3).max(15),
         
     });
     //check error and return error
@@ -293,13 +387,13 @@ router.put('/registeration', bodyParse.json(), async (req, res) => {
                 //save in database
                 const newUser = new Users({
                     level, fullname, stack, email
-                    , hashedPassword,phone,
+                    , hashedPassword,phone, type:"user",
                     dateCreated: new Date().toJSON(), dateUpdated: new Date().toJSON()
                 });
             //save user to db
                const createUser= await newUser.save()
                //create Token for user
-            const token = createToken(newUser._id.toString()+ newUser.fullname.toString()+ newUser.phone.toString())
+            const token = createToken(newUser._id.toString()+ newUser.fullname.toString()+ newUser.phone.toString(), "user")
                 res.cookie('token', token, { httpOnly: true, maxAge:3*24*60*60*1000});
 
                 //send info to user
@@ -330,17 +424,18 @@ router.put('/registeration', bodyParse.json(), async (req, res) => {
 
 
 
-//user Login
+//admin Login userLogin
 router.post('/login', bodyParse.json(), async (req, res) => {
     const Schema = Joi.object({
+        email: Joi.string().required().email().max(50),
+        type: Joi.string(),
         password: Joi.string().required(),
-        email: Joi.string().required().email().max(50)
-
     });
     //check error and return error
     const { error } = Schema.validate(req.body);
+    console.log(req.body.type);
+
     if (error) {
-        console.log(error);
         return res.status(400).send({
             responseCode: "96",
             responseMessage: error.details[0].message,
@@ -348,7 +443,8 @@ router.post('/login', bodyParse.json(), async (req, res) => {
         });
 
     }
-    const { email, password } = req.body;
+    const { email, password, type } = req.body;
+    console.log(email);
     try {
         //check if data exist
         const existUser = await Users.findOne({ email });
@@ -365,17 +461,28 @@ router.post('/login', bodyParse.json(), async (req, res) => {
             //check if password equals
             const Auth = await bcrypt.compare(password, existUser.hashedPassword )
             if (Auth===true){
-                //create Token for user
-                const token = createToken(existUser._id.toString())
-                res.cookie('token', token, { httpOnly: true, maxAge: 3 * 24 * 60 * 60 * 1000 });
+                if (existUser.type.toString() === type){
+                    //create Token for user
+                    const token = createToken(existUser._id.toString() + existUser.fullname.toString() + existUser.phone.toString(), type)
+                    res.cookie('token', token, { httpOnly: true, maxAge: 3 * 24 * 60 * 60 * 1000 });
 
-                //send info to user
-                res.status(200).send({
-                    responseCode: "00",
-                    responseMessage: "User Signed in successfully",
-                    data: existUser
-                })
+                    //send info to user
+                    res.status(200).send({
+                        responseCode: "00",
+                        responseMessage: "User Signed in successfully",
+                        data: existUser
+                    })
+                }
+                else{
 
+                    //send info to user
+                    res.status(400).send({
+                        responseCode: "96",
+                        responseMessage: "You are not an admin",
+                        data: existUser
+                    })
+                
+                }
 
             }
             else{
@@ -399,6 +506,7 @@ router.post('/login', bodyParse.json(), async (req, res) => {
 
     }
 })
+
 
 //user logout
 router.post("/logout", (req, res) => {
