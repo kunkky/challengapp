@@ -1,6 +1,7 @@
 const express = require("express");
 const { Questions } = require('../model/question');
 const { Users } = require('../model/user');
+const { Levels } = require('../model/level');
 const Joi = require("joi");
 const bodyParse = require("body-parser");
 const router = express.Router();
@@ -11,6 +12,7 @@ const requireuserAuth = require("../middleware/userAuthMiddleware");
 
 
 const checkPasswordValidation = require('../passwordValidator');
+const { Types } = require("../model/type");
 
 const createToken = (id,type )=>{
     let signature = "Challenge App | kunkkybaba was here doing wonders";
@@ -276,6 +278,92 @@ router.post('/createQuestions', requireAuth, bodyParse.json(), async (req, res) 
         
     }
 })
+//createQuestions Levels Api
+router.post('/createQuestionLevel', requireAuth, bodyParse.json(), async (req, res) => {
+    const Schema = Joi.object({
+        questionLevel: Joi.string().min(3).max(20).required(),
+    });
+    //check error and return error
+    const { error } = Schema.validate(req.body);
+    if (error) {
+        console.log(error);
+        return res.status(400).send({
+            responseCode: "96",
+            responseMessage: error.details[0].message,
+            data: null
+        });
+
+    }
+    const { questionLevel} = req.body;
+
+
+    try {
+        //save in database
+        const newLevel = new Levels({
+            questionLevel, 
+            dateCreated: new Date().toJSON(), dateUpdated: new Date().toJSON()
+        });
+
+        await newLevel.save()
+        res.status(200).send({
+            responseCode: "00",
+            responseMessage: "Question Level created successfully",
+            data: newLevel
+        })
+
+    } catch (error) {
+        res.status(500).send({
+            responseCode: "96",
+            responseMessage: "Internal server error",
+            data: 'null' + error
+        })
+
+    }
+})
+
+//createQuestions Types Api
+router.post('/createQuestionType', requireAuth, bodyParse.json(), async (req, res) => {
+    const Schema = Joi.object({
+        questionType: Joi.string().min(3).max(20).required(),
+    });
+    //check error and return error
+    const { error } = Schema.validate(req.body);
+    if (error) {
+        console.log(error);
+        return res.status(400).send({
+            responseCode: "96",
+            responseMessage: error.details[0].message,
+            data: null
+        });
+
+    }
+    const { questionType } = req.body;
+
+
+    try {
+        //save in database
+        const newType = new Types({
+            questionType,
+            dateCreated: new Date().toJSON(), dateUpdated: new Date().toJSON()
+        });
+
+        await newType.save()
+        res.status(200).send({
+            responseCode: "00",
+            responseMessage: "Question Type created successfully",
+            data: newType
+        })
+
+    } catch (error) {
+        res.status(500).send({
+            responseCode: "96",
+            responseMessage: "Internal server error",
+            data: 'null' + error
+        })
+
+    }
+})
+
 
 //delete Post 
 router.delete('/deleteQuestionsById', requireAuth, bodyParse.json(), async (req, res) => {
@@ -318,6 +406,91 @@ router.delete('/deleteQuestionsById', requireAuth, bodyParse.json(), async (req,
 
 })
 
+
+//delete Level 
+router.delete('/deleteLevelById', requireAuth, bodyParse.json(), async (req, res) => {
+    const Schema = Joi.object({
+        _id: Joi.string()
+    });
+    //check error and return error
+    const { error } = Schema.validate(req.body);
+
+    if (error) {
+        console.log("error");
+        return res.status(400).send({
+            responseCode: "96",
+            responseMessage: error.details[0].message,
+            data: null
+        });
+
+    }
+    else {
+        //check if id exists
+        const { _id } = req.body;
+        //Delete
+        try {
+            const result = await Levels.deleteOne({ _id });
+            return res.status(200).send({
+                responseCode: "00",
+                responseMessage: "Question " + _id + " deleted successfully",
+                data: []
+            });
+        } catch (error) {
+            return res.status(400).send({
+                responseCode: "96",
+                responseMessage: "Failed to Delete " + _id,
+                data: null
+            });
+        }
+
+
+    }
+
+})
+
+//delete Type 
+router.delete('/deleteTypeById', requireAuth, bodyParse.json(), async (req, res) => {
+    const Schema = Joi.object({
+        _id: Joi.string()
+    });
+    //check error and return error
+    const { error } = Schema.validate(req.body);
+
+    if (error) {
+        console.log("error");
+        return res.status(400).send({
+            responseCode: "96",
+            responseMessage: error.details[0].message,
+            data: null
+        });
+
+    }
+    else {
+        //check if id exists
+        const { _id } = req.body;
+        //Delete
+        try {
+            const result = await Types.deleteOne({ _id });
+            return res.status(200).send({
+                responseCode: "00",
+                responseMessage: "Type or Category  " + _id + " deleted successfully",
+                data: []
+            });
+        } catch (error) {
+            return res.status(400).send({
+                responseCode: "96",
+                responseMessage: "Failed to Delete " + _id,
+                data: null
+            });
+        }
+
+
+    }
+
+})
+
+
+//Update by Id
 router.put('/updateQuestionsById', requireAuth, bodyParse.json(), async (req, res) => {
         const Schema = Joi.object({
         questionType: Joi.string().min(3).max(20).required(),
@@ -397,6 +570,45 @@ router.get('/getAllUsers', requireAuth, async (req, res) => {
         })
     }
 })
+
+//Get all Levels
+router.get('/getAllLevels', requireAuth, async (req, res) => {
+    try {
+
+        const question = await Levels.find();
+        res.status(200).send({
+            responseCode: "00",
+            responseMessage: "Levels Fetch Successfully",
+            data: question
+        })
+    } catch (error) {
+        res.status(500).send({
+            responseCode: "96",
+            responseMessage: "internal Server erroe",
+            data: null
+        })
+    }
+})
+
+//Get all Levels
+router.get('/getAllTypes', requireAuth, async (req, res) => {
+    try {
+
+        const question = await Types.find();
+        res.status(200).send({
+            responseCode: "00",
+            responseMessage: "Levels Fetch Successfully",
+            data: question
+        })
+    } catch (error) {
+        res.status(500).send({
+            responseCode: "96",
+            responseMessage: "internal Server erroe",
+            data: null
+        })
+    }
+})
+
 
 
 //user registration
