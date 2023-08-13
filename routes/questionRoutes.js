@@ -572,7 +572,7 @@ router.get('/getAllUsers', requireAuth, async (req, res) => {
 })
 
 //Get all Levels
-router.get('/getAllLevels', requireAuth, async (req, res) => {
+router.get('/getAllLevels', async (req, res) => {
     try {
 
         const question = await Levels.find();
@@ -591,7 +591,7 @@ router.get('/getAllLevels', requireAuth, async (req, res) => {
 })
 
 //Get all Levels
-router.get('/getAllTypes', requireAuth, async (req, res) => {
+router.get('/getAllTypes', async (req, res) => {
     try {
 
         const question = await Types.find();
