@@ -52,7 +52,7 @@ router.get('/getAllQuestions', requireAuth, async (req, res) => {
 
 
 //Get Question by id 
-router.post('/getQuestionById', requireAuth, bodyParse.json(), async (req, res) => {
+router.get('/getQuestionById', requireAuth, bodyParse.json(), async (req, res) => {
     const Schema = Joi.object({
         _id: Joi.string()
     });
@@ -71,14 +71,24 @@ router.post('/getQuestionById', requireAuth, bodyParse.json(), async (req, res) 
         //check if id exists
         const { _id } = req.body;
 
-        const question = await Questions.findOne({ _id });
-        console.log(question);
-        return res.status(200).send({
-            responseCode: "00",
-            responseMessage: "Question Retrieved successfully",
-            data: question
-        });
+        try {
+            const items = await Questions.find({ _id });
+            
+            return res.status(200).send({
+                responseCode: "00",
+                responseMessage: "Question Retrieved successfully",
+                data: items
+            });
 
+        } catch (error) {
+            console.log(error);
+            return res.status(200).send({
+                responseCode: "00",
+                responseMessage: "Failed to retrieve "+_id,
+                data: null
+
+            });
+        }
 
     }
 
@@ -103,13 +113,12 @@ router.get('/getAllUserQuestions', requireuserAuth, async (req, res) => {
 
 
 //Get Question by id 
-router.post('/getUserQuestionById', requireuserAuth, bodyParse.json(), async (req, res) => {
+router.get('/getUserQuestionById', requireuserAuth, bodyParse.json(), async (req, res) => {
     const Schema = Joi.object({
         _id: Joi.string()
     });
     //check error and return error
     const { error } = Schema.validate(req.body);
-
     if (error) {
         console.log(error);
         return res.status(400).send({
@@ -123,23 +132,28 @@ router.post('/getUserQuestionById', requireuserAuth, bodyParse.json(), async (re
         //check if id exists
         const { _id } = req.body;
 
-        const question = await Questions.findOne({ _id });
-        console.log(question);
-        return res.status(200).send({
-            responseCode: "00",
-            responseMessage: "Question Retrieved successfully",
-            data: question
-        });
-
-
+        try {
+            const items = await Questions.find({ _id });
+            return res.status(200).send({
+                responseCode: "00",
+                responseMessage: "Question Retrieved successfully",
+                data: items
+            });
+        } catch (error) {
+            return res.status(400).send({
+                responseCode: "96",
+                responseMessage: "Failed to retrieve "+_id,
+                data: null
+            });
+        }
     }
 
 })
 
-//Get Question by id 
-router.post('/getUserQuestionByLevel', requireuserAuth, bodyParse.json(), async (req, res) => {
+//Get Question by Level
+router.get('/getUserQuestionByLevel', requireuserAuth, bodyParse.json(), async (req, res) => {
     const Schema = Joi.object({
-        _id: Joi.string()
+        questionLevel: Joi.string()
     });
     //check error and return error
     const { error } = Schema.validate(req.body);
@@ -155,21 +169,64 @@ router.post('/getUserQuestionByLevel', requireuserAuth, bodyParse.json(), async 
     }
     else {
         //check if id exists
-        const { searchKey } = req.body;
+        const { questionLevel } = req.body;
 
-        const question = await Questions.find( req.body );
-        console.log(question);
-        return res.status(200).send({
-            responseCode: "00",
-            responseMessage: "Question Retrieved successfully",
-            data: question
-        });
-
-
+        try {
+            const items = await Questions.find({ questionLevel });
+            return res.status(200).send({
+                responseCode: "00",
+                responseMessage: "Question Retrieved successfully",
+                data: items
+            });
+        } catch (error) {
+            return res.status(400).send({
+                responseCode: "96",
+                responseMessage: "Failed to retrieve " + level,
+                data: null
+            });
+        }
     }
 
 })
 
+//Get Question by Category
+router.get('/getUserQuestionByCategory', requireuserAuth, bodyParse.json(), async (req, res) => {
+    const Schema = Joi.object({
+        questionType: Joi.string()
+    });
+    //check error and return error
+    const { error } = Schema.validate(req.body);
+
+    if (error) {
+        console.log(error);
+        return res.status(400).send({
+            responseCode: "96",
+            responseMessage: error.details[0].message,
+            data: null
+        });
+
+    }
+    else {
+        //check if id exists
+        const { questionType } = req.body;
+
+        try {
+            const items = await Questions.find({ questionType });
+            return res.status(200).send({
+                responseCode: "00",
+                responseMessage: "Question Retrieved successfully",
+                data: items
+            });
+        } catch (error) {
+            return res.status(400).send({
+                responseCode: "96",
+                responseMessage: "Failed to retrieve " + questionType,
+                data: null
+            });
+        }
+    }
+
+})
 
 //admin Routes
 
@@ -241,27 +298,20 @@ router.delete('/deleteQuestionsById', requireAuth, bodyParse.json(), async (req,
         //check if id exists
         const { _id } = req.body;
         //Delete
-        const result = await Questions.deleteOne({ _id });
-        console.log(result);
-        if (result.deletedCount > 0) {
-
+        try {
+            const result = await Questions.deleteOne({ _id });
             return res.status(200).send({
                 responseCode: "00",
-                responseMessage: "Question deleted successfully",
+                responseMessage: "Question "+_id+" deleted successfully",
                 data: []
             });
-        
-        }
-        else{
-            //question does not exist
-            console.log(error);
+        } catch (error) {
             return res.status(400).send({
-                responseCode: "00",
-                responseMessage: "Question Does Not Exist",
-                data: []
+                responseCode: "96",
+                responseMessage: "Failed to Delete " + _id,
+                data: null
             });
         }
-
 
     
     }
@@ -306,7 +356,7 @@ router.put('/updateQuestionsById', requireAuth, bodyParse.json(), async (req, re
             //successful
             return res.status(200).send({
                 responseCode: "00",
-                responseMessage: 'update successful',
+                responseMessage: _id+' updated successfully',
                 data: {
                     questionType, questionLevel, question, solution, author, _id,
                     dateCreated: new Date().toJSON(), dateUpdated: new Date().toJSON()
@@ -317,7 +367,7 @@ router.put('/updateQuestionsById', requireAuth, bodyParse.json(), async (req, re
             //not successful
             return res.status(400).send({
                 responseCode: "96",
-                responseMessage: 'cannot update',
+                responseMessage: 'cannot update'+_id,
                 data: null
             });
         }
