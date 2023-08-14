@@ -69,7 +69,7 @@ const App = () => {
       <Route path='/profile' element={
         <ProtectedRoutes>
           <Profile />
-        </ProtectedRoutes>
+        </ProtectedRoutes> 
       }></Route>
 
       <Route path='/admindashboard' element={
