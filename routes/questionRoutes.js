@@ -263,6 +263,7 @@ router.post('/createQuestions', requireAuth, bodyParse.json(), async (req, res) 
         questionLevel: Joi.string().min(3).max(20).required(),
         question: Joi.string().min(20).required(),
         solution: Joi.string().min(20).required(),
+        answer: Joi.string().required(),
         author: Joi.string().required()
     });
     //check error and return error
@@ -276,13 +277,13 @@ router.post('/createQuestions', requireAuth, bodyParse.json(), async (req, res) 
         });
 
     }
-    const { questionType, questionLevel, question, solution,author } = req.body;
+    const { questionType, questionLevel, question, solution, author, answer } = req.body;
     
    
     try {
         //save in database
         const newQuestion = new Questions({
-            questionType, questionLevel, question, solution, author,
+            questionType, questionLevel, question, solution, author, answer,
             dateCreated: new Date().toJSON(), dateUpdated: new Date().toJSON()
         });
         
@@ -520,8 +521,9 @@ router.put('/updateQuestionsById', requireAuth, bodyParse.json(), async (req, re
         questionType: Joi.string().min(3).max(20).required(),
         questionLevel: Joi.string().min(3).max(20).required(),
         question: Joi.string().min(20).required(),
-        solution: Joi.string().min(20).required(),
+        solution: Joi.string().min(20).required(), 
         author: Joi.string().required(),
+        answer: Joi.string().required(),
         _id: Joi.string().required()
     });
     //check error and return error
@@ -535,7 +537,7 @@ router.put('/updateQuestionsById', requireAuth, bodyParse.json(), async (req, re
         });
 
     }
-    const { questionType, questionLevel, question, solution, author, _id } = req.body;
+    const { questionType, questionLevel, question, solution, author, _id, answer } = req.body;
 
     try {
         const result = await Questions.updateOne(
@@ -543,7 +545,7 @@ router.put('/updateQuestionsById', requireAuth, bodyParse.json(), async (req, re
             { $set: 
                     //save in database
                 {
-                questionType, questionLevel, question, solution, author,_id,
+                questionType, questionLevel, question, solution, author, _id, answer,
                 dateCreated: new Date().toJSON(), dateUpdated: new Date().toJSON()
                 }
             }
@@ -555,7 +557,7 @@ router.put('/updateQuestionsById', requireAuth, bodyParse.json(), async (req, re
                 responseCode: "00",
                 responseMessage: _id+' updated successfully',
                 data: {
-                    questionType, questionLevel, question, solution, author, _id,
+                    questionType, questionLevel, question, solution, author, _id, answer,
                     dateCreated: new Date().toJSON(), dateUpdated: new Date().toJSON()
                 }
             });

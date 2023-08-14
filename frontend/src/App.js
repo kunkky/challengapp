@@ -6,8 +6,9 @@ import Signin from './Pages/Signin'
 import Profile from './Pages/Profile'
 import ErrorPage from './Pages/ErrorPage'
 import Dashboard from './Pages/Dashboard'
-
-
+import WebTerminal from './Components/WebTerminal'
+import CodeEditor from './Components/CodeEditor'
+import HtmlCOdeEditor from './Components/HtmlCOdeEditor'
 
 
 
@@ -28,6 +29,9 @@ const App = () => {
       <Route path='/' element={<Home />}></Route>
       <Route path='/signUp' element={<SignUp />}></Route>
       <Route path='/signin' element={<Signin />}></Route>
+      <Route path='/terminal' element={<WebTerminal />}></Route>
+      <Route path='/editor' element={<CodeEditor />}></Route>
+      <Route path='/htmleditor' element={<HtmlCOdeEditor />}></Route>
       {/* Protected routes */}
 
       <Route path='/dashboard' element={
