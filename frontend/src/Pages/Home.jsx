@@ -63,7 +63,7 @@ const Home = () => {
               <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg">
                 <div className="px-4 py-5 flex-auto">
                   <div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-red-400">
-                      <i class="bi bi-braces"></i>
+                      <i className="bi bi-braces"></i>
                   </div>
                   <h6 className="text-xl font-semibold">Awarded Agency</h6>
                   <p className="mt-2 mb-4 text-gray-600">
@@ -77,7 +77,7 @@ const Home = () => {
               <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg">
                 <div className="px-4 py-5 flex-auto">
                   <div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-blue-400">
-                      <i class="bi bi-journal-code"></i>
+                      <i className="bi bi-journal-code"></i>
                   </div>
                   <h6 className="text-xl font-semibold">
                     Free Revisions
@@ -93,7 +93,7 @@ const Home = () => {
               <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg">
                 <div className="px-4 py-5 flex-auto">
                   <div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-green-400">
-                      <i class="bi bi-code-slash"></i>
+                      <i className="bi bi-code-slash"></i>
                   </div>
                   <h6 className="text-xl font-semibold">
                     Verified Company
@@ -110,7 +110,7 @@ const Home = () => {
           <div className="flex flex-wrap items-center mt-32">
             <div className="w-full md:w-5/12 px-4 mr-auto ml-auto">
               <div className="text-gray-600 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-gray-100">
-                  <i class="bi bi-terminal"></i>
+                  <i className="bi bi-terminal"></i>
               </div>
               <h3 className="text-3xl mb-2 font-semibold leading-normal">
                 Working with us is a pleasure
@@ -206,7 +206,7 @@ const Home = () => {
             <div className="w-full md:w-5/12 ml-auto mr-auto px-4">
               <div className="md:pr-12">
                 <div className="text-pink-600 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-pink-300">
-                    <i class="bi bi-braces-asterisk"></i>
+                    <i className="bi bi-braces-asterisk"></i>
                 </div>
                 <h3 className="text-3xl font-semibold">
                   A growing company

@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import Home from './Pages/Home'
 import SignUp from './Pages/Signup'
 import Signin from './Pages/Signin'
+import AdminSignin from './Pages/AdminSignin'
 import Profile from './Pages/Profile'
 import ErrorPage from './Pages/ErrorPage'
 import Dashboard from './Pages/Dashboard'
@@ -29,6 +30,7 @@ const App = () => {
       <Route path='/' element={<Home />}></Route>
       <Route path='/signUp' element={<SignUp />}></Route>
       <Route path='/signin' element={<Signin />}></Route>
+      <Route path='/adminsignin' element={<AdminSignin />}></Route>
       <Route path='/terminal' element={<WebTerminal />}></Route>
       <Route path='/editor' element={<CodeEditor />}></Route>
       <Route path='/htmleditor' element={<HtmlCOdeEditor />}></Route>

@@ -1,21 +1,14 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import Logo from '../assets/images/logo.png' 
 import { useFormik } from 'formik'; //for processing forms 
 import * as Yup from 'yup'; //for form validation
-import useLogin from '../Hooks/useLogin';
-import { ThreeDots } from 'react-loader-spinner'
 
 
 
-const Signin = () => {
-    //state for login response
-    const [details, setDetails] = useState(
-        {
-            "email": "",
-            "password": "",
-            "type": ""
-        })
+const AdminSignin = () => {
+
+
     const formik = useFormik({
         initialValues: {
             password: '',
@@ -26,12 +19,9 @@ const Signin = () => {
             email: Yup.string().email('Invalid email address').required('Valid email is required'),
         }),
         onSubmit: values => {
-            setDetails(values);
-           
+            alert(JSON.stringify(values, null, 2));
         },
     });
-    //use my sign in hook
-    const {  loading, loginResponse } = useLogin(details, 'login'); // 
 
   return (
       <section className="bg-gray-50 dark:bg-gray-900">
@@ -42,7 +32,7 @@ const Signin = () => {
               <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                   <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
                       <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                          Sign In 
+                          Admin Sign In 
                       </h1>
                       <form className="space-y-4 md:space-y-6" action="#" onSubmit={formik.handleSubmit}>
                           <div>
@@ -76,24 +66,8 @@ const Signin = () => {
                               ) : null}
                           </div>
                           
-                       
-                          {
-                          loading===true ? 
-                                  <button disabled className="flex justify-center items-center w-full text-white bg-blue-400 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                      <ThreeDots
-                                          height="25"
-                                          width="25"
-                                          radius="5"
-                                          color="#ffffff"
-                                          ariaLabel="three-dots-loading"
-                                          wrapperStyle={{}}
-                                          wrapperClassName=""
-                                          visible={true}
-                                      /></button> :
-                          <button type="submit" className="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                      Log In</button>
-                          }
                           
+                          <button type="submit" className="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Log In</button>
                           <p className="text-sm font-light text-gray-500 dark:text-gray-400">
 
                             <Link to='/signup'>  New user sign Up? </Link> 
@@ -110,4 +84,4 @@ const Signin = () => {
   )
 }
 
-export default Signin
+export default AdminSignin

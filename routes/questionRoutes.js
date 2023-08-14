@@ -715,7 +715,7 @@ router.put('/registeration', bodyParse.json(), async (req, res) => {
 router.post('/login', bodyParse.json(), async (req, res) => {
     const Schema = Joi.object({
         email: Joi.string().required().email().max(50),
-        type: Joi.string(),
+        type: Joi.string().required(),
         password: Joi.string().required(),
     });
     //check error and return error
@@ -731,7 +731,7 @@ router.post('/login', bodyParse.json(), async (req, res) => {
 
     }
     const { email, password, type } = req.body;
-    console.log(email);
+    
     try {
         //check if data exist
         const existUser = await Users.findOne({ email });

@@ -37,26 +37,26 @@ const Footer = () => {
               className="bg-white text-blue-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 p-3"
               type="button"
             >
-                <i class="flex bi bi-twitter"></i>
+                <i className="flex bi bi-twitter"></i>
                
             </button>
             <button
               className="bg-white text-blue-600 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 p-3"
               type="button"
             >
-                <i class="flex bi bi-facebook"></i>
+                <i className="flex bi bi-facebook"></i>
             </button>
             <button
               className="bg-white text-blue-700 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 p-3"
               type="button"
             >
-                <i class="flex bi bi-linkedin"></i>
+                <i className="flex bi bi-linkedin"></i>
             </button>
             <button
               className="bg-white text-gray-900 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 p-3"
               type="button"
             >
-                <i class="flex bi bi-github"></i>
+                <i className="flex bi bi-github"></i>
             </button>
           </div>
         </div>
