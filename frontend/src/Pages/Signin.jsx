@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import Logo from '../assets/images/logo.png' 
 import { useFormik } from 'formik'; //for processing forms 
 import * as Yup from 'yup'; //for form validation
@@ -9,6 +9,18 @@ import { ThreeDots } from 'react-loader-spinner'
 
 
 const Signin = () => {
+
+    const navigate = useNavigate()
+
+    //check if user already is logged in 
+    useLayoutEffect(() => {
+        document.title = "Login | Tech Challenge Game"
+        if (sessionStorage.getItem("usertoken")) {
+            window.location.href = "/dashboard"
+        }
+    }, [])
+
+
     //state for login response
     const [details, setDetails] = useState(
         {
@@ -30,9 +42,33 @@ const Signin = () => {
            
         },
     });
+    //set error message 
+    const [apiresponse, setApiresponse] = useState(null)
     //use my sign in hook
     const {  loading, loginResponse } = useLogin(details, 'login', "user"); // 
+    useEffect(() => {
+        if (loginResponse) {
+            setApiresponse(loginResponse.responseMessage)
+        }
 
+    }, [loginResponse])
+    
+    //handle login logic
+    if (loginResponse && loginResponse.responseCode==="00"){
+        //user is available
+        const data = loginResponse.data;
+        sessionStorage.setItem("token", loginResponse.data);
+        sessionStorage.setItem("user", JSON.stringify(loginResponse.usertoken));
+        console.log(loginResponse.responseCode);
+        navigate("/dashboard", {
+            state: {
+                data,
+                message: `welcome`
+            },
+            replace: true,
+        });
+
+    }
   return (
       <section className="bg-gray-50 dark:bg-gray-900">
           <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -75,7 +111,13 @@ const Signin = () => {
                                   <div className='text-red-600 text-sm'>{formik.errors.password}</div>
                               ) : null}
                           </div>
-                          
+                          {
+                              apiresponse!=="" &&
+                              <div className='text-red-600 text-sm'>
+                                  {apiresponse}
+                              </div>
+
+                          }
                        
                           {
                           loading===true ? 

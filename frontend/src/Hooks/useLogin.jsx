@@ -3,7 +3,7 @@ import BaseUrl from './../BaseUrl';
 
 const useLogin = (details, url, Authtype) => {
   const [loading, setLoading] = useState(false);
-  const [loginResponse, setLoginResponse] = useState(null);
+  const [loginResponse, setLoginResponse] = useState('');
   const userinfo = { email: details.email, password: details.password, type: Authtype };
   const fetchApi = async () => {
     if (details.email !== "") {
@@ -29,7 +29,6 @@ const useLogin = (details, url, Authtype) => {
   useEffect(() => {
     fetchApi();
   }, [details]);
-  console.log(loading);
   return {
     loading,
     loginResponse,
