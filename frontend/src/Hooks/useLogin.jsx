@@ -1,22 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import BaseUrl from './../BaseUrl';
 
-const useLogin = (details, url) => {
+const useLogin = (details, url, Authtype) => {
   const [loading, setLoading] = useState(false);
   const [loginResponse, setLoginResponse] = useState(null);
+  const userinfo = { email: details.email, password: details.password, type: Authtype };
   const fetchApi = async () => {
-  console.log(details);
     if (details.email !== "") {
       setLoading(true);
       try {
         const response = await fetch(BaseUrl + url, {
           method: 'POST',
-          body: details,
+          body: JSON.stringify(userinfo),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+
         });
-        console.log("Response status:", response.status);
-        console.log("Response statusText:", response.statusText);
         const data = await response.json();
-        console.log("Response data:", data);
         setLoading(false);
         setLoginResponse(data);
       } catch (error) {
@@ -27,8 +28,8 @@ const useLogin = (details, url) => {
   };
   useEffect(() => {
     fetchApi();
-  }, [details]); 
-
+  }, [details]);
+  console.log(loading);
   return {
     loading,
     loginResponse,

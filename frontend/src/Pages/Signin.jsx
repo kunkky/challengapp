@@ -31,7 +31,7 @@ const Signin = () => {
         },
     });
     //use my sign in hook
-    const {  loading, loginResponse } = useLogin(details, 'login'); // 
+    const {  loading, loginResponse } = useLogin(details, 'login', "user"); // 
 
   return (
       <section className="bg-gray-50 dark:bg-gray-900">
