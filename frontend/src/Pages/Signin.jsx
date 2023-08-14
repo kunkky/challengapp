@@ -15,10 +15,11 @@ const Signin = () => {
     //check if user already is logged in 
     useLayoutEffect(() => {
         document.title = "Login | Tech Challenge Game"
-        if (sessionStorage.getItem("usertoken")) {
+        if (sessionStorage.getItem("user")) {
             window.location.href = "/dashboard"
         }
     }, [])
+
 
 
     //state for login response
@@ -56,13 +57,11 @@ const Signin = () => {
     //handle login logic
     if (loginResponse && loginResponse.responseCode==="00"){
         //user is available
-        const data = loginResponse.data;
-        sessionStorage.setItem("token", loginResponse.data);
-        sessionStorage.setItem("user", JSON.stringify(loginResponse.usertoken));
-        console.log(loginResponse.responseCode);
+        const userInfo = loginResponse.data;
+        sessionStorage.setItem("user", JSON.stringify(userInfo));
         navigate("/dashboard", {
             state: {
-                data,
+                userInfo,
                 message: `welcome`
             },
             replace: true,
@@ -111,13 +110,6 @@ const Signin = () => {
                                   <div className='text-red-600 text-sm'>{formik.errors.password}</div>
                               ) : null}
                           </div>
-                          {
-                              apiresponse!=="" &&
-                              <div className='text-red-600 text-sm'>
-                                  {apiresponse}
-                              </div>
-
-                          }
                        
                           {
                           loading===true ? 
@@ -134,6 +126,13 @@ const Signin = () => {
                                       /></button> :
                           <button type="submit" className="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                       Log In</button>
+                          }
+                          {
+                              apiresponse !== "" &&
+                              <div className='text-red-600 text-sm mt-0'>
+                                  {apiresponse}
+                              </div>
+
                           }
                           
                           <p className="text-sm font-light text-gray-500 dark:text-gray-400">

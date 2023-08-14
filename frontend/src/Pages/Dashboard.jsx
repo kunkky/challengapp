@@ -1,27 +1,32 @@
-import React, { useLayoutEffect } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import React, { useLayoutEffect, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const Dashboard = () => {
+const Dashboard = ({ logoutHandler }) => {
   useLayoutEffect(() => {
-    document.title = "Dashboard | Big Money awaits you"
-  }, [])
-  
-  const navigate = useNavigate;
-  //set Use location so as to get user info
-  const location = useLocation()
-  let account_number = null;
-  if (sessionStorage.getItem("user")) {
-    console.log(sessionStorage.getItem("user"));
-  }
-  else {
-    navigate('/')
+    document.title = "Dashboard | ";
+  }, []);
 
-  }
-
+  //ensure only user see page
+  const navigate = useNavigate();
+  useEffect(() => {
+    // Set Use location so as to get user info
+    if (sessionStorage.getItem("user")) {
+      // Redirect if not user
+      const userInfo = JSON.parse(sessionStorage.getItem("user"));
+      if (userInfo.type === "admin") {
+        navigate('/admindashboard');
+      }
+    } else {
+      navigate('/');
+    }
+  }, [navigate]); // Add navigate to the dependency array
 
   return (
-    <div>Dashboard</div>
-  )
-}
+    <div>
+      Dashboard
+      <span onClick={logoutHandler}>Log Out</span>
+    </div>
+  );
+};
 
-export default Dashboard
+export default Dashboard;

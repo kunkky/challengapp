@@ -739,7 +739,7 @@ router.post('/login', bodyParse.json(), async (req, res) => {
             //return error user doesnt exist
           return  res.status(400).send({
                 responseCode: "96",
-                responseMessage: "Email Not Registered",
+                responseMessage: "Wrong Credentials",
               data: null
             })
         }
@@ -765,7 +765,7 @@ router.post('/login', bodyParse.json(), async (req, res) => {
                     //send info to user
                     res.status(400).send({
                         responseCode: "96",
-                        responseMessage: "You are not an admin",
+                        responseMessage: "You are not allowed here",
                         data: null
                     })
                 
