@@ -1,6 +1,7 @@
 import React, { useLayoutEffect, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import DashTemplate from '../Components/DashTemplate';
+import DashboardFooter from '../Components/DashboardFooter';
 
 const Dashboard = () => {
   useLayoutEffect(() => {
@@ -25,6 +26,7 @@ const Dashboard = () => {
   return (
     <div>
       <DashTemplate pageName="Dashboard" />
+      <DashboardFooter/>
     </div>
   );
 };
