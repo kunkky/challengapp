@@ -1,5 +1,6 @@
 import React, { useLayoutEffect, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import DashTemplate from '../Components/DashTemplate';
 
 const Dashboard = ({ logoutHandler }) => {
   useLayoutEffect(() => {
@@ -23,7 +24,7 @@ const Dashboard = ({ logoutHandler }) => {
 
   return (
     <div>
-      Dashboard
+      <DashTemplate/>
       <span onClick={logoutHandler}>Log Out</span>
     </div>
   );
