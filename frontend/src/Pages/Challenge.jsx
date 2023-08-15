@@ -1,6 +1,6 @@
 import React, { useLayoutEffect, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import DashTemplate from '../Components/DashTemplate';
+import ChallengeTemplate from '../Components/ChallengeTemplate';
 
 const Challenge = () => {
   useLayoutEffect(() => {
@@ -24,7 +24,7 @@ const Challenge = () => {
 
   return (
     <div>
-      <DashTemplate />
+      <ChallengeTemplate pageName="Challenge"/>
     </div>
   );
 };

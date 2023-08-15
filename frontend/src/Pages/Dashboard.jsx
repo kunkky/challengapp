@@ -4,7 +4,7 @@ import DashTemplate from '../Components/DashTemplate';
 
 const Dashboard = () => {
   useLayoutEffect(() => {
-    document.title = "Dashboard | ";
+    document.title = "Dashboard | Tech Challenge App";
   }, []);
 
   //ensure only user see page
@@ -24,7 +24,7 @@ const Dashboard = () => {
 
   return (
     <div>
-      <DashTemplate />
+      <DashTemplate pageName="Dashboard" />
     </div>
   );
 };

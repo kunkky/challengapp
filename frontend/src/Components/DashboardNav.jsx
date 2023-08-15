@@ -14,7 +14,7 @@ const DashboardNav = () => {
         { name: 'Profile', href: '/profile', current: false },
             ]
     const userNavigation = [
-        { name: 'Your Profile', href: '/logout' },
+        { name: 'Your Profile', href: '/profile' },
         { name: 'Sign out', href: '/logout' },
     ]
 
@@ -87,7 +87,7 @@ const DashboardNav = () => {
                                                   <Menu.Item key={item.name}>
                                                       {({ active }) => (
                                                           <NavLink
-                                                              href={item.href}
+                                                              to={item.href}
                                                               className={classNames(
                                                                   active ? 'bg-gray-100' : '',
                                                                   'block px-4 py-2 text-sm text-gray-700'
@@ -126,8 +126,8 @@ const DashboardNav = () => {
                           {navigation.map((item) => (
                               <Disclosure.Button
                                   key={item.name}
-                                  as="a"
-                                  href={item.href}
+                                  as="NavLink"
+                                  to={item.href}
                                   className={classNames(
                                       item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                                       'block rounded-md px-3 py-2 text-base font-medium'
@@ -152,9 +152,10 @@ const DashboardNav = () => {
                           <div className="mt-3 space-y-1 px-2">
                               {userNavigation.map((item) => (
                                   <Disclosure.Button
+                                  
                                       key={item.name}
-                                      as="a"
-                                      href={item.href}
+                                      as="NavLink"
+                                      to={item.href}
                                       className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
                                   >
                                       {item.name}

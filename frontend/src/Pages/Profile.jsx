@@ -1,6 +1,6 @@
 import React, { useLayoutEffect, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import DashTemplate from '../Components/DashTemplate';
+import ProfileTemplate from '../Components/ProfileTemplate';
 
 const Profile = () => {
   useLayoutEffect(() => {
@@ -24,7 +24,7 @@ const Profile = () => {
 
   return (
     <div>
-      <DashTemplate />
+      <ProfileTemplate pageName="Profile" />
     </div>
   );
 };
