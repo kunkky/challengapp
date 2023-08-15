@@ -2,9 +2,9 @@ import React, { useLayoutEffect, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import DashTemplate from '../Components/DashTemplate';
 
-const Profile = () => {
+const Challenge = () => {
   useLayoutEffect(() => {
-    document.title = "Dashboard | Profile";
+    document.title = "Dashboard | Challenge ";
   }, []);
 
   //ensure only user see page
@@ -29,4 +29,4 @@ const Profile = () => {
   );
 };
 
-export default Profile
+export default Challenge
