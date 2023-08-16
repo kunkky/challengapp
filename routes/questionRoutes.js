@@ -120,20 +120,49 @@ router.get('/getQuestionById', requireAuth, bodyParse.json(), async (req, res) =
 
 })
 //user Routes userAuthMiddleware
-router.get('/getAllUserQuestions', requireuserAuth, async (req, res) => {
-    try {
-        const question = await Questions.find();
-        res.status(200).send({
-            responseCode: "00",
-            responseMessage: "Question Fetch Successfully",
-            data: question
-        })
-    } catch (error) {
-        res.status(500).send({
+router.get('/getAllUserQuestions', requireuserAuth, bodyParse.json(), async (req, res) => {
+    const Schema = Joi.object({
+        type: Joi.string().required().min(3),
+        level: Joi.string().min(3).required()
+    });
+    //check error and return error
+    const { error } = Schema.validate(req.body);
+
+    if (error) {
+        return res.status(400).send({
             responseCode: "96",
-            responseMessage: "internal Server erroe",
+            responseMessage: error.details[0].message,
             data: null
-        })
+        });
+
+    }
+    else {
+        //check if id exists
+        const { type, level } = req.body;
+            const param= {
+                questionType: type,
+                questionLevel: level,
+            }
+
+        try {
+            const items = await Questions.find(param);
+
+            return res.status(200).send({
+                responseCode: "00",
+                responseMessage: "Question Retrieved successfully",
+                data: items
+            });
+
+        } catch (error) {
+            console.log(error);
+            return res.status(400).send({
+                responseCode: "96",
+                responseMessage: "Failed to retrieve " + _id,
+                data: null
+
+            });
+        }
+
     }
 })
 

@@ -10,6 +10,7 @@ import AdminSignin from './Pages/AdminSignin'
 import Profile from './Pages/Profile'
 import ErrorPage from './Pages/ErrorPage'
 import Dashboard from './Pages/Dashboard'
+import ChallengeList from './Pages/ChallengeList'
 import WebTerminal from './Components/WebTerminal'
 import CodeEditor from './Components/CodeEditor'
 import HtmlCOdeEditor from './Components/HtmlCOdeEditor'
@@ -46,7 +47,21 @@ const App = () => {
           <Dashboard />
         </ProtectedRoutes>
       }></Route>
-      <Route path='/challenge' element={
+
+      <Route path='/challengeList' element={
+        <ProtectedRoutes>
+          <ChallengeList />
+        </ProtectedRoutes>
+      }></Route>
+
+      <Route path='/challengeList/:id' element={
+        <ProtectedRoutes>
+          <div>Questions Here</div>
+        </ProtectedRoutes>
+      }></Route>
+
+
+      <Route path='/challenge/:id' element={
         <ProtectedRoutes>
           <Challenge />
         </ProtectedRoutes>
