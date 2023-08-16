@@ -33,9 +33,9 @@ const ProfilePage = () => {
           <h2 className="text-blue-2xl font-semibold mb-2"><strong>Student Name:</strong> {profileDetails.name}</h2>
           <p className="text-blue-600 mb-1"><strong>Stack:</strong> {profileDetails.stack}</p>
           <p className="text-blue-600 mb-1"><strong>Level:</strong> {profileDetails.level}</p>
-          <p className="text-blue-600 mb-1"><strong>Language</strong> {profileDetails.language}</p>
-          <p className="text-blue-600 mb-1"><strong>Email</strong> {profileDetails.email}</p>
-          <p className="text-blue-600 mb-1"><strong>Contact</strong> {profileDetails.contact}</p>
+          <p className="text-blue-600 mb-1"><strong>Language:</strong> {profileDetails.language}</p>
+          <p className="text-blue-600 mb-1"><strong>Email:</strong> {profileDetails.email}</p>
+          <p className="text-blue-600 mb-1"><strong>Contact:</strong> {profileDetails.contact}</p>
         </div>
         <button
           className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded"
