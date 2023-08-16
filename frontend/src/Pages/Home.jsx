@@ -23,12 +23,10 @@ const Home = () => {
               <div className="w-full lg:w-6/12 px-4 ml-auto mr-auto text-center">
                 <div className="pr-12">
                   <h1 className="text-white font-semibold text-5xl">
-                    Your story starts with us.
+                  Welcome to the ultimate Tech Challenge website, where innovation meets competition!
                   </h1>
                   <p className="mt-4 text-lg text-gray-300">
-                    This is a simple example of a Landing Page you can build
-                    using Tailwind Starter Kit. It features multiple CSS
-                    components based on the Tailwindcss design system.
+                  Get ready to embark on a journey of innovation, learning, and growth. Join the Tech Challenge community and be a part of shaping the future through technology. Are you up for the challenge?
                   </p>
                 </div>
               </div>
@@ -65,9 +63,9 @@ const Home = () => {
                   <div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-red-400">
                       <i className="bi bi-braces"></i>
                   </div>
-                  <h6 className="text-xl font-semibold">Awarded Agency</h6>
+                  <h6 className="text-xl font-semibold">Collaboration Opportunities</h6>
                   <p className="mt-2 mb-4 text-gray-600">
-                    Divide details about your product or agency work into parts. A paragraph describing a feature will be enough.
+                  Collaboration is the heart of innovation. Engage with other participants through forums, chat rooms, and collaborative coding spaces. Form teams, brainstorm ideas, and collectively solve challenges that require multidisciplinary expertise.
                   </p>
                 </div>
               </div>
@@ -80,10 +78,10 @@ const Home = () => {
                       <i className="bi bi-journal-code"></i>
                   </div>
                   <h6 className="text-xl font-semibold">
-                    Free Revisions
+                  Real-world Impact
                   </h6>
                   <p className="mt-2 mb-4 text-gray-600">
-                    Keep you user engaged by providing meaningful information. Remember that by this time, the user is curious.
+                  Our challenges aren't just theoretical exercises. They're often based on real-world problems faced by industries and communities. By participating, you're contributing to innovative solutions that can make a tangible impact on the world
                   </p>
                 </div>
               </div>
@@ -96,10 +94,10 @@ const Home = () => {
                       <i className="bi bi-code-slash"></i>
                   </div>
                   <h6 className="text-xl font-semibold">
-                    Verified Company
+                  Skill Levels
                   </h6>
                   <p className="mt-2 mb-4 text-gray-600">
-                    Write a few lines about each one. A paragraph describing a feature will be enough. Keep you user engaged!
+                 Our Challenges are tailored to cater to participants of all skill levels, from beginners taking their first steps in tech to to intermediate to seasoned professionals looking for the next big challenge. Choose challenges that match your skill level and progressively level up.
                   </p>
                 </div>
               </div>
