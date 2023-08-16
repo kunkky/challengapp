@@ -70,7 +70,7 @@ const Home = () => {
                 </div>
               </div>
             </div>
-
+           
             <div className="w-full md:w-4/12 px-4 text-center">
               <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg">
                 <div className="px-4 py-5 flex-auto">
@@ -97,7 +97,53 @@ const Home = () => {
                   Skill Levels
                   </h6>
                   <p className="mt-2 mb-4 text-gray-600">
-                 Our Challenges are tailored to cater to participants of all skill levels, from beginners taking their first steps in tech to to intermediate to seasoned professionals looking for the next big challenge. Choose challenges that match your skill level and progressively level up.
+                 Our Challenges are tailored to cater to participants of all skill levels, from beginners taking their first steps in tech to intermediate then to seasoned professionals looking for the next big challenge. Choose challenges that match your skill level and progressively level up.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="lg:pt-12 pt-6 w-full md:w-4/12 px-4 text-center">
+              <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg">
+                <div className="px-4 py-5 flex-auto">
+                  <div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-red-400">
+                      <i className="bi bi-braces"></i>
+                  </div>
+                  <h6 className="text-xl font-semibold">Rich and Varied Question Formats</h6>
+                  <p className="mt-2 mb-4 text-gray-600">
+                   We present questions in various formats including multiple choice, coding challenges, debugging scenarios, algorithmic puzzles, and design problems. This keeps participants engaged and provides a holistic learning experience.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="w-full md:w-4/12 px-4 text-center">
+              <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg">
+                <div className="px-4 py-5 flex-auto">
+                  <div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-blue-400">
+                      <i className="bi bi-journal-code"></i>
+                  </div>
+                  <h6 className="text-xl font-semibold">
+                  Interactive Coding Environment
+                  </h6>
+                  <p className="mt-2 mb-4 text-gray-600">
+                 We offer an in-browser coding environment that supports multiple programming languages. Participants can write, compile, and test their code directly on the platform, making it easier to tackle coding challenges.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="pt-6 w-full md:w-4/12 px-4 text-center">
+              <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg">
+                <div className="px-4 py-5 flex-auto">
+                  <div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-green-400">
+                      <i className="bi bi-code-slash"></i>
+                  </div>
+                  <h6 className="text-xl font-semibold">
+                  Challenge History and Progress Tracking
+                  </h6>
+                  <p className="mt-2 mb-4 text-gray-600">
+                 We give participants the ability to track their challenge history, progress, and completion status. This offers a sense of achievement and a roadmap for continuous growth.
                   </p>
                 </div>
               </div>
@@ -170,6 +216,7 @@ const Home = () => {
           </div>
         </div>
       </section>
+     
 
       <section className="relative py-20">
         <div
