@@ -16,7 +16,7 @@ const ChallengeTemplate = ({ pageName }) => {
     })
     //use my sign in hook
     let challenges= null;
-    const { loading, challengeResponse } = useFetchChallenges(details, 'getAllQuestionsGroup', "admin"); // 
+    const { loading, challengeResponse } = useFetchChallenges(details, 'getAllQuestionsGroup'); // 
     useEffect(() => {
         if (challengeResponse) {
             setApiresponse(challengeResponse.responseMessage)
