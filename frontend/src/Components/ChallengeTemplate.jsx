@@ -5,21 +5,28 @@ import { useParams } from 'react-router-dom'
 import useFetchChallenges from '../Hooks/useFetchChallenges'
 import { ThreeDots } from 'react-loader-spinner'
 
+
 const ChallengeTemplate = ({ pageName }) => {
+    //get user info
+    const userInfo = JSON.parse(sessionStorage.getItem("user"));
     const params = useParams();
     //fetch javascript questions
     const [apiresponse, setApiresponse] = useState(null)
 
-    const [details, setDetails] = useState({
-        "type": "",
-        "level": ""
-    })
+    
+    const details={
+        type: params.id,
+        level: userInfo.level
+    }
     //use my sign in hook
     let challenges= null;
-    const { loading, challengeResponse } = useFetchChallenges(details, 'getAllQuestionsGroup'); // 
+    const { loading, challengeResponse } = useFetchChallenges(details, 'getAllUserQuestions'); // 
+    //console.log(challengeResponse);
+
     useEffect(() => {
         if (challengeResponse) {
-            setApiresponse(challengeResponse.responseMessage)
+          //  setApiresponse(challengeResponse.responseMessage)
+            console.log(challengeResponse);
         } 
 
     }, [challengeResponse])

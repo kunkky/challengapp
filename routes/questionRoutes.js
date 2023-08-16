@@ -120,7 +120,7 @@ router.get('/getQuestionById', requireAuth, bodyParse.json(), async (req, res) =
 
 })
 //user Routes userAuthMiddleware
-router.get('/getAllUserQuestions', requireuserAuth, bodyParse.json(), async (req, res) => {
+router.post('/getAllUserQuestions', requireuserAuth, bodyParse.json(), async (req, res) => {
     const Schema = Joi.object({
         type: Joi.string().required().min(3),
         level: Joi.string().min(3).required()
