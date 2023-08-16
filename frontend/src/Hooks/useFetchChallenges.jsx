@@ -10,8 +10,8 @@ const useFetchChallenges = (details, url) => {
       
             setLoading(true);
             try {
-                const response = await fetch("http://localhost:2994/api/v1/" + url, {
-                    method: 'GET',
+                const response = await fetch(BaseUrl + url, {
+                    method: 'POST',
                     body: JSON.stringify(details),
                     headers: {
                         'Content-Type': 'application/json',
