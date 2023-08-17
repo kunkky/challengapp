@@ -1,37 +1,54 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import axios from 'axios';
 import Logo from '../assets/images/logo.png';
 import viewicon from "../assets/images/view.png";
 import hideicon from '../assets/images/hide.png'
 import { ThreeDots } from 'react-loader-spinner';
+import BaseUrl from '../BaseUrl';
+
+
 
 const Signup = () => {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         stack: '',
         level: 'intermediate',
         fullname: '',
         email: '',
         password: '',
-        confirmPassword: '',
+        // confirmPassword: '',
         phone: '',
         acceptTerms: false,
+        type: "user"
     });
-
+    // To check if password and confirm password match
     const [passwordMatch, setPasswordMatch] = useState(true);
+
+    // To toggle password visibility
     const [passwordVisible, setPasswordVisible] = useState(false);
+
+    // To toggle confirm password visibility
     const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
+
+    // To know when the form is submitted and loading
     const [isLoading, setIsLoading] = useState(false);
 
+    // To handle registration success and redirection
+    const [regResponse, setRegResponse] = useState(null);
+    const [errorMsg, setErrorMsg] = useState(null)
 
+
+    // To handle change in input fields
     const handleInputChange = (e) => {
         const { name, value } = e.target;
 
+        // To ensure that if a value that is not a number is entered into the phone input field, it returns nothing
         if (name === 'phone' && isNaN(value)) {
             return; // If the value is not a number, then return nothing
         }
 
+        // To compare if the password input and confirm password input matches
         if (name === 'password' || name === 'confirmPassword') {
             if (name === 'password') {
                 setFormData((prevData) => ({
@@ -53,6 +70,8 @@ const Signup = () => {
         }
     };
 
+
+    // To handle checkbox changes
     const handleCheckboxChange = (e) => {
         const { checked } = e.target;
         setFormData((prevData) => ({
@@ -61,6 +80,7 @@ const Signup = () => {
         }));
     };
 
+    // To handle the Form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -78,26 +98,61 @@ const Signup = () => {
             alert('Please select a stack.');
             return;
         }
+        const userData = {
+            stack: formData.stack,
+            level: formData.level,
+            fullname: formData.fullname,
+            email: formData.email,
+            password: formData.password,
+            phone: formData.phone,
+            type: "user"
 
-        try {
-            setIsLoading(true); //Set the loading state
-            const response = await axios.post('http://localhost:2994/api/v1/registeration', formData); // Make the API POST request
-
-            if (response.status === 201) {
-                console.log('User registered successfully.');
-                // Handle success, redirect user or show a success message
-            } else {
-                console.error('Registration failed.');
-                // Handle registration failure, show an error message
-            }
-        } catch (error) {
-            console.error('An error occurred:', error);
-            // Handle any other errors, show an error message
-        } finally {
-            setIsLoading(false); // Reset to hide the loading indicator
         }
-    };
 
+        const fetchApi = async (formData) => {
+            if (formData !== "") {
+                setIsLoading(true);
+                try {
+                    const response = await fetch(BaseUrl + 'registeration', {
+                        method: 'PUT',
+                        body: JSON.stringify(userData),
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                    });
+                    const data = await response.json();
+                    console.log(data);
+                    setIsLoading(false);
+                    setRegResponse(data);
+                } catch (error) {
+                    setIsLoading(false);
+                    setRegResponse(error);
+                    console.log(error);
+                }
+            }
+        };
+
+        fetchApi(formData)
+
+    }
+    //redirect to dashboard if registration
+    if (regResponse && regResponse.responseCode === "00") {
+        //user is available
+        const userInfo = regResponse.data;
+        sessionStorage.setItem("user", JSON.stringify(userInfo));
+        navigate("/dashboard", {
+            state: {
+                userInfo,
+                message: `welcome ${FormData.fullname}`
+            },
+            replace: true,
+        });
+
+    } else {
+        if(regResponse.responseMessage){
+        setErrorMsg(regResponse.responseMessage);
+        }
+    }
     return (
         <section className="bg-gray-50 dark:bg-gray-900 lg:h-[140svh] md:h-[105svh] pt-7">
             <div className="flex flex-col items-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -180,17 +235,20 @@ const Signup = () => {
                             </div>
                             {
                                 isLoading ? <button disabled className="flex justify-center items-center w-full text-white bg-blue-400 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                <ThreeDots
-                                    height="25"
-                                    width="25"
-                                    radius="5"
-                                    color="#ffffff"
-                                    ariaLabel="three-dots-loading"
-                                    wrapperStyle={{}}
-                                    wrapperClassName=""
-                                    visible={true}
-                                /></button> :
-                                <button type="submit" className="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Create an account</button>
+                                    <ThreeDots
+                                        height="25"
+                                        width="25"
+                                        radius="5"
+                                        color="#ffffff"
+                                        ariaLabel="three-dots-loading"
+                                        wrapperStyle={{}}
+                                        wrapperClassName=""
+                                        visible={true}
+                                    /></button> :
+                                    <button type="submit" className="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Create an account</button>
+                            }
+                            {
+                                errorMsg !== null ? errorMsg : <></>
                             }
                             <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                                 Already have an account? <Link to="/signin" className="font-medium text-blue-600 hover:underline dark:text-blue-500">Login here</Link>

@@ -649,7 +649,7 @@ router.put('/registeration', bodyParse.json(), async (req, res) => {
         }),
         email: Joi.string().required().email().min(3).max(50),
         phone: Joi.string().required().min(3).max(15),
-        
+        type: Joi.string().required().min(3).max(15),        
     });
     //check error and return error
     const { error } = Schema.validate(req.body);
@@ -662,7 +662,7 @@ router.put('/registeration', bodyParse.json(), async (req, res) => {
         });
 
     }
-    const { level, fullname, stack, email, password, phone } = req.body;
+    const { level, fullname, stack, email, password, phone ,type} = req.body;
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
@@ -675,7 +675,7 @@ router.put('/registeration', bodyParse.json(), async (req, res) => {
                 const newUser = new Users({
                     level, fullname, stack, email
                     , hashedPassword,phone, type:"user",
-                    dateCreated: new Date().toJSON(), dateUpdated: new Date().toJSON()
+                    dateCreated: new Date().toJSON(), dateUpdated: new Date().toJSON(),type
                 });
             //save user to db
                const createUser= await newUser.save()
