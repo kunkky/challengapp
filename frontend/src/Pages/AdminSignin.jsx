@@ -45,7 +45,7 @@ const AdminSignin = () => {
     //set error message 
     const [apiresponse, setApiresponse] = useState(null)
     //use my sign in hook
-    const { loading, loginResponse } = useLogin(details, 'login', "admin"); // 
+    const { loading, loginResponse } = useLogin(details, 'adminlogin', "admin"); // 
     useEffect(() => {
         if (loginResponse) {
             setApiresponse(loginResponse.responseMessage)

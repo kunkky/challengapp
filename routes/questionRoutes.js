@@ -8,17 +8,13 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken");
 const requireAuth = require("../middleware/authMiddleware");
-const requireuserAuth = require("../middleware/userAuthMiddleware");
 
 
 const checkPasswordValidation = require('../passwordValidator');
 const { Types } = require("../model/type");
 
-const createToken = (id,type )=>{
-    let signature = "Challenge App | kunkkybaba was here doing wonders";
-    if (type==='user'){
-        signature +=' for users';
-    }
+const createToken = (id )=>{
+    let signature = "Challenge App | gadjjajcabdhcjadbajkvhcan hjc";
     const expDate = 3 * 24 * 60 * 60;
     return token = jwt.sign({ id }, signature, { expiresIn: expDate});
 
@@ -120,7 +116,7 @@ router.get('/getQuestionById', requireAuth, bodyParse.json(), async (req, res) =
 
 })
 //user Routes userAuthMiddleware
-router.post('/getAllUserQuestions', requireuserAuth, bodyParse.json(), async (req, res) => {
+router.post('/getAllUserQuestions', requireAuth, bodyParse.json(), async (req, res) => {
     const Schema = Joi.object({
         type: Joi.string().required().min(3),
         level: Joi.string().min(3).required()
@@ -168,7 +164,7 @@ router.post('/getAllUserQuestions', requireuserAuth, bodyParse.json(), async (re
 
 
 //Get Question by id 
-router.get('/getUserQuestionById', requireuserAuth, bodyParse.json(), async (req, res) => {
+router.get('/getUserQuestionById', requireAuth, bodyParse.json(), async (req, res) => {
     const Schema = Joi.object({
         _id: Joi.string()
     });
@@ -206,7 +202,7 @@ router.get('/getUserQuestionById', requireuserAuth, bodyParse.json(), async (req
 })
 
 //Get Question by Level
-router.get('/getUserQuestionByLevel', requireuserAuth, bodyParse.json(), async (req, res) => {
+router.get('/getUserQuestionByLevel', requireAuth, bodyParse.json(), async (req, res) => {
     const Schema = Joi.object({
         questionLevel: Joi.string()
     });
@@ -245,7 +241,7 @@ router.get('/getUserQuestionByLevel', requireuserAuth, bodyParse.json(), async (
 })
 
 //Get Question by Category
-router.get('/getUserQuestionByCategory', requireuserAuth, bodyParse.json(), async (req, res) => {
+router.get('/getUserQuestionByCategory', requireAuth, bodyParse.json(), async (req, res) => {
     const Schema = Joi.object({
         questionType: Joi.string()
     });
@@ -706,11 +702,12 @@ router.put('/registeration', bodyParse.json(), async (req, res) => {
                     , hashedPassword,phone, type:"user",
                     dateCreated: new Date().toJSON(), dateUpdated: new Date().toJSON()
                 });
+
             //save user to db
                const createUser= await newUser.save()
                //create Token for user
-            const token = createToken(newUser._id.toString()+ newUser.fullname.toString()+ newUser.phone.toString(), "user")
-            res.cookie(type+'token', token, { httpOnly: true, maxAge:3*24*60*60*1000});
+            const token = createToken(newUser._id)
+            res.cookie('Token', token, { httpOnly: true, maxAge:3*24*60*60*1000});
 
                 //send info to user
                 res.status(200).send({
@@ -738,9 +735,90 @@ router.put('/registeration', bodyParse.json(), async (req, res) => {
     }
 })
 
-
-
 //admin Login userLogin
+router.post('/adminlogin', bodyParse.json(), async (req, res) => {
+    const Schema = Joi.object({
+        email: Joi.string().required().email().max(50),
+        type: Joi.string().required(),
+        password: Joi.string().required(),
+    });
+    //check error and return error
+    const { error } = Schema.validate(req.body);
+
+    if (error) {
+        return res.status(400).send({
+            responseCode: "96",
+            responseMessage: error.details[0].message,
+            data: null
+        });
+
+    }
+    const { email, password, type } = req.body;
+
+    try {
+        //check if data exist
+        const existUser = await Users.findOne({ email });
+        if (existUser === null) {
+            //return error user doesnt exist
+            return res.status(400).send({
+                responseCode: "96",
+                responseMessage: "Wrong Credentials",
+                data: null
+            })
+        }
+        else {
+
+            //check if password equals
+            const Auth = await bcrypt.compare(password, existUser.hashedPassword)
+            if (Auth === true) {
+                if (existUser.type === "admin") {
+                    //create Token for user
+                    const token = createToken(existUser._id)
+                  return  res.cookie('Token', token, { httpOnly: true, maxAge: 3 * 24 * 60 * 60 * 1000 });
+                    //send info to user
+                    res.status(200).send({
+                        responseCode: "00",
+                        responseMessage: "User Signed in successfully",
+                        data: existUser
+                    })
+
+                }
+                else {
+                    //send info to user
+                 return   res.status(400).send({
+                        responseCode: "96",
+                        responseMessage: "You are not allowed here",
+                        data: null
+                    })
+
+                }
+
+            }
+            else {
+                res.status(400).send({
+                    responseCode: "96",
+                    responseMessage: "Wrong Password",
+                    data: null
+                })
+
+
+            }
+
+        }
+
+    } catch (error) {
+        res.status(500).send({
+            responseCode: "96",
+            responseMessage: "Internal server error",
+            data: 'null' + error
+        })
+
+    }
+})
+
+
+
+//Login userLogin
 router.post('/login', bodyParse.json(), async (req, res) => {
     const Schema = Joi.object({
         email: Joi.string().required().email().max(50),
@@ -749,7 +827,6 @@ router.post('/login', bodyParse.json(), async (req, res) => {
     });
     //check error and return error
     const { error } = Schema.validate(req.body);
-    console.log(req.body.type);
 
     if (error) {
         return res.status(400).send({
@@ -775,24 +852,23 @@ router.post('/login', bodyParse.json(), async (req, res) => {
         else {
 
             //check if password equals
-            const Auth = await bcrypt.compare(password, existUser.hashedPassword )
+            const Auth = await bcrypt.compare(password, existUser.hashedPassword)
             if (Auth===true){
-                if (existUser.type.toString() === type){
+                if (existUser.type === "user"){
                     //create Token for user
-                    const token = createToken(existUser._id.toString() + existUser.fullname.toString() + existUser.phone.toString(), type)
-                    res.cookie(type+'token', token, { httpOnly: true, maxAge: 3 * 24 * 60 * 60 * 1000 });
-
+                    const token = createToken(existUser._id)
+                    res.cookie('Token', token, { httpOnly: true, maxAge: 3 * 24 * 60 * 60 * 1000 });
                     //send info to user
-                    res.status(200).send({
+                   return res.status(200).send({
                         responseCode: "00",
                         responseMessage: "User Signed in successfully",
                         data: existUser
-                    })
+                    }) 
+
                 }
                 else{
-
                     //send info to user
-                    res.status(400).send({
+                  return  res.status(400).send({
                         responseCode: "96",
                         responseMessage: "You are not allowed here",
                         data: null

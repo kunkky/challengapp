@@ -10,8 +10,9 @@ const cookieParser = require('cookie-parser');
 app.use(cookieParser());
 //handle cors for local work please remove on deployment
 app.use(cors(
-    {
-        origin: 'http://127.0.0.1:3000',
+    corsOptions = {
+        origin: 'http://localhost:3000', // Change to your React app's origin
+        credentials: true,
     }
 ));
 app.use("/api/v1/", questionRouter);

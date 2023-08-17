@@ -4,32 +4,30 @@ import BaseUrl from './../BaseUrl';
 const useFetchChallenges = (details, url) => {
     const [loading, setLoading] = useState(false);
     const [challengeResponse, setChallengeResponse] = useState('');
-    
-    console.log(JSON.stringify(details))
+
     const fetchApi = async () => {
-      
-            setLoading(true);
-            try {
-                const response = await fetch(BaseUrl + url, {
-                    method: 'POST',
-                    body: JSON.stringify(details),
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                });
-                const data = await response;
-                console.log(data);
-                setLoading(false);
-                setChallengeResponse(data);
-            } catch (error) {
-                setLoading(false);
-                setChallengeResponse(error);
-            }
-       
+        setLoading(true);
+        try {
+        console.log(BaseUrl+url);
+            const response = await fetch(BaseUrl + url, {
+                method: 'POST',
+                credentials: 'include', // Include cookies in the request
+                body: JSON.stringify(details),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            const data = await response.json();
+            setLoading(false);
+            setChallengeResponse(data);
+        } catch (error) {
+            setLoading(false);
+            setChallengeResponse(error);
+        }
     };
 
     useEffect(() => {
-        // Run the effect only when details.email, details.password, or Authtype change
+        // Run the effect only when details.level, details.type change
         fetchApi();
     }, [details.level, details.type]);
 
@@ -39,4 +37,4 @@ const useFetchChallenges = (details, url) => {
     };
 };
 
-export default useFetchChallenges
+export default useFetchChallenges;
