@@ -8,8 +8,16 @@ const { questionRouter } = require("./routes/questionRoutes");
 const cookieParser = require('cookie-parser');
 
 app.use(cookieParser());
-app.use(cors());
+//handle cors for local work please remove on deployment
+app.use(cors(
+    corsOptions = {
+        origin: 'http://localhost:3000', // Change to your React app's origin
+        credentials: true,
+    }
+));
 app.use("/api/v1/", questionRouter);
+
+
 
 dotenv.config({ path: "config.env" })
 let PORT = process.env.PORT || 8080

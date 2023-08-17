@@ -10,7 +10,7 @@ const DashboardNav = () => {
 
     const navigation = [
         { name: 'Dashboard', href: '/dashboard', current: true },
-        { name: 'Challenge', href: '/challenge', current: false },
+        { name: 'Challenge', href: '/challenge/default', current: false },
         { name: 'Profile', href: '/profile', current: false },
             ]
     const userNavigation = [

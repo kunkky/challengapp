@@ -3,7 +3,7 @@ import ToastMessage from './ToastMessage'
 import HtmlLogo from '../assets/images/html.png'
 import CssLogo from '../assets/images/css.png'
 import JsLogo from '../assets/images/js.png'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 const DashboardPage = () => {
   return (
@@ -49,46 +49,46 @@ const DashboardPage = () => {
        
 
 
-      <div className=" w-full grid sm:grid-cols-4 sm:p-0 sm:px-10 px-5 gap-5 sm:gap-10 grid-cols-1">
+      <div className=" w-full grid sm:grid-cols-2 sm:p-0 sm:px-10 px-5 gap-5 sm:gap-10 grid-cols-1">
         
 
-        <div class="bg-slate-50 p-10 rounded-lg flex justify-between items-center col-span-2 flex-row">
+        {/* <div class="bg-slate-50 p-10 rounded-lg flex justify-between items-center col-span-2 flex-row">
           <div className="">
             <img src={HtmlLogo} alt="" className='w-[150px]'/>
           </div>
           <div className="">
          
-            <button className='bg-[#121212] p-3 rounded text-white border-0'>Take Challenge</button>
+            <Link to="/challenge/HTML" className='bg-[#121212] p-3 rounded text-white border-0'>Take Challenge</Link>
           </div>
-        </div>
+        </div> */}
 
-        <div class="bg-slate-50 p-10 rounded-lg flex justify-between items-center col-span-2 flex-row">
+        <div class="bg-slate-50 p-10 rounded-lg flex justify-between items-center col-span-1 flex-row">
           <div className="">
             <img src={HtmlLogo} alt="" className='w-[150px]' />
           </div>
           <div className="">
 
-            <button className='bg-[#121212] p-3 rounded text-white border-0'>Take Challenge</button>
+            <NavLink to="/challenge/java script" className='bg-[#121212] p-3 rounded text-white border-0'>Take Challenge</NavLink>
           </div>
         </div>
 
-        <div class="bg-slate-50 p-10 rounded-lg flex justify-between items-center col-span-2 flex-row">
+        <div class="bg-slate-50 p-10 rounded-lg flex justify-between items-center col-span-1 flex-row">
           <div className="">
             <img src={JsLogo} alt="" className='w-[150px]' />
           </div>
           <div className="">
 
-            <Link to="/jschallenge" className='bg-[#121212] p-3 rounded text-white border-0'>Take Challenge</Link>
+            <NavLink to="/challenge/java script" className='bg-[#121212] p-3 rounded text-white border-0'>Take Challenge</NavLink>
           </div>
         </div>
 
-        <div class="bg-slate-50 p-10 rounded-lg flex justify-between items-center col-span-2 flex-row">
+        <div class="bg-slate-50 p-10 rounded-lg flex justify-between items-center col-span-1 flex-row">
           <div className="">
             <img src={CssLogo} alt="" className='w-[150px]' />
           </div>
           <div className="">
 
-            <button className='bg-[#121212] p-3 rounded text-white border-0'>Take Challenge</button>
+            <NavLink to="/challenge/css" className='bg-[#121212] p-3 rounded text-white border-0'>Take Challenge</NavLink>
           </div>
         </div>
 

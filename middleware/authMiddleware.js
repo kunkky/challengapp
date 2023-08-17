@@ -1,10 +1,10 @@
 const jwt = require('jsonwebtoken');
 
 const requireAuth = (req, res, next) => {
-    if (req.cookies && req.cookies.admintoken) {
-        console.log(req.cookies.admintoken);
-        const admintoken = req.cookies.admintoken;
-        jwt.verify(admintoken, 'Challenge App | kunkkybaba was here doing wonders', (err, decodedToken) => {
+    if (req.cookies.Token) {
+        const token = req.cookies.Token; // Access the 'Token' cookie
+        console.log(token);
+        jwt.verify(token, 'Challenge App | gadjjajcabdhcjadbajkvhcan hjc', (err, decodedToken) => {
             if (err) {
                 console.log(err.message);
                 res.status(401).send({
@@ -13,7 +13,7 @@ const requireAuth = (req, res, next) => {
                     data: null
                 });
             } else {
-                console.log(decodedToken); 
+                console.log(decodedToken);
                 next();
             }
         });
