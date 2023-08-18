@@ -33,6 +33,8 @@ const Signup = () => {
         type: "user"
     });
 
+    const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+
     //formic for validation 
     const formik = useFormik({
         initialValues: {
@@ -46,11 +48,12 @@ const Signup = () => {
         },
         validationSchema: Yup.object({
             password: Yup.string().required('Password is Required'),
+            confirmPassword: Yup.string().oneOf([Yup.ref('password'), null], 'Passwords must match'),
             email: Yup.string().email('Invalid email address').required('Valid email is required'),
             fullname: Yup.string().email('Invalid email address').required('Valid email is required'),
             stack: Yup.string().email('Invalid email address').required('Valid email is required'),
             confirmPassword: Yup.string().email('Invalid email address').required('Valid email is required'),
-            phone: Yup.string().tel('this is not').required('Valid email is required'),
+            phone: Yup.string().matches(phoneRegExp, 'Phone number is not valid').required("Valid Phone is needed"),
             checked: Yup.string().email('Invalid email address').required('Valid email is required'),
 
         }),
@@ -202,7 +205,7 @@ const Signup = () => {
                                 ) : null}
                             </div>
 
-                            <div>
+                            {/* <div>
                               <input
 
                                     id="checkbox"
@@ -218,7 +221,7 @@ const Signup = () => {
                                 {formik.touched.checkbox && formik.errors.checkbox ? (
                                     <div className='text-red-600 text-sm'>{formik.errors.checkbox}</div>
                                 ) : null}
-                            </div>
+                            </div> */}
                         
 
                             {
