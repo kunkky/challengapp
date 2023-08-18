@@ -34,7 +34,7 @@ const Signup = () => {
     });
 
     const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
-
+    const PassRegEx = /(?=.*[A-Z])^(?=.*[a-z])^(?=.*[0-9])/;
     //formic for validation 
     const formik = useFormik({
         initialValues: {
@@ -47,14 +47,13 @@ const Signup = () => {
             checked: '',
         },
         validationSchema: Yup.object({
-            password: Yup.string().required('Password is Required'),
-            confirmPassword: Yup.string().oneOf([Yup.ref('password'), null], 'Passwords must match'),
+            password: Yup.string().matches(PassRegEx, 'Password must include Uppercase, Lower Case and Special Character').required('Password is Required'),
+            confirmPassword: Yup.string().required().oneOf([Yup.ref('password'), null], 'Passwords must match'),
             email: Yup.string().email('Invalid email address').required('Valid email is required'),
             fullname: Yup.string().email('Invalid email address').required('Valid email is required'),
             stack: Yup.string().email('Invalid email address').required('Valid email is required'),
-            confirmPassword: Yup.string().email('Invalid email address').required('Valid email is required'),
             phone: Yup.string().matches(phoneRegExp, 'Phone number is not valid').required("Valid Phone is needed"),
-            checked: Yup.string().email('Invalid email address').required('Valid email is required'),
+            checked: Yup.boolean().oneOf([true], 'Pleas accept'),
 
         }),
         onSubmit: values => {
