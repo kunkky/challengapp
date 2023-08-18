@@ -7,21 +7,23 @@ const useRegisteration = (details, url, Authtype) => {
     const [regResponse, setRegResponse] = useState('');
     const userinfo = {
         stack: details.stack,
-        level: details.level,
         fullname: details.fullname,
         email: details.email,
         password: details.password,
         phone: details.phone,
-        type: "user"
+        type: Authtype,
+        level: "starter"
 
     }
 
+
     const fetchApi = async () => {
+        console.log(JSON.stringify(userinfo));
         if (details.email !== "") {
             setLoading(true);
             try {
                 const response = await fetch(BaseUrl + url, {
-                    method: 'POST',
+                    method: 'PUT',
                     body: JSON.stringify(userinfo),
                     headers: {
                         'Content-Type': 'application/json',
@@ -30,6 +32,7 @@ const useRegisteration = (details, url, Authtype) => {
                 const data = await response.json();
                 setLoading(false);
                 setRegResponse(data);
+                console.log(data);
             } catch (error) {
                 setLoading(false);
                 setRegResponse(error);

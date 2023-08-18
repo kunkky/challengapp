@@ -737,7 +737,7 @@ router.put('/registeration', bodyParse.json(), async (req, res) => {
                     return res.status(200).send({
                         responseCode: "00",
                         responseMessage: "User Signed in successfully",
-                        data: existUser,
+                        data: createUser,
                         token
                     })
                 }
