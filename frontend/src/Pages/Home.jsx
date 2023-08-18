@@ -63,9 +63,9 @@ const Home = () => {
                   <div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-red-400">
                       <i className="bi bi-braces"></i>
                   </div>
-                  <h6 className="text-xl font-semibold">Collaboration Opportunities</h6>
+                  <h6 className="text-xl font-semibold">Mentorship and Feedback</h6>
                   <p className="mt-2 mb-4 text-gray-600">
-                  Collaboration is the heart of innovation. Engage with other participants through forums, chat rooms, and collaborative coding spaces. Form teams, brainstorm ideas, and collectively solve challenges that require multidisciplinary expertise.
+                  Receive guidance from experienced mentors who are eager to share their knowledge and provide feedback on your solutions. Grow not only as a developer but also as a critical thinker and problem solver.
                   </p>
                 </div>
               </div>
@@ -157,18 +157,14 @@ const Home = () => {
                   <i className="bi bi-terminal"></i>
               </div>
               <h3 className="text-3xl mb-2 font-semibold leading-normal">
-                Working with us is a pleasure
+              Collaboration Opportunities
               </h3>
               <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-gray-700">
-                Don't let your uses guess by attaching tooltips and popoves
-                to any element. Just make sure you enable them first via
-                JavaScript.
+              Collaboration is the heart of innovation. Engage with other participants through forums, chat rooms, and collaborative coding spaces. Form teams, brainstorm ideas,
+               and collectively solve challenges that require multidisciplinary expertise.
               </p>
               <p className="text-lg font-light leading-relaxed mt-0 mb-4 text-gray-700">
-                The kit comes with three pre-built pages to help you get
-                started faster. You can change the text and images and
-                you're good to go. Just make sure you enable them first via
-                JavaScript.
+              Participation in discussion forums, share insight, ask questions,and connect with like minded developers to grow your network.
               </p>
               <a
                 href="https://www.creative-tim.com/learning-lab/tailwind-starter-kit#/presentation"
@@ -313,7 +309,7 @@ const Home = () => {
           <div className="flex flex-wrap justify-center text-center mb-24">
             <div className="w-full lg:w-6/12 px-4">
               <h2 className="text-4xl font-semibold">
-                Here are our heroes
+                Meet Our DevOps
               </h2>
               <p className="text-lg leading-relaxed m-4 text-gray-600">
                 According to the National Oceanic and Atmospheric
@@ -366,10 +362,10 @@ const Home = () => {
                 />
                 <div className="pt-6 text-center">
                   <h5 className="text-xl font-bold">
-                    Romina Hadid
+                    Bello Idowu
                   </h5>
                   <p className="mt-1 text-sm text-gray-500 uppercase font-semibold">
-                    Marketing Specialist
+                  Frontend Web Developer
                   </p>
                   <div className="mt-6">
                     <button
@@ -398,10 +394,10 @@ const Home = () => {
                 />
                 <div className="pt-6 text-center">
                   <h5 className="text-xl font-bold">
-                    Alexa Smith
+                    Moshood Owodeinde
                   </h5>
                   <p className="mt-1 text-sm text-gray-500 uppercase font-semibold">
-                    UI/UX Designer
+                    Frontend Web Developer
                   </p>
                   <div className="mt-6">
                     <button
@@ -436,10 +432,10 @@ const Home = () => {
                 />
                 <div className="pt-6 text-center">
                   <h5 className="text-xl font-bold">
-                    Jenna Kardi
+                    Olumide Oladipupo
                   </h5>
                   <p className="mt-1 text-sm text-gray-500 uppercase font-semibold">
-                    Founder and CEO
+                  Frontend Web Developer
                   </p>
                   <div className="mt-6">
                     <button
