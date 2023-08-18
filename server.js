@@ -6,6 +6,7 @@ const mongoose = require('mongoose')
 const cors = require('cors');
 const { questionRouter } = require("./routes/questionRoutes");
 const cookieParser = require('cookie-parser');
+const jwt = require('jsonwebtoken');
 
 app.use(cookieParser());
 //handle cors for local work please remove on deployment

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import BaseUrl from './../BaseUrl';
+import  Token  from './../Token';
 
 const useFetchChallenges = (details, url) => {
     const [loading, setLoading] = useState(false);
@@ -11,10 +12,11 @@ const useFetchChallenges = (details, url) => {
         console.log(BaseUrl+url);
             const response = await fetch(BaseUrl + url, {
                 method: 'POST',
-                credentials: 'include', // Include cookies in the request
                 body: JSON.stringify(details),
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': Token
+                    
                 },
             });
             const data = await response.json();

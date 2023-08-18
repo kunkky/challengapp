@@ -19,26 +19,7 @@ const ChallengeTemplate = ({ pageName }) => {
         level: userInfo.level
     }
     //use my sign in hook
-    let challenges= null;
     const { loading, challengeResponse } = useFetchChallenges(details, 'getAllUserQuestions'); // 
-    //console.log(challengeResponse);
-
-    useEffect(() => {
-        if (challengeResponse) {
-          //  setApiresponse(challengeResponse.responseMessage)
-            console.log(challengeResponse);
-        } 
-
-    }, [challengeResponse])
-
-    //handle login logic
-    if (apiresponse && apiresponse.responseCode === "00") {
-        //user is available
-        //user is available
-       
-        challenges = apiresponse.padStart;
-       
-    }
 
     return (
         <>
@@ -54,7 +35,7 @@ const ChallengeTemplate = ({ pageName }) => {
                 <main>
                     <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
                         {
-                            loading === false ? <div>
+                            loading === true ? <div>
                             <ThreeDots
                                 height="100"
                                 width="100"
@@ -64,7 +45,7 @@ const ChallengeTemplate = ({ pageName }) => {
                                 wrapperStyle={{}}
                                 wrapperClassName=""
                                 visible={true}
-                            /></div> : <ChallengePage challenges={challenges}/>
+                                /></div> : <ChallengePage challenges={challengeResponse}/>
                         }
                         
 

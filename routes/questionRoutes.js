@@ -1,5 +1,6 @@
 const express = require("express");
 const { Questions } = require('../model/question');
+const { Tokens } = require('../model/token');
 const { Users } = require('../model/user');
 const { Levels } = require('../model/level');
 const Joi = require("joi");
@@ -14,12 +15,35 @@ const checkPasswordValidation = require('../passwordValidator');
 const { Types } = require("../model/type");
 
 const createToken = (id )=>{
-    let signature = "Challenge App | gadjjajcabdhcjadbajkvhcan hjc";
+    let signature = "ChallengeApp_gadjjajcabdhcjadbajkvhcanhjc";
     const expDate = 3 * 24 * 60 * 60;
     return token = jwt.sign({ id }, signature, { expiresIn: expDate});
 
  
 }
+//function that adds token todb
+const addToken = async (token, userData) => {
+    const user_id = userData._id;
+    console.log(user_id);
+    console.log(user_id.toString());
+    try {
+        const result = await Tokens.deleteOne({ user_id });
+
+        const newToken = new Tokens({
+            user_id: userData._id,
+            token: token,
+            userType: userData.type
+        });
+
+        // Save token to the database
+        const savedToken = await newToken.save();
+       
+        return true; // Indicate success
+    } catch (error) {
+        console.error(error); // Log the error
+        throw error; // Propagate the error back to the caller
+    }
+};
 
 //default Get
 router.get("/",(req,res)=>{
@@ -706,15 +730,25 @@ router.put('/registeration', bodyParse.json(), async (req, res) => {
             //save user to db
                const createUser= await newUser.save()
                //create Token for user
-            const token = createToken(newUser._id)
-            res.cookie('Token', token, { httpOnly: true, maxAge:3*24*60*60*1000});
-
+                const token = createToken(newUser._id)
+            const addTokenDB = await addToken(token,newUser)
                 //send info to user
-                res.status(200).send({
-                    responseCode: "00",
-                    responseMessage: "User Registrating successfully",
-                    data: newUser
-                })
+                if (addTokenDB === true) {
+                    return res.status(200).send({
+                        responseCode: "00",
+                        responseMessage: "User Signed in successfully",
+                        data: existUser,
+                        token
+                    })
+                }
+                else {
+                    return res.status(400).send({
+                        responseCode: "96",
+                        responseMessage: "Not able to create table to DB for user",
+                        data: null,
+                        token
+                    })
+                }
             }
         else{
             res.status(400).send({
@@ -774,14 +808,24 @@ router.post('/adminlogin', bodyParse.json(), async (req, res) => {
                 if (existUser.type === "admin") {
                     //create Token for user
                     const token = createToken(existUser._id)
-                  return  res.cookie('Token', token, { httpOnly: true, maxAge: 3 * 24 * 60 * 60 * 1000 });
+                    const addTokenDB = await addToken(token, existUser)
                     //send info to user
-                    res.status(200).send({
-                        responseCode: "00",
-                        responseMessage: "User Signed in successfully",
-                        data: existUser
-                    })
-
+                    if (addTokenDB === true) {
+                        return res.status(200).send({
+                            responseCode: "00",
+                            responseMessage: "Admin Signed in successfully",
+                            data: existUser,
+                            token
+                        })
+                    }
+                    else {
+                        return res.status(400).send({
+                            responseCode: "96",
+                            responseMessage: "Not able to create admin table to DB",
+                            data: null,
+                            token
+                        })
+                    }
                 }
                 else {
                     //send info to user
@@ -819,7 +863,7 @@ router.post('/adminlogin', bodyParse.json(), async (req, res) => {
 
 
 //Login userLogin
-router.post('/login', bodyParse.json(), async (req, res) => {
+router.post('/login', bodyParse.json(),  async (req, res) => {
     const Schema = Joi.object({
         email: Joi.string().required().email().max(50),
         type: Joi.string().required(),
@@ -857,14 +901,25 @@ router.post('/login', bodyParse.json(), async (req, res) => {
                 if (existUser.type === "user"){
                     //create Token for user
                     const token = createToken(existUser._id)
-                    res.cookie('Token', token, { httpOnly: true, maxAge: 3 * 24 * 60 * 60 * 1000 });
+                    const addTokenDB = await  addToken(token, existUser)
                     //send info to user
-                   return res.status(200).send({
-                        responseCode: "00",
-                        responseMessage: "User Signed in successfully",
-                        data: existUser
-                    }) 
-
+                    console.log(addTokenDB);
+                    if (addTokenDB===true){
+                        return res.status(200).send({
+                                responseCode: "00",
+                                responseMessage: "User Signed in successfully",
+                                data: existUser,
+                                token
+                            }) 
+                    }
+                    else{
+                        return res.status(400).send({
+                            responseCode: "96",
+                            responseMessage: "Not able to create table user login to DB",
+                            data: null,
+                            token
+                        })                     
+                    }
                 }
                 else{
                     //send info to user

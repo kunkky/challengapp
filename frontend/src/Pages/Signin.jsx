@@ -58,7 +58,10 @@ const Signin = () => {
     if (loginResponse && loginResponse.responseCode==="00"){
         //user is available
         const userInfo = loginResponse.data;
+        const token = loginResponse.token
+        console.log(token);
         sessionStorage.setItem("user", JSON.stringify(userInfo));
+        sessionStorage.setItem("token", JSON.stringify(token));
         navigate("/dashboard", {
             state: {
                 userInfo,

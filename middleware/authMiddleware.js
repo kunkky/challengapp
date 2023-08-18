@@ -1,26 +1,49 @@
 const jwt = require('jsonwebtoken');
+const { Tokens } = require('../model/token');
 
-const requireAuth = (req, res, next) => {
-    if (req.cookies.Token) {
-        const token = req.cookies.Token; // Access the 'Token' cookie
-        console.log(token);
-        jwt.verify(token, 'Challenge App | gadjjajcabdhcjadbajkvhcan hjc', (err, decodedToken) => {
+const requireAuth = async (req, res, next) => {
+    const authHeader = req.headers.authorization;
+
+    // Check if authorization header is missing
+    if (!authHeader) {
+        return res.status(401).json({
+            responseCode: "96",
+            responseMessage: "Authorization header missing",
+            data: null
+        });
+    }
+
+    try {
+        // Check if token exists in the database
+        const queryToken = { token: JSON.parse(authHeader) }
+        const tokens = await Tokens.find(queryToken);
+
+        if (tokens.length === 0) {
+            return res.status(401).json({
+                responseCode: "96",
+                responseMessage: "Token not found in the database",
+                data: null
+            });
+        }
+
+        // Verify token using jwt.verify
+        jwt.verify(JSON.parse(authHeader), 'ChallengeApp_gadjjajcabdhcjadbajkvhcanhjc', (err, decodedToken) => {
             if (err) {
-                console.log(err.message);
-                res.status(401).send({
+                return res.status(401).json({
                     responseCode: "96",
-                    responseMessage: "Invalid Token",
+                    responseMessage: "Invalid token",
                     data: null
                 });
             } else {
-                console.log(decodedToken);
-                next();
+                req.user = decodedToken; // Attach decoded user data to the request object
+                next(); // Proceed to the next middleware or route handler
             }
         });
-    } else {
-        res.status(401).send({
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
             responseCode: "96",
-            responseMessage: "Token missing",
+            responseMessage: "Internal server error",
             data: null
         });
     }
