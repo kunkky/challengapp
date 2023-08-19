@@ -23,7 +23,7 @@ const ProfilePage = () => {
   const fetchUser = async () => {
     try {
       const response = await axios.get("http://localhost:3000/api/profile"); // Replace with actual endpoint to fetch user profile details from the backend
-      setUser(response.data);
+      setUser(response.data.user);
     } catch (error) {
       console.log(error);
     }
