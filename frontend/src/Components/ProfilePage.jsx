@@ -5,9 +5,20 @@ import axios from "axios";
 const ProfilePage = () => {
   const [user, setUser] = useState({});
 
+  //ensure only user see page
+  const navigate = useNavigate();
+  
   useEffect(() => {
-    fetchProfileDetails();
-  }, []);
+    if (sessionStorage.getItem("user")) {
+      const userInfo = JSON.parse(sessionStorage.getItem("user"));
+        if (userInfo.type === "user") {
+          navigate('/dashboard');
+        }
+    } else {
+      console.log("Navigating to /");
+        navigate('/');
+    }
+  }, [navigate]);
 
     //ensure only user see page
     const navigate = useNavigate();
@@ -15,7 +26,7 @@ const ProfilePage = () => {
   const fetchProfileDetails = async () => {
     try {
       const response = await axios.get("http://localhost:3000/api/profile"); // Replace with actual endpoint to fetch user profile details from the backend
-      setProfileDetails(response.data);
+      setUser(response.data);
     } catch (error) {
       console.log(error);
     }
