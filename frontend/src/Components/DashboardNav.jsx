@@ -111,10 +111,10 @@ const DashboardNav = () => {
                                   <span className="sr-only">Open main menu</span>
                                   {open ? (
                                       // <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
-                                      <i class="bi bi-x-lg"></i>
+                                      <i className="bi bi-x-lg"></i>
                                   ) : (
                                       
-                                          <i class="bi bi-three-dots-vertical"></i>
+                                          <i className="bi bi-three-dots-vertical"></i>
                                   )}
                               </Disclosure.Button>
                           </div>

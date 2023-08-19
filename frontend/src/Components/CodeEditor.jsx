@@ -61,6 +61,9 @@ const CodeEditor = () => {
             if(question.answer===answer){
                 setResult(`You are correct the answer is ${question.answer}`)
             }
+            else{
+                setResult(`you are wrong`)
+            }
         }
     }
     
@@ -78,7 +81,7 @@ const CodeEditor = () => {
                     ...basicSetup,
                 }}
             />
-                <button onClick={runCode} className='bg-green-800 p-1 text-white rounded'>Run <i class="bi bi-play"></i></button> {/* Run button */}
+                <button onClick={runCode} className='bg-green-800 p-1 text-white rounded'>Run <i className="bi bi-play"></i></button> {/* Run button */}
             <div>
                 <h3>Output: </h3>
                 <pre>{output}</pre>
@@ -111,6 +114,15 @@ const CodeEditor = () => {
                             <div className="">{questionItem.question}</div>
                         </div>
                     )):<div>Question Preveiw</div>
+                
+                }
+                {
+                    result!==null?
+                    <div>
+                    <div>{result}</div>
+                    <button onClick={showSolution} className='bg-green-800 p-2 text-white'>Solution</button>
+                    </div>
+                    :null
                 
                 }
         </div>
