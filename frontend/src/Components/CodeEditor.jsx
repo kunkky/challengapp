@@ -14,9 +14,18 @@ const CodeEditor = () => {
 
     const runCode = () => {
         try {
-            //remove doc keyword
-            const evaluatedOutput = eval(code); // Execute the code
+            const keywordsToReplace = ['document.', 'print.', 'console.', 'alert.', 'window.alert.'];
+            let modifiedCode = code;
+
+            keywordsToReplace.forEach(keyword => {
+                modifiedCode = modifiedCode.replace(new RegExp(keyword, 'gi'), ''); // Replace each keyword
+            });
+
+            const evaluatedOutput = eval(modifiedCode); // Execute the modified code
             setOutput(evaluatedOutput.toString()); // Update the output state
+
+            //check if user is correct
+            checkAnswer(evaluatedOutput)
         } catch (error) {
             setOutput(`Error: ${error.message}`); // Handle evaluation errors
         }
@@ -44,6 +53,15 @@ const CodeEditor = () => {
     const navigate = useNavigate();   
      const goBack=()=>{
          navigate(-1); 
+    }
+    //check answer
+    const [result, setResult] = useState(null)
+    const checkAnswer=(answer)=>{
+        if (question && question.length > 0){
+            if(question.answer===answer){
+                setResult(`You are correct the answer is ${question.answer}`)
+            }
+        }
     }
     
     return (
@@ -90,8 +108,6 @@ const CodeEditor = () => {
 
                     question && question.length > 0 ? question.map((questionItem, index) => (
                         <div className='p-5 overflow-auto h-[80%]' key={index}>
-                            <div className="">{questionItem.question}</div>
-                            <div className="">{questionItem.question}</div>
                             <div className="">{questionItem.question}</div>
                         </div>
                     )):<div>Question Preveiw</div>
