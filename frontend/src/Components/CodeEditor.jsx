@@ -26,6 +26,7 @@ const CodeEditor = () => {
 
             //check if user is correct
             checkAnswer(evaluatedOutput)
+            
         } catch (error) {
             setOutput(`Error: ${error.message}`); // Handle evaluation errors
         }
@@ -42,6 +43,7 @@ const CodeEditor = () => {
     const { loading, challengeResponse } = useFetchQuestionById(details, 'getUserQuestionById'); // 
     
     const [question, setQuestion] = useState(null)
+    
     useEffect(() => {
         if (challengeResponse) {
             setQuestion(challengeResponse.data)
@@ -56,14 +58,31 @@ const CodeEditor = () => {
     }
     //check answer
     const [result, setResult] = useState(null)
+    const [solution, setSolution] = useState(null)
     const checkAnswer=(answer)=>{
         if (question && question.length > 0){
-            if(question.answer===answer){
-                setResult(`You are correct the answer is ${question.answer}`)
+
+            //set solution
+            setSolution(question[0].solution);
+            console.log(typeof answer);
+            if(question[0].answer===answer){
+                setResult(`You are correct the answer is ${question[0].answer}`)
+               console.log(result);
             }
-            else{
+           else{
                 setResult(`you are wrong`)
+                
             }
+        }
+    }
+    //set button that display solution
+    const [solutionScreen, setSolutionScreen] = useState(false)
+    const showSolution = ()=>{
+        if (solutionScreen ===false){
+            setSolutionScreen(true)
+        }
+        else{
+            setSolutionScreen(false)
         }
     }
     
@@ -86,6 +105,18 @@ const CodeEditor = () => {
                 <h3>Output: </h3>
                 <pre>{output}</pre>
             </div>
+                {
+                    solutionScreen===true?<div>{solution}</div>:null
+                }
+                {
+                    result !== null ?
+                        <div>
+                            <div className='capitalize'>{result}</div>
+                            <button onClick={showSolution} className=' text-green-900'>Show Solution</button>
+                        </div>
+                        : null
+
+                }
         </div>
         <div className='flex justify-center items-center fixed bottom-0'>
                 {
@@ -116,15 +147,7 @@ const CodeEditor = () => {
                     )):<div>Question Preveiw</div>
                 
                 }
-                {
-                    result!==null?
-                    <div>
-                    <div>{result}</div>
-                    <button onClick={showSolution} className='bg-green-800 p-2 text-white'>Solution</button>
-                    </div>
-                    :null
-                
-                }
+               
         </div>
 
     </div>

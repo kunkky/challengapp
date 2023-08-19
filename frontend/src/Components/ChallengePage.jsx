@@ -4,10 +4,10 @@ import {Link} from 'react-router-dom'
 const ChallengePage = ({ challenges }) => { 
     const  questions = challenges.data
     return (
-        <div className='gap-5 flex flex-row justify-center item-center'>
+        <div className='gap-5 grid grid-cols'>
             {
                 questions && questions.length  > 0 ? questions.map((question, index)=>(
-                    <div className='bg-slate-100 p-5 rounded-lg flex-col gap-5 flex mb-5' key={index}>
+                    <div className='bg-slate-100 w-full p-5 rounded-lg flex-col gap-5 flex mb-5' key={index}>
                         <div className="">{question.question}</div>
                        <div className='flex flex-row'> 
                             <div className="font-bold uppercase">{question.questionType} |  </div>
