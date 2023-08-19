@@ -188,9 +188,9 @@ router.post('/getAllUserQuestions', requireAuth, bodyParse.json(), async (req, r
 
 
 //Get Question by id 
-router.get('/getUserQuestionById', requireAuth, bodyParse.json(), async (req, res) => {
+router.post('/getUserQuestionById', requireAuth, bodyParse.json(), async (req, res) => {
     const Schema = Joi.object({
-        _id: Joi.string()
+        _id: Joi.string().required()
     });
     //check error and return error
     const { error } = Schema.validate(req.body);

@@ -7,14 +7,14 @@ const ChallengePage = ({ challenges }) => {
         <div className='gap-5 flex flex-row justify-center item-center'>
             {
                 questions && questions.length  > 0 ? questions.map((question, index)=>(
-                    <div className='bg-slate-100 p-5 rounded-lg flex-col gap-5 flex mb-5'>
+                    <div className='bg-slate-100 p-5 rounded-lg flex-col gap-5 flex mb-5' key={index}>
                         <div className="">{question.question}</div>
                        <div className='flex flex-row'> 
                             <div className="font-bold uppercase">{question.questionType} |  </div>
                             <div className="capitalize"> {question.questionLevel}</div>
                         </div>
                         <div className="">
-                        <Link to={`selectedChallenge\${question._id}`} className="p-3 bg-green-800 rounded-sm text-white font-bold">Take Challenge</Link>
+                        <Link to={`../../selectedChallenge/${question._id}`} className="p-3 bg-green-800 rounded-sm text-white font-bold">Take Challenge</Link>
                         </div>
                 </div>
                 ))

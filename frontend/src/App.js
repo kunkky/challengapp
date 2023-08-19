@@ -38,7 +38,6 @@ const App = () => {
       <Route path='/logout' element={<Logout />}></Route> 
       <Route path='/adminsignin' element={<AdminSignin />}></Route>
       <Route path='/terminal' element={<WebTerminal />}></Route>
-      <Route path='/editor' element={<CodeEditor />}></Route>
       <Route path='/htmleditor' element={<HtmlCOdeEditor />}></Route>
       {/* Protected routes */}
 
@@ -72,11 +71,20 @@ const App = () => {
         </ProtectedRoutes>
       }></Route>
 
+  
+      <Route path='/selectedChallenge/:id' element={
+        <ProtectedRoutes>
+          <CodeEditor />
+        </ProtectedRoutes>
+      }></Route>
+
+
       <Route path='/profile' element={
         <ProtectedRoutes>
           <Profile />
-        </ProtectedRoutes> 
+        </ProtectedRoutes>
       }></Route>
+
 
       <Route path='/admindashboard' element={
         <ProtectedRoutes>

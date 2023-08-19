@@ -11,9 +11,7 @@ const ChallengeTemplate = ({ pageName }) => {
     const userInfo = JSON.parse(sessionStorage.getItem("user"));
     const params = useParams();
     //fetch javascript questions
-    const [apiresponse, setApiresponse] = useState(null)
 
-    
     const details={
         type: params.id,
         level: userInfo.level

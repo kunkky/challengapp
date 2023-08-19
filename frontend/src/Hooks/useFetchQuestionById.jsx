@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import BaseUrl from './../BaseUrl';
-import  Token  from './../Token';
+import Token from './../Token';
 
-const useFetchChallenges = (details, url) => {
+const useFetchQuestionById = (details, url) => {
     const [loading, setLoading] = useState(false);
-    const [challengeResponse, setChallengeResponse] = useState('');
+    const [challengeResponse, setChallengeResponse] = useState(null);
 
     const fetchApi = async () => {
         setLoading(true);
@@ -15,7 +15,7 @@ const useFetchChallenges = (details, url) => {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': Token
-                    
+
                 },
             });
             const data = await response.json();
@@ -30,7 +30,7 @@ const useFetchChallenges = (details, url) => {
     useEffect(() => {
         // Run the effect only when details.level, details.type change
         fetchApi();
-    }, [details.level, details.type]);
+    }, [details._id]);
 
     return {
         loading,
@@ -38,4 +38,4 @@ const useFetchChallenges = (details, url) => {
     };
 };
 
-export default useFetchChallenges;
+export default useFetchQuestionById

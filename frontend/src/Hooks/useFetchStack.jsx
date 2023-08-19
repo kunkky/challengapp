@@ -8,7 +8,6 @@ const useFetchStack = (url,where) => {
     const fetchApi = async () => {
         setApiLoading(true);
         try {
-            console.log(BaseUrl + where);
             const response = await fetch(BaseUrl + url, {
                 method: 'GET',
                 headers: {
