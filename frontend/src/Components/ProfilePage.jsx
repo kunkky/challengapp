@@ -20,10 +20,7 @@ const ProfilePage = () => {
     }
   }, [navigate]);
 
-    //ensure only user see page
-    const navigate = useNavigate();
-
-  const fetchProfileDetails = async () => {
+  const fetchUser = async () => {
     try {
       const response = await axios.get("http://localhost:3000/api/profile"); // Replace with actual endpoint to fetch user profile details from the backend
       setUser(response.data);
