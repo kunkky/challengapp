@@ -8,6 +8,7 @@ import Signin from './Pages/Signin'
 import Challenge from './Pages/Challenge'
 import AdminSignin from './Pages/AdminSignin'
 import Profile from './Pages/Profile'
+import AdminProfile from './Pages/AdminProfile'
 import ErrorPage from './Pages/ErrorPage'
 import Dashboard from './Pages/Dashboard'
 import ChallengeList from './Pages/ChallengeList'
@@ -82,6 +83,12 @@ const App = () => {
       <Route path='/profile' element={
         <ProtectedRoutes>
           <Profile />
+        </ProtectedRoutes>
+      }></Route>
+
+      <Route path='/profile' element={
+        <ProtectedRoutes>
+          <AdminProfile />
         </ProtectedRoutes>
       }></Route>
 

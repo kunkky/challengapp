@@ -1,5 +1,7 @@
 import React, { useEffect, useLayoutEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
+import DashboardFooter from '../Components/DashboardFooter'
+import AdminDashTemplate from '../Components/AdminDashTemplate'
 
 
 const AdminDashboard = ({ logoutHandler }) => {
@@ -23,10 +25,11 @@ const AdminDashboard = ({ logoutHandler }) => {
     }, [navigate]);
     
         return (
-        <div>
-            Dashboard
-            <span onClick={logoutHandler}>Log Out</span>
-        </div>
+            <div>
+                <AdminDashTemplate pageName="Admin Dashboard" />
+                <DashboardFooter />
+            </div>
+
     );
 };
 
