@@ -7,31 +7,32 @@ const ProfilePage = () => {
 
   //ensure only user see page
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     if (sessionStorage.getItem("user")) {
       const userInfo = JSON.parse(sessionStorage.getItem("user"));
-        if (userInfo.type === "user") {
-          navigate('/dashboard');
-        }
+      if (userInfo.type === "user") {
+        navigate('/dashboard');
+      } else {
+        fetchUserInfo(userInfo.id);
+      }
     } else {
       console.log("Navigating to /");
-        navigate('/');
+      navigate('/');
     }
   }, [navigate]);
 
-  const fetchUser = async () => {
+  const fetchUserInfo = async (userId) => {
     try {
-      const response = await axios.get("http://localhost:3000/api/profile"); // Replace with actual endpoint to fetch user profile details from the backend
-      setUser(response.data.user);
+      const response = await axios.get(`/api/user/${userId}`); // Update the API endpoint as per your backend
+      setUser(response.data);
     } catch (error) {
       console.log(error);
     }
   };
 
   const handleLogout = () => {
-    // Add logout logic here
-    navigate('/logout')
+    navigate('/logout');
   };
 
   return (
@@ -52,8 +53,8 @@ const ProfilePage = () => {
           Logout
         </button>
       </div>
-  </div>
+    </div>
   )
 }
 
-export default ProfilePage
+export default ProfilePage;
