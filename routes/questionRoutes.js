@@ -356,6 +356,7 @@ router.post('/createQuestions', requireAuth, bodyParse.json(), async (req, res) 
 router.post('/createQuestionLevel', requireAuth, bodyParse.json(), async (req, res) => {
     const Schema = Joi.object({
         questionLevel: Joi.string().min(3).max(20).required(),
+        authType: Joi.string().min(3).max(20).required(),
     });
     //check error and return error
     const { error } = Schema.validate(req.body);
@@ -367,6 +368,13 @@ router.post('/createQuestionLevel', requireAuth, bodyParse.json(), async (req, r
             data: null
         });
 
+    }
+    if (authType !=="admin"){
+        return res.status(400).send({
+            responseCode: "96",
+            responseMessage: "You are not allowed here",
+            data: null
+        });
     }
     const { questionLevel} = req.body;
 
@@ -383,6 +391,56 @@ router.post('/createQuestionLevel', requireAuth, bodyParse.json(), async (req, r
             responseCode: "00",
             responseMessage: "Question Level created successfully",
             data: newLevel
+        })
+
+    } catch (error) {
+        res.status(500).send({
+            responseCode: "96",
+            responseMessage: "Internal server error",
+            data: 'null' + error
+        })
+
+    }
+})
+//createQuestions Levels Api
+router.post('/createUserStack', requireAuth, bodyParse.json(), async (req, res) => {
+    const Schema = Joi.object({
+        userStacks: Joi.string().min(3).max(20).required(),
+        authType: Joi.string().min(3).max(20).required(),
+    });
+    //check error and return error
+    const { error } = Schema.validate(req.body);
+    if (error) {
+        console.log(error);
+        return res.status(400).send({
+            responseCode: "96",
+            responseMessage: error.details[0].message,
+            data: null
+        });
+
+    }
+    if (authType !== "admin") {
+        return res.status(400).send({
+            responseCode: "96",
+            responseMessage: "You are not allowed here",
+            data: null
+        });
+    }
+    const { userStacks } = req.body;
+
+
+    try {
+        //save in database
+        const newStack = new Stacks({
+            userStacks,
+            dateCreated: new Date().toJSON(), dateUpdated: new Date().toJSON()
+        });
+
+        await newStack.save()
+        res.status(200).send({
+            responseCode: "00",
+            responseMessage: "User Stack created successfully",
+            data: newStack
         })
 
     } catch (error) {
