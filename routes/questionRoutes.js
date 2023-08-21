@@ -748,6 +748,7 @@ router.get('/getAllUsers', requireAuth, async (req, res) => {
 
 //Get all Levels
 router.get('/getAllLevels', async (req, res) => {
+    console.log('Hi There');
     try {
 
         const question = await Levels.find();

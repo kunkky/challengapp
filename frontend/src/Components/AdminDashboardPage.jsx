@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import ToastMessage from './ToastMessage'
-import HtmlLogo from '../assets/images/html.png'
 import CssLogo from '../assets/images/css.png'
 import JsLogo from '../assets/images/js.png'
 import { NavLink } from 'react-router-dom'
 import AddModal from './AddModal'
 import useGetLevel from '../Hooks/useGetLevel'
+import useGetType from '../Hooks/useGetType'
+import AddQuestion from './AddQuestion'
+
 
 const customModalStyles = {
     content: {
@@ -37,7 +39,7 @@ const AdminDashboardPage = () => {
     };
   //getLevels
   const { LevelResponse, levelLoading } = useGetLevel("getAllLevels");
-  const { typeResponse, typeLoading } = useGetLevel("getAllTypes")
+  const { typeResponse, typeLoading } = useGetType("getAllTypes")
 
   console.log(LevelResponse);
   console.log(typeResponse);
@@ -76,7 +78,7 @@ const AdminDashboardPage = () => {
 
               </div>
         
-        <h1 className='font-semibold text-xl sm:text-3xl mb-3'>Challenge Operations</h1>
+        <h1 className='font-semibold text-xl sm:text-2xl mb-3'>Challenge Operations</h1>
         
       </div>
        
@@ -86,13 +88,10 @@ const AdminDashboardPage = () => {
         
 
         <div className="bg-slate-50 p-10 rounded-lg flex justify-between items-center col-span-1 flex-row">
-          <div className="">
-            <img src={HtmlLogo} alt="" className='w-[150px]' />
+          <div className="w-full">
+            <AddQuestion levelResponse={LevelResponse} typeResponse={typeResponse} />
           </div>
-          <div className="">
-
-            <NavLink to="/challenge/java script" className='bg-[#121212] p-3 rounded text-white border-0'>Take Challenge</NavLink>
-          </div>
+          
         </div>
 
         <div className="bg-slate-50 p-10 rounded-lg flex justify-between items-center col-span-1 flex-row">

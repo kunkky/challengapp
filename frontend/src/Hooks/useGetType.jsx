@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import BaseUrl from './../BaseUrl';
 
 const useGetLevel = ( url) => {
-  const [LevelLoading, setLoading] = useState(false);
-    const [LevelResponse, setApiResponse] = useState(null);
+  const [typeLoading, setLoading] = useState(false);
+    const [typeResponse, setApiResponse] = useState(null);
     
   const fetchApi = async () => {
     if (url !== "") {
@@ -32,8 +32,8 @@ const useGetLevel = ( url) => {
   }, [url]);
 
   return {
-      LevelLoading,
-      LevelResponse,
+      typeLoading,
+      typeResponse,
   };
 };
 
