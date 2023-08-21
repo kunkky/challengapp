@@ -39,31 +39,38 @@ const AdminDashboardPage = () => {
 
   return (
     <div>     
-          <button onClick={()=>openModal("Add new Level")}>Open Modal</button>
           <AddModal modalIsOpen={modalIsOpen} closeModal={closeModal} customModalStyles={customModalStyles} modalTitle={modalTitle} />
-      <div className="w-full grid sm:grid-cols-3 sm:p-0 sm:px-10 px-5 gap-5 sm:gap-10 grid-cols-1 flex-row justify-between items-center">
+      <div className="w-full grid sm:grid-cols-4 sm:p-0 sm:px-10 px-5 gap-5 sm:gap-10 grid-cols-1 flex-row justify-between items-center">
         <div className="sm:p-5 bg-blue-100 shadow-sm rounded-md flex flex-col gap-2 p-2 ">
           <div className="font-bold">Level</div>
           <div className="flex grid-cols gap-3">
-                      <button className="rounded-lg bg-blue-800 p-3 text-blue-50 hover:bg-blue-600">View Levels</button>
-                      <button className="rounded-lg bg-slate-800 p-3 text-slate-50 hover:bg-slate-600">Add Levels</button>
+                      <button className="rounded-lg bg-blue-800 p-2 text-blue-50 hover:bg-blue-600">View Levels</button>
+                      <button className="rounded-lg bg-slate-800 p-2 text-slate-50 hover:bg-slate-600" onClick={() => openModal("Add new level")}>Add Levels</button>
           </div>
         </div>
         <div className="sm:p-5 bg-red-50 shadow-sm rounded-md flex flex-col gap-2 p-2 ">
-                  <div className="font-bold">Stacks</div>
+                  <div className="font-bold">User Stacks</div>
                   <div className="flex grid-cols gap-3">
-                      <button className="rounded-lg bg-red-800 p-3 text-blue-50 hover:bg-red-600">View Stacks</button>
-                      <button className="rounded-lg bg-slate-800 p-3 text-slate-50 hover:bg-slate-600">Add Stacks</button>
+                      <button className="rounded-lg bg-red-800 p-2 text-blue-50 hover:bg-red-600">View Stacks</button>
+                      <button className="rounded-lg bg-slate-800 p-2 text-slate-50 hover:bg-slate-600" onClick={() => openModal("Add new stack")}>Add Stacks</button>
                   </div>
 
         </div>
-        <div className="sm:p-5 bg-green-100 shadow-sm rounded-md flex flex-col gap-2 p-2 ">
+              <div className="sm:p-5 bg-green-100 shadow-sm rounded-md flex flex-col gap-2 p-2 ">
+                  <div className="font-bold">Question Types</div>
+                  <div className="flex grid-cols gap-3">
+                      <button className="rounded-lg bg-green-800 p-2 text-blue-50 hover:bg-green-600">View Types</button>
+                      <button className="rounded-lg bg-slate-800 p-2 text-slate-50 hover:bg-slate-600" onClick={() => openModal("Add new question type")}>Add Type</button>
+                  </div>
+
+              </div>
+              <div className="sm:p-5 bg-pink-100 shadow-sm rounded-md flex flex-col gap-2 p-2 ">
                   <div className="font-bold">Users</div>
                   <div className="flex grid-cols gap-3">
-                      <button className="rounded-lg bg-green-800 p-3 text-blue-50 hover:bg-green-600">View Users</button>
+                      <button className="rounded-lg bg-pink-800 p-2 text-pink-50 hover:bg-pink-600">View Users</button>
                   </div>
 
-        </div>
+              </div>
         
         <h1 className='font-semibold text-xl sm:text-3xl mb-3'>Challenge Operations</h1>
         

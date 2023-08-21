@@ -21,7 +21,7 @@ const requireAuth = async (req, res, next) => {
         if (tokens.length === 0) {
             return res.status(401).json({
                 responseCode: "96",
-                responseMessage: "Token not found in the database",
+                responseMessage: "Token not found",
                 data: null
             });
         }
@@ -43,7 +43,7 @@ const requireAuth = async (req, res, next) => {
         console.log(error);
         return res.status(500).json({
             responseCode: "96",
-            responseMessage: "Internal server error",
+            responseMessage: "Internal server error " + error,
             data: null
         });
     }

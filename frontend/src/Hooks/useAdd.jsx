@@ -5,7 +5,6 @@ import  Token  from './../Token';
 const useAdd = (details, url) => {
     const [loading, setLoading] = useState(false);
     const [challengeResponse, setChallengeResponse] = useState('');
-
     const fetchApi = async () => {
         setLoading(true);
         try {
@@ -19,6 +18,7 @@ const useAdd = (details, url) => {
                 },
             });
             const data = await response.json();
+           console.log(data);
             setLoading(false);
             setChallengeResponse(data);
         } catch (error) {
@@ -30,7 +30,7 @@ const useAdd = (details, url) => {
     useEffect(() => {
         // Run the effect only when details.level, details.type change
         fetchApi();
-    }, [details.level, details.type]);
+    }, [details.item]);
 
     return {
         loading,

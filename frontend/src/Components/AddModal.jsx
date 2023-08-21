@@ -6,6 +6,16 @@ import useAdd from '../Hooks/useAdd';
 import { ThreeDots } from 'react-loader-spinner'
 
 const AddModal = ({ modalIsOpen, closeModal, customModalStyles, modalTitle }) => {
+    let url=null;
+    if(modalTitle==="Add new stack"){
+        url = "createUserStack"
+    }
+    else if (modalTitle === "Add new level"){
+        url = "createQuestionLevel"
+    }
+    else {
+        url = "createQuestionType"
+    }
     //state for login response
     const [details, setDetails] = useState(
         {
@@ -19,14 +29,23 @@ const AddModal = ({ modalIsOpen, closeModal, customModalStyles, modalTitle }) =>
             item: Yup.string().min(4).required('This is Required')
         }),
         onSubmit: values => {
-            setDetails(values);
-            console.log(values);
+            //set items
+            if (url ==="createQuestionLevel"){
+                setDetails({questionLevel:values.item});
+            }
+            else if (url === "createQuestionType") {
+                setDetails({ questionType: values.item });
+            }
+            else{
+                setDetails(values);
+            
+            }
         },
     }); 
     //set error message 
     const [apiresponse, setApiresponse] = useState(null)
     //use my sign in hook
-    const { loading, loginResponse } = useAdd(details, 'add', "admin"); // 
+    const { loading, loginResponse } = useAdd(details, url, "admin"); // 
     useEffect(() => {
         if (loginResponse) {
             setApiresponse(loginResponse.responseMessage)
@@ -37,6 +56,7 @@ const AddModal = ({ modalIsOpen, closeModal, customModalStyles, modalTitle }) =>
     //handle login logic
     if (loginResponse && loginResponse.responseCode === "00") {
         //Show success message        
+        console.log("This was successful");
     }
     Modal.setAppElement('#root');
   return (
@@ -71,7 +91,7 @@ const AddModal = ({ modalIsOpen, closeModal, customModalStyles, modalTitle }) =>
 
                   {
                       loading === true ?
-                          <button disabled className="flex justify-center items-center w-full text-white bg-blue-400 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                          <button disabled className="capitalize flex justify-center items-center w-full text-white bg-blue-400 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                               <ThreeDots
                                   height="25"
                                   width="25"
@@ -82,7 +102,7 @@ const AddModal = ({ modalIsOpen, closeModal, customModalStyles, modalTitle }) =>
                                   wrapperClassName=""
                                   visible={true}
                               /></button> :
-                          <button type="submit" className="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                          <button type="submit" className="capitalize w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                               {modalTitle}</button>
                   }
                   {

@@ -3,6 +3,8 @@ const { Questions } = require('../model/question');
 const { Tokens } = require('../model/token');
 const { Users } = require('../model/user');
 const { Levels } = require('../model/level');
+const { Stacks } = require('../model/stack');
+const { Types } = require("../model/type");
 const Joi = require("joi");
 const bodyParse = require("body-parser");
 const router = express.Router();
@@ -12,7 +14,6 @@ const requireAuth = require("../middleware/authMiddleware");
 
 
 const checkPasswordValidation = require('../passwordValidator');
-const { Types } = require("../model/type");
 
 const createToken = (id )=>{
     let signature = "ChallengeApp_gadjjajcabdhcjadbajkvhcanhjc";
@@ -405,7 +406,7 @@ router.post('/createQuestionLevel', requireAuth, bodyParse.json(), async (req, r
 //createQuestions Levels Api
 router.post('/createUserStack', requireAuth, bodyParse.json(), async (req, res) => {
     const Schema = Joi.object({
-        userStacks: Joi.string().min(3).max(20).required(),
+        userStack: Joi.string().min(3).max(20).required(),
         authType: Joi.string().min(3).max(20).required(),
     });
     //check error and return error
@@ -419,6 +420,7 @@ router.post('/createUserStack', requireAuth, bodyParse.json(), async (req, res) 
         });
 
     }
+    const { userStack, authType } = req.body;
     if (authType !== "admin") {
         return res.status(400).send({
             responseCode: "96",
@@ -426,13 +428,12 @@ router.post('/createUserStack', requireAuth, bodyParse.json(), async (req, res) 
             data: null
         });
     }
-    const { userStacks } = req.body;
 
 
     try {
         //save in database
         const newStack = new Stacks({
-            userStacks,
+            userStack,
             dateCreated: new Date().toJSON(), dateUpdated: new Date().toJSON()
         });
 
@@ -446,7 +447,7 @@ router.post('/createUserStack', requireAuth, bodyParse.json(), async (req, res) 
     } catch (error) {
         res.status(500).send({
             responseCode: "96",
-            responseMessage: "Internal server error",
+            responseMessage: "Internal server error here",
             data: 'null' + error
         })
 

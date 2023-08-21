@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const stackSchema = new mongoose.Schema({
-    questionType: {
+    userStack: {
         type: String,
         minlength: 3,
         maxlength: 50,
