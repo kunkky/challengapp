@@ -26,7 +26,7 @@ const AddModal = ({ modalIsOpen, closeModal, customModalStyles, modalTitle }) =>
             item: '',
         },
         validationSchema: Yup.object({
-            item: Yup.string().min(4).required('This is Required')
+            item: Yup.string().min(3).required('This is Required')
         }),
         onSubmit: values => {
             //set items

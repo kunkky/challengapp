@@ -17,6 +17,7 @@ const useAdd = (details, url) => {
                     
                 },
             });
+            console.log(Token);
             const data = await response.json();
            console.log(data);
             setLoading(false);
