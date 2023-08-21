@@ -3,7 +3,6 @@ const { Questions } = require('../model/question');
 const { Tokens } = require('../model/token');
 const { Users } = require('../model/user');
 const { Levels } = require('../model/level');
-const { Stacks } = require('../model/stack');
 const { Types } = require("../model/type");
 const Joi = require("joi");
 const bodyParse = require("body-parser");
@@ -11,6 +10,7 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken");
 const requireAuth = require("../middleware/authMiddleware");
+const { Stacks } = require('../model/stack');
 
 
 const checkPasswordValidation = require('../passwordValidator');
@@ -354,56 +354,68 @@ router.post('/createQuestions', requireAuth, bodyParse.json(), async (req, res) 
     }
 })
 //createQuestions Levels Api
-router.post('/createQuestionLevel', requireAuth, bodyParse.json(), async (req, res) => {
-    const Schema = Joi.object({
-        questionLevel: Joi.string().min(3).max(20).required(),
-        authType: Joi.string().min(3).max(20).required(),
-    });
-    //check error and return error
-    const { error } = Schema.validate(req.body);
-    if (error) {
-        console.log(error);
-        return res.status(400).send({
-            responseCode: "96",
-            responseMessage: error.details[0].message,
-            data: null
+    router.post('/createQuestionLevel', requireAuth, bodyParse.json(), async (req, res) => {
+        const Schema = Joi.object({
+            questionLevel: Joi.string().min(3).max(20).required(),
+            authType: Joi.string().min(3).max(20).required(),
         });
+        //check error and return error
+        const { error } = Schema.validate(req.body);
+        if (error) {
+            console.log(error);
+            return res.status(400).send({
+                responseCode: "96",
+                responseMessage: error.details[0].message,
+                data: null
+            });
 
-    }
-    if (authType !=="admin"){
-        return res.status(400).send({
-            responseCode: "96",
-            responseMessage: "You are not allowed here",
-            data: null
-        });
-    }
-    const { questionLevel} = req.body;
+        }
+
+        const { questionLevel, authType } = req.body;
+        if (authType !== "admin") {
+            return res.status(400).send({
+                responseCode: "96",
+                responseMessage: "You are not allowed here",
+                data: null
+            });
+        }
+        try {
+            const existUser = await Levels.findOne({ questionLevel: questionLevel });
+            if (existUser === null) {
+                //save in database
+
+                const newLevel = new Levels({
+                    questionLevel: questionLevel,
+                    dateCreated: new Date().toJSON(), dateUpdated: new Date().toJSON()
+                });
+
+                await newLevel.save()
+                res.status(200).send({
+                    responseCode: "00",
+                    responseMessage: "Type created successfully",
+                    data: newLevel
+                })
+            } else {
+                return res.status(400).send({
+                    responseCode: "96",
+                    responseMessage: "Type already exist",
+                    data: null
+                })
+
+            }
 
 
-    try {
-        //save in database
-        const newLevel = new Levels({
-            questionLevel, 
-            dateCreated: new Date().toJSON(), dateUpdated: new Date().toJSON()
-        });
+        } catch (error) {
+            res.status(500).send({
+                responseCode: "96",
+                responseMessage: "Internal server error adding Level" + error,
+                data: 'null' + error
+            })
 
-        await newLevel.save()
-        res.status(200).send({
-            responseCode: "00",
-            responseMessage: "Question Level created successfully",
-            data: newLevel
-        })
+        }
+    })
 
-    } catch (error) {
-        res.status(500).send({
-            responseCode: "96",
-            responseMessage: "Internal server error",
-            data: 'null' + error
-        })
-
-    }
-})
-//createQuestions Levels Api
+//createQuestions Stack Api
 router.post('/createUserStack', requireAuth, bodyParse.json(), async (req, res) => {
     const Schema = Joi.object({
         userStack: Joi.string().min(3).max(20).required(),
@@ -421,6 +433,7 @@ router.post('/createUserStack', requireAuth, bodyParse.json(), async (req, res) 
 
     }
     const { userStack, authType } = req.body;
+    
     if (authType !== "admin") {
         return res.status(400).send({
             responseCode: "96",
@@ -428,21 +441,31 @@ router.post('/createUserStack', requireAuth, bodyParse.json(), async (req, res) 
             data: null
         });
     }
-
     try {
-        //save in database
-        const newStack = new Stacks({
-            userStack: userStack,
-            dateCreated: new Date().toJSON(), dateUpdated: new Date().toJSON()
-        });
+        const existUser = await Stacks.findOne({ userStack: userStack });
+            if (existUser === null) {
+            //save in database
 
-       
-        await newStack.save()
-        res.status(200).send({
-            responseCode: "00",
-            responseMessage: "User Stack created successfully",
-            data: newStack
-        })
+            const newStack = new Stacks({
+                userStack: userStack,
+                dateCreated: new Date().toJSON(), dateUpdated: new Date().toJSON()
+            });
+
+            await newStack.save()
+            res.status(200).send({
+                responseCode: "00",
+                responseMessage: "User Stack created successfully",
+                data: newStack
+            })
+        } else {
+            return res.status(400).send({
+                responseCode: "96",
+                responseMessage: "Stack already exist",
+                data: null
+            })
+
+        }
+
 
     } catch (error) {
         res.status(500).send({
@@ -456,47 +479,65 @@ router.post('/createUserStack', requireAuth, bodyParse.json(), async (req, res) 
 
 //createQuestions Types Api
 router.post('/createQuestionType', requireAuth, bodyParse.json(), async (req, res) => {
-    const Schema = Joi.object({
-        questionType: Joi.string().min(3).max(20).required(),
-    });
-    //check error and return error
-    const { error } = Schema.validate(req.body);
-    if (error) {
-        console.log(error);
-        return res.status(400).send({
-            responseCode: "96",
-            responseMessage: error.details[0].message,
-            data: null
+        const Schema = Joi.object({
+            questionType: Joi.string().min(3).max(20).required(),
+            authType: Joi.string().min(3).max(20).required(),
         });
+        //check error and return error
+        const { error } = Schema.validate(req.body);
+        if (error) {
+            console.log(error);
+            return res.status(400).send({
+                responseCode: "96",
+                responseMessage: error.details[0].message,
+                data: null
+            });
 
-    }
-    const { questionType } = req.body;
+        }
+        
+    const { questionType, authType } = req.body;
+        if (authType !== "admin") {
+            return res.status(400).send({
+                responseCode: "96",
+                responseMessage: "You are not allowed here",
+                data: null
+            });
+        }
+        try {
+            const existUser = await Types.findOne({ questionType: questionType });
+            if (existUser === null) {
+                //save in database
+
+                const newType = new Types({
+                    questionType: questionType,
+                    dateCreated: new Date().toJSON(), dateUpdated: new Date().toJSON()
+                });
+
+                await newType.save()
+                res.status(200).send({
+                    responseCode: "00",
+                    responseMessage: "Type created successfully",
+                    data: newType
+                })
+            } else {
+                return res.status(400).send({
+                    responseCode: "96",
+                    responseMessage: "Type already exist",
+                    data: null
+                })
+
+            }
 
 
-    try {
-        //save in database
-        const newType = new Types({
-            questionType,
-            dateCreated: new Date().toJSON(), dateUpdated: new Date().toJSON()
-        });
+        } catch (error) {
+            res.status(500).send({
+                responseCode: "96",
+                responseMessage: "Internal server error adding Type" + error,
+                data: 'null' + error
+            })
 
-        await newType.save()
-        res.status(200).send({
-            responseCode: "00",
-            responseMessage: "Question Type created successfully",
-            data: newType
-        })
-
-    } catch (error) {
-        res.status(500).send({
-            responseCode: "96",
-            responseMessage: "Internal server error",
-            data: 'null' + error
-        })
-
-    }
-})
-
+        }
+    })
 
 //delete Post 
 router.delete('/deleteQuestionsById', requireAuth, bodyParse.json(), async (req, res) => {

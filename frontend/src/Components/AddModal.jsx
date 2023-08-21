@@ -2,13 +2,17 @@ import React, { useEffect, useState } from 'react'
 import Modal from 'react-modal';
 import { useFormik } from 'formik'; //for processing forms 
 import * as Yup from 'yup'; //for form validation
-import useAdd from '../Hooks/useAdd';
 import { ThreeDots } from 'react-loader-spinner'
 import BaseUrl from './../BaseUrl';
 import Token from './../Token';
 
 const AddModal = ({ modalIsOpen, closeModal, customModalStyles, modalTitle }) => {
     let url=null;
+    //state for Api response
+    const [loading, setLoading] = useState(false);
+    const [apiresponse, setApiResponse] = useState(false)
+    const [apiData, setApiData] = useState(null)
+
     if(modalTitle==="Add new stack"){
         url = "createUserStack"
     }
@@ -18,10 +22,6 @@ const AddModal = ({ modalIsOpen, closeModal, customModalStyles, modalTitle }) =>
     else {
         url = "createQuestionType"
     }
-    //state for Api response
-     const [loading, setLoading] = useState(false);
-    const [apiresponse, setApiResponse]=useState(false)
-    const [apiData, setApiData]=useState(null)
     const formik = useFormik({
         initialValues: {
             item: '',
@@ -31,11 +31,14 @@ const AddModal = ({ modalIsOpen, closeModal, customModalStyles, modalTitle }) =>
         }),
         onSubmit: async values => {
             //desctruct values
+            setApiResponse(null)
             if (url === "createQuestionLevel") {
-                setApiData({ userStack: values.item, authType: "admin" });
+                setApiData({ questionLevel: values.item, authType: "admin" });
+                console.log("Level is here");
+
             }
             else if (url === "createQuestionType") {
-                setApiData({ userStack: values.item, authType: "admin" });
+                setApiData({ questionType: values.item, authType: "admin" });
             }
             else if (url === "createUserStack") {
                 
@@ -49,6 +52,7 @@ const AddModal = ({ modalIsOpen, closeModal, customModalStyles, modalTitle }) =>
             console.log(apiData);
             setLoading(true);
             try {
+            console.log(url);
                 const response = await fetch(BaseUrl + url, {
                     method: 'POST',
                     body: JSON.stringify(apiData),
