@@ -5,6 +5,7 @@ import CssLogo from '../assets/images/css.png'
 import JsLogo from '../assets/images/js.png'
 import { NavLink } from 'react-router-dom'
 import AddModal from './AddModal'
+import useGetLevel from '../Hooks/useGetLevel'
 
 const customModalStyles = {
     content: {
@@ -34,9 +35,12 @@ const AdminDashboardPage = () => {
     const closeModal = () => {
         setModalIsOpen(false);
     };
+  //getLevels
+  const { LevelResponse, levelLoading } = useGetLevel("getAllLevels");
+  const { typeResponse, typeLoading } = useGetLevel("getAllTypes")
 
-
-
+  console.log(LevelResponse);
+  console.log(typeResponse);
   return (
     <div>     
           <AddModal modalIsOpen={modalIsOpen} closeModal={closeModal} customModalStyles={customModalStyles} modalTitle={modalTitle} />

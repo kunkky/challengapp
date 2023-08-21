@@ -1,28 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import BaseUrl from './../BaseUrl';
 
-const useLogin = (details, url, Authtype) => {
+const useGetLevel = ( url) => {
   const [loading, setLoading] = useState(false);
-  const [loginResponse, setLoginResponse] = useState('');
-  const userinfo = { email: details.email, password: details.password, type: Authtype };
-
+    const [apiResponse, setApiResponse] = useState(null);
+    console.log(BaseUrl+url);
   const fetchApi = async () => {
-    if (details.email !== "") {
+    if (url !== "") {
       setLoading(true);
       try {
-        const response = await fetch(BaseUrl + url, {
-          method: 'POST',
-          body: JSON.stringify(userinfo),
+          const response = await fetch(BaseUrl + url, {
+          method: 'GET',
           headers: {
             'Content-Type': 'application/json',
           },
         });
         const data = await response.json();
         setLoading(false);
-        setLoginResponse(data);
+          setApiResponse(data);
       } catch (error) {
         setLoading(false);
-        setLoginResponse(error);
+          setApiResponse(error);
+          console.log(error);
       }
     }
   };
@@ -30,12 +29,12 @@ const useLogin = (details, url, Authtype) => {
   useEffect(() => {
     // Run the effect only when details.email, details.password, or Authtype change
     fetchApi();
-  }, [details.email, details.password, Authtype]);
+  }, [url]);
 
   return {
     loading,
-    loginResponse,
+    apiResponse,
   };
 };
 
-export default useLogin;
+export default useGetLevel;
