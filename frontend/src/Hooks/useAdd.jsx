@@ -5,21 +5,37 @@ import  Token  from './../Token';
 const useAdd = (details, url) => {
     const [loading, setLoading] = useState(false);
     const [challengeResponse, setChallengeResponse] = useState('');
+    const [apiData, setApiData] = useState(null)
+
+        //destructure data
+    //set items
+    if (url === "createQuestionLevel") {
+        setApiData({ questionLevel: details.item, authType: "admin" });
+    }
+    else if (url === "createQuestionType") {
+        setApiData({ questionType: details.item, authType: "admin" });
+    }
+    else if (url === "createUserStack") {
+        setApiData({ userStack: details.item, authType: "admin" });
+    }
+    else {
+        setApiData(null);
+
+    }
+
     const fetchApi = async () => {
         setLoading(true);
         try {
             const response = await fetch(BaseUrl + url, {
                 method: 'POST',
-                body: JSON.stringify(details),
+                body: JSON.stringify(apiData),
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': Token
                     
                 },
             });
-            console.log(Token);
             const data = await response.json();
-           console.log(data);
             setLoading(false);
             setChallengeResponse(data);
         } catch (error) {

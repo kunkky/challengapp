@@ -4,6 +4,8 @@ import { useFormik } from 'formik'; //for processing forms
 import * as Yup from 'yup'; //for form validation
 import useAdd from '../Hooks/useAdd';
 import { ThreeDots } from 'react-loader-spinner'
+import BaseUrl from './../BaseUrl';
+import Token from './../Token';
 
 const AddModal = ({ modalIsOpen, closeModal, customModalStyles, modalTitle }) => {
     let url=null;
@@ -16,48 +18,58 @@ const AddModal = ({ modalIsOpen, closeModal, customModalStyles, modalTitle }) =>
     else {
         url = "createQuestionType"
     }
-    //state for login response
-    const [details, setDetails] = useState(
-        {
-            item:""
-        })
+    //state for Api response
+     const [loading, setLoading] = useState(false);
+    const [apiresponse, setApiResponse]=useState(false)
+    const [apiData, setApiData]=useState(null)
     const formik = useFormik({
         initialValues: {
             item: '',
         },
         validationSchema: Yup.object({
-            item: Yup.string().min(3).required('This is Required')
+            item: Yup.string().min(3).required('This is Required'),
         }),
-        onSubmit: values => {
-            //set items
-            if (url ==="createQuestionLevel"){
-                setDetails({questionLevel:values.item});
+        onSubmit: async values => {
+            //desctruct values
+            if (url === "createQuestionLevel") {
+                setApiData({ userStack: values.item, authType: "admin" });
             }
             else if (url === "createQuestionType") {
-                setDetails({ questionType: values.item });
+                setApiData({ userStack: values.item, authType: "admin" });
             }
-            else{
-                setDetails(values);
-            
+            else if (url === "createUserStack") {
+                
+                setApiData({ userStack: values.item, authType: "admin" });
+            }
+            else {
+                setApiData(null);
+
+            }
+
+            console.log(apiData);
+            setLoading(true);
+            try {
+                const response = await fetch(BaseUrl + url, {
+                    method: 'POST',
+                    body: JSON.stringify(apiData),
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': Token,
+                    },
+                });
+                const data = await response.json();
+                console.log(data);
+                setLoading(false);
+                setApiResponse(data.responseMessage)
+
+            } catch (error) {
+                setLoading(false);
+                setApiResponse(error.responseMessage)
+
             }
         },
-    }); 
-    //set error message 
-    const [apiresponse, setApiresponse] = useState(null)
-    //use my sign in hook
-    const { loading, loginResponse } = useAdd(details, url, "admin"); // 
-    useEffect(() => {
-        if (loginResponse) {
-            setApiresponse(loginResponse.responseMessage)
-        }
+    });
 
-    }, [loginResponse])
-
-    //handle login logic
-    if (loginResponse && loginResponse.responseCode === "00") {
-        //Show success message        
-        console.log("This was successful");
-    }
     Modal.setAppElement('#root');
   return (
      <div>

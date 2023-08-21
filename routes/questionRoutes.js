@@ -429,14 +429,14 @@ router.post('/createUserStack', requireAuth, bodyParse.json(), async (req, res) 
         });
     }
 
-
     try {
         //save in database
         const newStack = new Stacks({
-            userStack,
+            userStack: userStack,
             dateCreated: new Date().toJSON(), dateUpdated: new Date().toJSON()
         });
 
+       
         await newStack.save()
         res.status(200).send({
             responseCode: "00",
@@ -447,7 +447,7 @@ router.post('/createUserStack', requireAuth, bodyParse.json(), async (req, res) 
     } catch (error) {
         res.status(500).send({
             responseCode: "96",
-            responseMessage: "Internal server error here",
+            responseMessage: "Internal server error here"+error,
             data: 'null' + error
         })
 

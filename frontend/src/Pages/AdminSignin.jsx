@@ -58,6 +58,9 @@ const AdminSignin = () => {
         //user is available
         //user is available
         const userInfo = loginResponse.data;
+        const token = loginResponse.token
+
+        sessionStorage.setItem("token", JSON.stringify(token));
         sessionStorage.setItem("user", JSON.stringify(userInfo));
         navigate("/admindashboard", {
             state: {
