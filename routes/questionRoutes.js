@@ -311,8 +311,8 @@ router.post('/createQuestions', requireAuth, bodyParse.json(), async (req, res) 
     const Schema = Joi.object({
         questionType: Joi.string().min(3).max(20).required(),
         questionLevel: Joi.string().min(3).max(20).required(),
-        question: Joi.string().min(20).required(),
-        solution: Joi.string().min(20).required(),
+        question: Joi.string().min(3).required(),
+        solution: Joi.string().min(3).required(),
         answer: Joi.string().required(),
         author: Joi.string().required()
     });
@@ -748,7 +748,6 @@ router.get('/getAllUsers', requireAuth, async (req, res) => {
 
 //Get all Levels
 router.get('/getAllLevels', async (req, res) => {
-    console.log('Hi There');
     try {
 
         const question = await Levels.find();
@@ -911,6 +910,7 @@ router.post('/adminlogin', bodyParse.json(), async (req, res) => {
                     const token = createToken(existUser._id)
                     const addTokenDB = await addToken(token, existUser)
                     //send info to user
+                    console.log(token);
                     if (addTokenDB === true) {
                         return res.status(200).send({
                             responseCode: "00",
@@ -982,7 +982,7 @@ router.post('/login', bodyParse.json(),  async (req, res) => {
 
     }
     const { email, password, type } = req.body;
-    
+    console.log("thi is user");
     try {
         //check if data exist
         const existUser = await Users.findOne({ email });

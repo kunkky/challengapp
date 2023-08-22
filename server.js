@@ -38,7 +38,7 @@ app.get("*", function (_, res) {
     )
 })
 
-let MONGOL = process.env.MONGO_URL || "mongodb://0.0.0.0:27017"
+let MONGOL = process.env.MONGO_URL
 mongoose.connect(MONGOL).then(() => {
     console.log("Database Connection Successful");
 }).catch((err) => {

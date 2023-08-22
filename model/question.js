@@ -8,7 +8,10 @@ const questionSchema =new mongoose.Schema({
         type: String
     },
     question: {
-        type: String
+        type: String,
+        unique: true,
+        required: true
+
     },
     answer: {
         type: String

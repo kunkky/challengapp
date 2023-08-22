@@ -17,7 +17,7 @@ const requireAuth = async (req, res, next) => {
         // Check if token exists in the database
         const queryToken = { token: JSON.parse(authHeader) }
         const tokens = await Tokens.find(queryToken);
-
+console.log('hi');
         if (tokens.length === 0) {
             return res.status(401).json({
                 responseCode: "96",
