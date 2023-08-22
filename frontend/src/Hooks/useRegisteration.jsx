@@ -18,7 +18,6 @@ const useRegisteration = (details, url, Authtype) => {
 
 
     const fetchApi = async () => {
-        console.log(JSON.stringify(userinfo));
         if (details.email !== "") {
             setLoading(true);
             try {
@@ -32,7 +31,6 @@ const useRegisteration = (details, url, Authtype) => {
                 const data = await response.json();
                 setLoading(false);
                 setRegResponse(data);
-                console.log(data);
             } catch (error) {
                 setLoading(false);
                 setRegResponse(error);
