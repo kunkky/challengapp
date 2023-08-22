@@ -1,6 +1,49 @@
 import React, { useState } from 'react';
+import DeleteConfirmationModal from './DeleteConfirmationModal'; // Path to your modal component
+import Token from '../Token'
+import BaseUrl from '../BaseUrl';
+import { useNavigate } from 'react-router-dom';
 
 function PaginatedList({ itemsPerPage, items }) {
+
+    const navigate = useNavigate();
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const handleDelete = (id) => {
+        // Handle the deletion logic here
+        const chalengeData = {
+            _id: id
+        }
+        deleteApi(chalengeData)
+
+        setIsModalOpen(false);
+      console.log(deleteResponse);
+    };  
+
+    //delete function
+    const [deleteResponse, setDeleteResponse] = useState()
+    const deleteApi = async (chalengeData) => {
+    console.log(chalengeData);
+        try {
+            const response = await fetch(BaseUrl + "deleteQuestionsById", {
+                method: 'DELETE',
+                body: JSON.stringify(chalengeData),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': Token
+
+                },
+            });
+            const data = await response.json();
+            setDeleteResponse(data);
+        } catch (error) {
+            setDeleteResponse(error);
+        }
+    };
+
+
+
     const [currentPage, setCurrentPage] = useState(0);
 
     const pageCount = Math.ceil(items.length / itemsPerPage);
@@ -14,13 +57,30 @@ function PaginatedList({ itemsPerPage, items }) {
         }
     };
 
+    const deleteItem = (id)=>{
+       const data= {
+            "_id": id
+        }
+
+    }
+
     return (
         <div>
-            <ul>
+            <div>
                 {currentItems.map((item, index) => (
-                    <li key={index}>{item}</li>
+                    <div className='border-b-2'>
+                    <div dangerouslySetInnerHTML={{ __html: item.question }} />
+                        <button onClick={() => setIsModalOpen(true, item._id)} className='bg-red-500 p-1 text-white rounded hover:bg-red-800 text-sm'>Delete Question</button>
+                        <DeleteConfirmationModal
+                            isOpen={isModalOpen}
+                            onClose={() => setIsModalOpen(false)}
+                            onDelete={() => handleDelete(item._id)}
+                            id={item._id}
+                        />
+
+                    </div>
                 ))}
-            </ul>
+            </div>
             <div className="pagination">
                 {Array.from({ length: pageCount }).map((_, index) => (
                     <button
@@ -28,7 +88,7 @@ function PaginatedList({ itemsPerPage, items }) {
                         onClick={() => goToPage(index)}
                         className={index === currentPage ? 'active' : ''}
                     >
-                        {index + 1}
+                        {` Page ${index + 1} `}
                     </button>
                 ))}
             </div>

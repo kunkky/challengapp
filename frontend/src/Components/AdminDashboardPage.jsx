@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
 import ToastMessage from './ToastMessage'
-import CssLogo from '../assets/images/css.png'
-import { NavLink } from 'react-router-dom'
 import AddModal from './AddModal'
 import useGetLevel from '../Hooks/useGetLevel'
 import useGetType from '../Hooks/useGetType'
@@ -93,18 +91,6 @@ const AdminDashboardPage = () => {
         <div className="bg-slate-50 p-10 rounded-lg flex justify-between items-center col-span-1 flex-row">
           <QuestionsList/>
         </div>
-
-        <div className="bg-slate-50 p-10 rounded-lg flex justify-between items-center col-span-1 flex-row">
-          <div className="">
-            <img src={CssLogo} alt="" className='w-[150px]' />
-          </div>
-          <div className="">
-
-            <NavLink to="/challenge/css" className='bg-[#121212] p-3 rounded text-white border-0'>Take Challenge</NavLink>
-          </div>
-        </div>
-
-
 
       </div>
         

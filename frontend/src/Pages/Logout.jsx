@@ -13,6 +13,7 @@ const Logout = () => {
             //clearsession
             // Delete the session item
             sessionStorage.removeItem('user');
+            sessionStorage.removeItem('token');
 
             //redirect here
             navigate("/", {

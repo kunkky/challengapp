@@ -25,8 +25,6 @@ const createToken = (id )=>{
 //function that adds token todb
 const addToken = async (token, userData) => {
     const user_id = userData._id;
-    console.log(user_id);
-    console.log(user_id.toString());
     try {
         const result = await Tokens.deleteOne({ user_id });
 
@@ -41,7 +39,6 @@ const addToken = async (token, userData) => {
        
         return true; // Indicate success
     } catch (error) {
-        console.error(error); // Log the error
         throw error; // Propagate the error back to the caller
     }
 };
@@ -68,7 +65,6 @@ router.get('/logout', bodyParse.json(), async (req, res) => {
             });
 
         } catch (error) {
-            console.log(error);
             return res.status(400).send({
                 responseCode: "96",
                 responseMessage: "Failed to logout",
@@ -128,7 +124,6 @@ router.get('/getQuestionById', requireAuth, bodyParse.json(), async (req, res) =
             });
 
         } catch (error) {
-            console.log(error);
             return res.status(200).send({
                 responseCode: "00",
                 responseMessage: "Failed to retrieve "+_id,
@@ -175,7 +170,6 @@ router.post('/getAllUserQuestions', requireAuth, bodyParse.json(), async (req, r
             });
 
         } catch (error) {
-            console.log(error);
             return res.status(400).send({
                 responseCode: "96",
                 responseMessage: "Failed to retrieve " + _id,
@@ -196,7 +190,6 @@ router.post('/getUserQuestionById', requireAuth, bodyParse.json(), async (req, r
     //check error and return error
     const { error } = Schema.validate(req.body);
     if (error) {
-        console.log(error);
         return res.status(400).send({
             responseCode: "96",
             responseMessage: error.details[0].message,
@@ -235,7 +228,6 @@ router.get('/getUserQuestionByLevel', requireAuth, bodyParse.json(), async (req,
     const { error } = Schema.validate(req.body);
 
     if (error) {
-        console.log(error);
         return res.status(400).send({
             responseCode: "96",
             responseMessage: error.details[0].message,
@@ -274,7 +266,6 @@ router.get('/getUserQuestionByCategory', requireAuth, bodyParse.json(), async (r
     const { error } = Schema.validate(req.body);
 
     if (error) {
-        console.log(error);
         return res.status(400).send({
             responseCode: "96",
             responseMessage: error.details[0].message,
@@ -319,7 +310,6 @@ router.post('/createQuestions', requireAuth, bodyParse.json(), async (req, res) 
     //check error and return error
     const { error } = Schema.validate(req.body);
     if (error) {
-        console.log(error);
         return res.status(400).send({
             responseCode: "96",
             responseMessage: error.details[0].message,
@@ -362,7 +352,6 @@ router.post('/createQuestions', requireAuth, bodyParse.json(), async (req, res) 
         //check error and return error
         const { error } = Schema.validate(req.body);
         if (error) {
-            console.log(error);
             return res.status(400).send({
                 responseCode: "96",
                 responseMessage: error.details[0].message,
@@ -424,7 +413,6 @@ router.post('/createUserStack', requireAuth, bodyParse.json(), async (req, res) 
     //check error and return error
     const { error } = Schema.validate(req.body);
     if (error) {
-        console.log(error);
         return res.status(400).send({
             responseCode: "96",
             responseMessage: error.details[0].message,
@@ -486,7 +474,6 @@ router.post('/createQuestionType', requireAuth, bodyParse.json(), async (req, re
         //check error and return error
         const { error } = Schema.validate(req.body);
         if (error) {
-            console.log(error);
             return res.status(400).send({
                 responseCode: "96",
                 responseMessage: error.details[0].message,
@@ -548,7 +535,6 @@ router.delete('/deleteQuestionsById', requireAuth, bodyParse.json(), async (req,
     const { error } = Schema.validate(req.body);
 
     if (error) {
-        console.log("error");
         return res.status(400).send({
             responseCode: "96",
             responseMessage: error.details[0].message,
@@ -590,7 +576,6 @@ router.delete('/deleteLevelById', requireAuth, bodyParse.json(), async (req, res
     const { error } = Schema.validate(req.body);
 
     if (error) {
-        console.log("error");
         return res.status(400).send({
             responseCode: "96",
             responseMessage: error.details[0].message,
@@ -631,7 +616,6 @@ router.delete('/deleteTypeById', requireAuth, bodyParse.json(), async (req, res)
     const { error } = Schema.validate(req.body);
 
     if (error) {
-        console.log("error");
         return res.status(400).send({
             responseCode: "96",
             responseMessage: error.details[0].message,
@@ -678,7 +662,6 @@ router.put('/updateQuestionsById', requireAuth, bodyParse.json(), async (req, re
     //check error and return error
     const { error } = Schema.validate(req.body);
     if (error) {
-        console.log(error);
         return res.status(400).send({
             responseCode: "96",
             responseMessage: error.details[0].message,
@@ -699,7 +682,6 @@ router.put('/updateQuestionsById', requireAuth, bodyParse.json(), async (req, re
                 }
             }
         );
-        console.log(result);
         if (result.modifiedCount>0){
             //successful
             return res.status(200).send({
@@ -803,7 +785,6 @@ router.put('/registeration', bodyParse.json(), async (req, res) => {
     //check error and return error
     const { error } = Schema.validate(req.body);
     if (error) {
-        console.log(error);
         return res.status(400).send({
             responseCode: "96",
             responseMessage: error.details[0].message,
@@ -910,7 +891,6 @@ router.post('/adminlogin', bodyParse.json(), async (req, res) => {
                     const token = createToken(existUser._id)
                     const addTokenDB = await addToken(token, existUser)
                     //send info to user
-                    console.log(token);
                     if (addTokenDB === true) {
                         return res.status(200).send({
                             responseCode: "00",
@@ -982,7 +962,6 @@ router.post('/login', bodyParse.json(),  async (req, res) => {
 
     }
     const { email, password, type } = req.body;
-    console.log("thi is user");
     try {
         //check if data exist
         const existUser = await Users.findOne({ email });
@@ -1004,7 +983,6 @@ router.post('/login', bodyParse.json(),  async (req, res) => {
                     const token = createToken(existUser._id)
                     const addTokenDB = await  addToken(token, existUser)
                     //send info to user
-                    console.log(addTokenDB);
                     if (addTokenDB===true){
                         return res.status(200).send({
                                 responseCode: "00",

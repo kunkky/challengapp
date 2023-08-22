@@ -9,7 +9,6 @@ import 'react-quill/dist/quill.snow.css';
 
 const AddQuestion = ({ levelResponse, typeResponse }) => {
 
-    let url = null;
     //state for Api response
     const [loading, setLoading] = useState(false);
     const [apiresponse, setApiResponse] = useState(false)
@@ -32,9 +31,7 @@ const AddQuestion = ({ levelResponse, typeResponse }) => {
         }),
         onSubmit: async values => {
             //desctruct values
-            console.log(values);
             setApiData({ ...values, author : "Group 7"})
-            console.log(apiData);
             setLoading(true);
             try {
                 const response = await fetch(BaseUrl + "createQuestions", {
@@ -46,7 +43,6 @@ const AddQuestion = ({ levelResponse, typeResponse }) => {
                     },
                 });
                 const data = await response.json();
-                console.log(data);
                 setLoading(false);
                 setApiResponse(data.responseMessage)
 
@@ -58,7 +54,6 @@ const AddQuestion = ({ levelResponse, typeResponse }) => {
            
         },
     });
-    console.log(Token);
   return (
     <div>
           <form className="space-y-4 md:space-y-6" action="#" onSubmit={formik.handleSubmit}>
