@@ -1,13 +1,11 @@
 import React, { useEffect, useLayoutEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
-import DashboardFooter from '../Components/DashboardFooter'
-import AdminDashTemplate from '../Components/AdminDashTemplate'
 
 
 const AdminDashboard = ({ logoutHandler }) => {
-    useLayoutEffect(() => {
-        document.title = "Dashboard |";
-    }, []);
+  useLayoutEffect(() => {
+    document.title = "Dashboard |";
+  }, []);
 
 //ensure only admin see page
     const navigate = useNavigate();
@@ -25,12 +23,11 @@ const AdminDashboard = ({ logoutHandler }) => {
     }, [navigate]);
     
         return (
-            <div>
-                <AdminDashTemplate pageName="Admin Dashboard" />
-                <DashboardFooter />
-            </div>
-
+        <div>
+            Dashboard
+            <span onClick={logoutHandler}>Log Out</span>
+        </div>
     );
 };
 
-export default AdminDashboard
+export default AdminDashboard;

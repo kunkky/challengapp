@@ -1,6 +1,6 @@
-import React, { useLayoutEffect, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import ProfileTemplate from '../Components/ProfileTemplate';
+import React, { useLayoutEffect, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import ProfileTemplate from "../Components/ProfileTemplate";
 
 const Profile = () => {
   useLayoutEffect(() => {
@@ -15,10 +15,10 @@ const Profile = () => {
       // Redirect if not user
       const userInfo = JSON.parse(sessionStorage.getItem("user"));
       if (userInfo.type === "admin") {
-        navigate('/admindashboard');
+        navigate("/admindashboard");
       }
     } else {
-      navigate('/');
+      navigate("/");
     }
   }, [navigate]); // Add navigate to the dependency array
 
@@ -29,4 +29,4 @@ const Profile = () => {
   );
 };
 
-export default Profile
+export default Profile;
