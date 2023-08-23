@@ -5,7 +5,12 @@ import Footer from "../Components/Footer.jsx";
 import team1 from "../assets/img/team7.jpeg";
 import team2 from "../assets/img/team6.jpeg";
 import team3 from "../assets/img/team5.jpeg";
-import team4 from "../assets/img/team6.jpeg";
+import team4 from "../assets/img/team8.jpeg";
+import team5 from "../assets/img/team9.jpeg";
+import team6 from "../assets/img/bel.jpeg";
+import team7 from "../assets/img/folo.jpeg";
+import team8 from "../assets/img/olu.jpeg";
+import team9 from "../assets/img/ri.jpeg";
 
 const Home = () => {
   const teamMembers = [
@@ -25,9 +30,43 @@ const Home = () => {
       imgSrc: team2,
       stack: "Frontend Developer",
     },
+
     {
-      nameTitle: "Adenusi David",
+      nameTitle: "Haroun Ayotunde",
       imgSrc: team3,
+      stack: "Backend Developer",
+    },
+
+    // note correct
+    {
+      nameTitle: "Mogaji Rasheed",
+      imgSrc: team4,
+      stack: "Backend Developer",
+    },
+    {
+      nameTitle: "Owodeinde Moshood",
+      imgSrc: team5,
+      stack: "Frontend Developer",
+    },
+    {
+      nameTitle: "Bello Idowu",
+      imgSrc: team6,
+      stack: "Backend Developer",
+    },
+    {
+      nameTitle: "Folorunsho Quazeem",
+      imgSrc: team7,
+      stack: "Frontend Developer",
+    },
+
+    {
+      nameTitle: "Oladipupo Olumide",
+      imgSrc: team8,
+      stack: "Frontend Developer",
+    },
+    {
+      nameTitle: "Afolabi Omobalanle",
+      imgSrc: team9,
       stack: "Backend Developer",
     },
   ];
@@ -368,157 +407,42 @@ const Home = () => {
             </div>
 
             <div className="flex flex-wrap">
-              <div className="md:w-6/12 lg:w-3/12 lg:mb-0 mb-12 px-4">
-                <div className="px-6 flex">
-                  {teamMembers.map((teamMember) => {
-                    return (
-                      <div>
-                        <img
-                          alt="..."
-                          src={teamMember.imgSrc}
-                          className="shadow-lg rounded-full max-w-full mx-auto"
-                          style={{ maxWidth: "120px" }}
-                        />
-                        <div className="pt-6 text-center">
-                          <h5 className="text-xl font-bold">
-                           {teamMember.nameTitle}
-                          </h5>
-                          <p className="mt-1 text-sm text-gray-500 uppercase font-semibold">
-                            {teamMember.stack}
-                          </p>
-                          <div className="mt-6">
-                            <button
-                              className="bg-blue-400 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
-                              type="button"
-                            >
-                              <i className="fab fa-twitter"></i>
-                            </button>
-                            <button
-                              className="bg-blue-600 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
-                              type="button"
-                            >
-                              <i className="fab fa-facebook-f"></i>
-                            </button>
-                          </div>
+              <div className="flex flex-wrap justify-between w-full px-6">
+                {teamMembers.map((teamMember) => {
+                  return (
+                    <div className="w-full p-2 md:w-6/12 lg:w-3/12 lg:mb-4 mb-12 px-4 bg-gray-100 md:mr-2 hover:bg-gray-950 hover:text-white rounded-lg">
+                      <img
+                        alt="img"
+                        src={teamMember.imgSrc}
+                        className="shadow-lg rounded-full max-w-full mx-auto"
+                        style={{ maxWidth: "120px" }}
+                      />
+                      <div className="pt-6 text-center">
+                        <h5 className="text-xl font-bold">
+                          {teamMember.nameTitle}
+                        </h5>
+                        <p className="mt-1 text-sm text-gray-500 uppercase font-semibold">
+                          {teamMember.stack}
+                        </p>
+                        <div className="mt-6 flex justify-around items-center">
+                          <button
+                            className="bg-blue-600 text-white p-2 rounded-full outline-none focus:outline-none mr-1 mb-1"
+                            type="button"
+                          >
+                            <i className="flex bi bi-twitter"></i>
+                          </button>
+                          <button
+                            className="bg-gray-900 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
+                            type="button"
+                          >
+                            <i className="bi bi-github"></i>
+                          </button>
                         </div>
                       </div>
-                    );
-                  })}
-                  {/* map end */}
-                </div>
-              </div>
-              {/* end */}
-              {/* <div className="w-full md:w-6/12 lg:w-3/12 lg:mb-0 mb-12 px-4">
-                <div className="px-6">
-                  <img
-                    alt="..."
-                    src={team1}
-                    className="shadow-lg rounded-full max-w-full mx-auto"
-                    style={{ maxWidth: "120px" }}
-                  />
-                  <div className="pt-6 text-center">
-                    <h5 className="text-xl font-bold">Adenusi David</h5>
-                    <p className="mt-1 text-sm text-gray-500 uppercase font-semibold">
-                      Frontend Web Developer
-                    </p>
-                    <div className="mt-6">
-                      <button
-                        className="bg-red-600 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
-                        type="button"
-                      >
-                        <i className="fab fa-google"></i>
-                      </button>
-                      <button
-                        className="bg-blue-600 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
-                        type="button"
-                      >
-                        <i className="fab fa-facebook-f"></i>
-                      </button>
                     </div>
-                  </div>
-                </div>
+                  );
+                })}
               </div>
-              
-              <div className="w-full md:w-6/12 lg:w-3/12 lg:mb-0 mb-12 px-4">
-                <div className="px-6">
-                  <img
-                    alt="..."
-                    src={team2}
-                    className="shadow-lg rounded-full max-w-full mx-auto"
-                    style={{ maxWidth: "120px" }}
-                  />
-                  <div className="pt-6 text-center">
-                    <h5 className="text-xl font-bold">Paseda Modupe</h5>
-                    <p className="mt-1 text-sm text-gray-500 uppercase font-semibold">
-                      Frontend Web Developer
-                    </p>
-                    <div className="mt-6">
-                      <button
-                        className="bg-red-600 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
-                        type="button"
-                      >
-                        <i className="fab fa-google"></i>
-                      </button>
-                      <button
-                        className="bg-blue-400 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
-                        type="button"
-                      >
-                        <i className="fab fa-twitter"></i>
-                      </button>
-                      <button
-                        className="bg-gray-800 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
-                        type="button"
-                      >
-                        <i className="fab fa-instagram"></i>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="w-full md:w-6/12 lg:w-3/12 lg:mb-0 mb-12 px-4">
-                <div className="px-6">
-                  <img
-                    alt="..."
-                    src={team3}
-                    className="shadow-lg rounded-full max-w-full mx-auto"
-                    style={{ maxWidth: "120px" }}
-                  />
-                  <div className="pt-6 text-center">
-                    <h5 className="text-xl font-bold">Haroun Ayotunde</h5>
-                    <p className="mt-1 text-sm text-gray-500 uppercase font-semibold">
-                      Frontend Web Developer
-                    </p>
-                    <div className="mt-6">
-                      <button
-                        className="bg-pink-500 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
-                        type="button"
-                      >
-                        <i className="fab fa-dribbble"></i>
-                      </button>
-                      <button
-                        className="bg-red-600 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
-                        type="button"
-                      >
-                        <i className="fab fa-google"></i>
-                      </button>
-                      <button
-                        className="bg-blue-400 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
-                        type="button"
-                      >
-                        <i className="fab fa-twitter"></i>
-                      </button>
-                      <button
-                        className="bg-gray-800 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
-                        type="button"
-                      >
-                        <i className="fab fa-instagram"></i>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div> */}
-
-              {/* ends here too */}
             </div>
           </div>
         </section>
