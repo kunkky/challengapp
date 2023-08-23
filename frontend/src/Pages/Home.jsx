@@ -37,7 +37,6 @@ const Home = () => {
       stack: "Backend Developer",
     },
 
-    // note correct
     {
       nameTitle: "Mogaji Rasheed",
       imgSrc: team4,
@@ -97,14 +96,12 @@ const Home = () => {
               <div className="w-full lg:w-6/12 px-4 ml-auto mr-auto text-center">
                 <div className="pr-12 mt-8">
                   <h1 className="text-white font-semibold text-5xl">
-                    Welcome to the ultimate Tech Challenge website, where
-                    innovation meets competition!
+                    Welcome to the ultimate platform, where innovation meets
+                    competition!
                   </h1>
-                  <p className="mt-4 text-lg text-gray-300">
+                  <p className="mt-4 text-md text-gray-300">
                     Get ready to embark on a journey of innovation, learning,
-                    and growth. Join the Tech Challenge community and be a part
-                    of shaping the future through technology. Are you up for the
-                    challenge?
+                    and growth. Are you up for the challenge?
                   </p>
                 </div>
               </div>
@@ -146,8 +143,9 @@ const Home = () => {
                     <p className="mt-2 mb-4 text-gray-600">
                       Receive guidance from experienced mentors who are eager to
                       share their knowledge and provide feedback on your
-                      solutions. Grow not only as a developer but also as a
-                      critical thinker and problem solver.
+                      solutions.
+                      {/* Grow not only as a developer but also as a
+                      critical thinker and problem solver. */}
                     </p>
                   </div>
                 </div>
@@ -163,9 +161,10 @@ const Home = () => {
                     <p className="mt-2 mb-4 text-gray-600">
                       Our challenges aren't just theoretical exercises. They're
                       often based on real-world problems faced by industries and
-                      communities. By participating, you're contributing to
+                      communities.
+                      {/* By participating, you're contributing to
                       innovative solutions that can make a tangible impact on
-                      the world
+                      the world */}
                     </p>
                   </div>
                 </div>
@@ -179,11 +178,10 @@ const Home = () => {
                     </div>
                     <h6 className="text-xl font-semibold">Skill Levels</h6>
                     <p className="mt-2 mb-4 text-gray-600">
-                      Our Challenges are tailored to cater to participants of
-                      all skill levels, from beginners taking their first steps
-                      in tech to intermediate then to seasoned professionals
-                      looking for the next big challenge. Choose challenges that
-                      match your skill level and progressively level up.
+                      Our Challenges are tailored to cater for participants of
+                      all skill levels, from beginners taking their first steps.
+                      {/* Choose challenges that
+                      match your skill level and progressively level up. */}
                     </p>
                   </div>
                 </div>
@@ -200,10 +198,11 @@ const Home = () => {
                     </h6>
                     <p className="mt-2 mb-4 text-gray-600">
                       We present questions in various formats including multiple
-                      choice, coding challenges, debugging scenarios,
-                      algorithmic puzzles, and design problems. This keeps
+                      choice, coding challenges, algorithmic puzzles, and design
+                      problems.
+                      {/* This keeps
                       participants engaged and provides a holistic learning
-                      experience.
+                      experience. */}
                     </p>
                   </div>
                 </div>
@@ -220,9 +219,9 @@ const Home = () => {
                     </h6>
                     <p className="mt-2 mb-4 text-gray-600">
                       We offer an in-browser coding environment that supports
-                      multiple programming languages. Participants can write,
-                      compile, and test their code directly on the platform,
-                      making it easier to tackle coding challenges.
+                      multiple languages. You can write, and test their code
+                      directly on the platform.
+                      {/* making it easier to tackle coding challenges. */}
                     </p>
                   </div>
                 </div>
@@ -239,8 +238,9 @@ const Home = () => {
                     </h6>
                     <p className="mt-2 mb-4 text-gray-600">
                       We give participants the ability to track their challenge
-                      history, progress, and completion status. This offers a
-                      sense of achievement and a roadmap for continuous growth.
+                      history, progress, and completion status. 
+                      {/* This offers a
+                      sense of achievement and a roadmap for continuous growth. */}
                     </p>
                   </div>
                 </div>
@@ -262,11 +262,11 @@ const Home = () => {
                   coding spaces. Form teams, brainstorm ideas, and collectively
                   solve challenges that require multidisciplinary expertise.
                 </p>
-                <p className="text-lg font-light leading-relaxed mt-0 mb-4 text-gray-700">
+                {/* <p className="text-lg font-light leading-relaxed mt-0 mb-4 text-gray-700">
                   Participation in discussion forums, share insight, ask
                   questions,and connect with like minded developers to grow your
                   network.
-                </p>
+                </p> */}
               </div>
 
               <div className="w-full md:w-4/12 px-4 mr-auto ml-auto">
