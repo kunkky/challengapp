@@ -1,8 +1,36 @@
 import React from "react";
 import Navbar from "../Components/Navbar.jsx";
 import Footer from "../Components/Footer.jsx";
+// import team1 from "../assets/img/team1.jpg";
+import team1 from "../assets/img/team7.jpeg";
+import team2 from "../assets/img/team6.jpeg";
+import team3 from "../assets/img/team5.jpeg";
+import team4 from "../assets/img/team6.jpeg";
 
 const Home = () => {
+  const teamMembers = [
+    {
+      nameTitle: "Ademuyiwa Adekunle",
+      imgSrc:
+        "https://scontent.flos1-1.fna.fbcdn.net/v/t39.30808-6/343324053_757820185794519_2169248705563550875_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=09cbfe&_nc_eui2=AeG6f7nrQaXNec7ktxHAMJaEpaOMy7Ft786lo4zLsW3vznxZqvgGb5XcTeoiO6guPsbkiZdIVcHM3fZaLYY1B84_&_nc_ohc=dTNL8OCMB_gAX9MjJgX&_nc_zt=23&_nc_ht=scontent.flos1-1.fna&oh=00_AfC5__3zmWcRzS9tRzBDpG6o6fVqnGdnlmxU-DVTSnLpRA&oe=64EA721E",
+      stack: "Fullstack Developer",
+    },
+    {
+      nameTitle: "Adenusi David",
+      imgSrc: team1,
+      stack: "Frontend Developer",
+    },
+    {
+      nameTitle: "Paseda Modupe",
+      imgSrc: team2,
+      stack: "Frontend Developer",
+    },
+    {
+      nameTitle: "Adenusi David",
+      imgSrc: team3,
+      stack: "Backend Developer",
+    },
+  ];
   return (
     <>
       <Navbar transparent />
@@ -278,9 +306,8 @@ const Home = () => {
                   </div>
                   <h3 className="text-3xl font-semibold">A growing platform</h3>
                   <p className="mt-4 text-lg leading-relaxed text-gray-600">
-                    The platform comes with well structured word problem to aid your growth and
-                    get started faster. 
-                    
+                    The platform comes with well structured word problem to aid
+                    your growth and get started faster.
                   </p>
                   <ul className="list-none mt-6">
                     <li className="py-2">
@@ -305,9 +332,7 @@ const Home = () => {
                           </span>
                         </div>
                         <div>
-                          <h4 className="text-gray-600">
-                            Built in Terminal
-                          </h4>
+                          <h4 className="text-gray-600">Built in Terminal</h4>
                         </div>
                       </div>
                     </li>
@@ -336,53 +361,63 @@ const Home = () => {
               <div className="w-full lg:w-6/12 px-4">
                 <h2 className="text-4xl font-semibold">Meet Our Developers</h2>
                 <p className="text-lg leading-relaxed m-4 text-gray-600">
-                  According to the National Oceanic and Atmospheric
-                  Administration, Ted, Scambos, NSIDClead scentist, puts the
-                  potentially record maximum.
+                  Meet our amazing developers who are working together to
+                  develop one of the greatest platform for Techies.
                 </p>
               </div>
             </div>
+
             <div className="flex flex-wrap">
-              <div className="w-full md:w-6/12 lg:w-3/12 lg:mb-0 mb-12 px-4">
-                <div className="px-6">
-                  <img
-                    alt="..."
-                    src="https://scontent.flos2-2.fna.fbcdn.net/v/t39.30808-6/343324053_757820185794519_2169248705563550875_n.jpg?_nc_cat=106&cb=99be929b-59f725be&ccb=1-7&_nc_sid=be3454&_nc_eui2=AeG6f7nrQaXNec7ktxHAMJaEpaOMy7Ft786lo4zLsW3vznxZqvgGb5XcTeoiO6guPsbkiZdIVcHM3fZaLYY1B84_&_nc_ohc=kp89VnBvJYUAX-oMYEN&_nc_ht=scontent.flos2-2.fna&oh=00_AfDjs_0KSQXKk9IsiWBHEISjCCvWsTB9Pes_uBZF0OnVCQ&oe=64DAA01E"
-                    className="shadow-lg rounded-full max-w-full mx-auto"
-                    style={{ maxWidth: "120px" }}
-                  />
-                  <div className="pt-6 text-center">
-                    <h5 className="text-xl font-bold">Ademuyiwa Adekunle</h5>
-                    <p className="mt-1 text-sm text-gray-500 uppercase font-semibold">
-                      Fullstack Web Developer
-                    </p>
-                    <div className="mt-6">
-                      <button
-                        className="bg-blue-400 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
-                        type="button"
-                      >
-                        <i className="fab fa-twitter"></i>
-                      </button>
-                      <button
-                        className="bg-blue-600 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
-                        type="button"
-                      >
-                        <i className="fab fa-facebook-f"></i>
-                      </button>
-                    </div>
-                  </div>
+              <div className="md:w-6/12 lg:w-3/12 lg:mb-0 mb-12 px-4">
+                <div className="px-6 flex">
+                  {teamMembers.map((teamMember) => {
+                    return (
+                      <div>
+                        <img
+                          alt="..."
+                          src={teamMember.imgSrc}
+                          className="shadow-lg rounded-full max-w-full mx-auto"
+                          style={{ maxWidth: "120px" }}
+                        />
+                        <div className="pt-6 text-center">
+                          <h5 className="text-xl font-bold">
+                           {teamMember.nameTitle}
+                          </h5>
+                          <p className="mt-1 text-sm text-gray-500 uppercase font-semibold">
+                            {teamMember.stack}
+                          </p>
+                          <div className="mt-6">
+                            <button
+                              className="bg-blue-400 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
+                              type="button"
+                            >
+                              <i className="fab fa-twitter"></i>
+                            </button>
+                            <button
+                              className="bg-blue-600 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
+                              type="button"
+                            >
+                              <i className="fab fa-facebook-f"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                  {/* map end */}
                 </div>
               </div>
-              <div className="w-full md:w-6/12 lg:w-3/12 lg:mb-0 mb-12 px-4">
+              {/* end */}
+              {/* <div className="w-full md:w-6/12 lg:w-3/12 lg:mb-0 mb-12 px-4">
                 <div className="px-6">
                   <img
                     alt="..."
-                    src={require("../assets/img/team-2-800x800.jpg").default}
+                    src={team1}
                     className="shadow-lg rounded-full max-w-full mx-auto"
                     style={{ maxWidth: "120px" }}
                   />
                   <div className="pt-6 text-center">
-                    <h5 className="text-xl font-bold">Bello Idowu</h5>
+                    <h5 className="text-xl font-bold">Adenusi David</h5>
                     <p className="mt-1 text-sm text-gray-500 uppercase font-semibold">
                       Frontend Web Developer
                     </p>
@@ -403,16 +438,17 @@ const Home = () => {
                   </div>
                 </div>
               </div>
+              
               <div className="w-full md:w-6/12 lg:w-3/12 lg:mb-0 mb-12 px-4">
                 <div className="px-6">
                   <img
                     alt="..."
-                    src={require("../assets/img/team-3-800x800.jpg").default}
+                    src={team2}
                     className="shadow-lg rounded-full max-w-full mx-auto"
                     style={{ maxWidth: "120px" }}
                   />
                   <div className="pt-6 text-center">
-                    <h5 className="text-xl font-bold">Moshood Owodeinde</h5>
+                    <h5 className="text-xl font-bold">Paseda Modupe</h5>
                     <p className="mt-1 text-sm text-gray-500 uppercase font-semibold">
                       Frontend Web Developer
                     </p>
@@ -443,12 +479,12 @@ const Home = () => {
                 <div className="px-6">
                   <img
                     alt="..."
-                    src={require("../assets/img/team-4-470x470.png").default}
+                    src={team3}
                     className="shadow-lg rounded-full max-w-full mx-auto"
                     style={{ maxWidth: "120px" }}
                   />
                   <div className="pt-6 text-center">
-                    <h5 className="text-xl font-bold">Olumide Oladipupo</h5>
+                    <h5 className="text-xl font-bold">Haroun Ayotunde</h5>
                     <p className="mt-1 text-sm text-gray-500 uppercase font-semibold">
                       Frontend Web Developer
                     </p>
@@ -480,7 +516,9 @@ const Home = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
+
+              {/* ends here too */}
             </div>
           </div>
         </section>
