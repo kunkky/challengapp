@@ -54,8 +54,8 @@ const Navbar = (props) => {
               <Link to="/signin"
                 className={
                   (props.transparent
-                    ? "bg-white text-gray-800 active:bg-gray-100"
-                    : "bg-pink-500 text-white active:bg-pink-600") +
+                    ? "bg-white text-gray-800 hover:bg-gray-800 hover:text-white active:bg-gray-100"
+                    : "bg-pink-500 text-whit hover:bg-white hover:text-pink-500 active:bg-pink-600") +
                   " text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3"
                 }
                 
@@ -70,8 +70,8 @@ const Navbar = (props) => {
               <Link to="/signup"
                 className={
                   (props.transparent
-                    ? "bg-white text-gray-800 active:bg-gray-100"
-                    : "bg-pink-500 text-white active:bg-pink-600") +
+                    ? "bg-white text-gray-800 hover:bg-gray-800 hover:text-white active:bg-gray-100"
+                    : "bg-pink-500 text-white hover:bg-white hover:text-pink-500 active:bg-pink-600") +
                   " text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3"
                 }
 
