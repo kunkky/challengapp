@@ -22,7 +22,7 @@ const Home = () => {
           >
             <span
               id="blackOverlay"
-              className="w-full h-full absolute opacity-75 bg-black"
+              className="w-full h-full absolute opacity-75 bg-black hover:bg-slate-600"
             ></span>
           </div>
           <div className="container relative mx-auto">
@@ -68,7 +68,7 @@ const Home = () => {
           <div className="container mx-auto px-4">
             <div className="flex flex-wrap">
               <div className="lg:pt-12 pt-6 w-full md:w-4/12 px-4 text-center">
-                <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg">
+                <div className="relative flex flex-col min-w-0 break-words bg-white hover:translate-y-2 w-full mb-8 shadow-lg rounded-lg">
                   <div className="px-4 py-5 flex-auto">
                     <div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-red-400">
                       <i className="bi bi-braces"></i>
@@ -86,7 +86,7 @@ const Home = () => {
                 </div>
               </div>
 
-              <div className="w-full md:w-4/12 px-4 text-center">
+              <div className="w-full md:w-4/12 px-4 text-center hover:translate-y-2">
                 <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg">
                   <div className="px-4 py-5 flex-auto">
                     <div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-blue-400">
@@ -104,7 +104,7 @@ const Home = () => {
                 </div>
               </div>
 
-              <div className="pt-6 w-full md:w-4/12 px-4 text-center">
+              <div className="pt-6 w-full md:w-4/12 px-4 text-center hover:translate-y-2">
                 <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg">
                   <div className="px-4 py-5 flex-auto">
                     <div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-green-400">
@@ -123,7 +123,7 @@ const Home = () => {
               </div>
 
               <div className="lg:pt-12 pt-6 w-full md:w-4/12 px-4 text-center">
-                <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg">
+                <div className="relative flex flex-col min-w-0 break-words hover:translate-y-2 bg-white w-full mb-8 shadow-lg rounded-lg">
                   <div className="px-4 py-5 flex-auto">
                     <div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-red-400">
                       <i className="bi bi-braces"></i>
@@ -143,7 +143,7 @@ const Home = () => {
               </div>
 
               <div className="w-full md:w-4/12 px-4 text-center">
-                <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg">
+                <div className="relative flex flex-col min-w-0 break-words hover:translate-y-2 bg-white w-full mb-8 shadow-lg rounded-lg">
                   <div className="px-4 py-5 flex-auto">
                     <div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-blue-400">
                       <i className="bi bi-journal-code"></i>
@@ -162,7 +162,7 @@ const Home = () => {
               </div>
 
               <div className="pt-6 w-full md:w-4/12 px-4 text-center">
-                <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg">
+                <div className="relative flex flex-col min-w-0 break-words hover:translate-y-2 bg-white w-full mb-8 shadow-lg rounded-lg">
                   <div className="px-4 py-5 flex-auto">
                     <div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-green-400">
                       <i className="bi bi-code-slash"></i>
@@ -180,7 +180,7 @@ const Home = () => {
               </div>
             </div>
 
-              {/* <h3>Our features</h3> */}
+            {/* <h3>Our features</h3> */}
             <div className="flex flex-wrap items-center mt-32">
               <div className="w-full md:w-5/12 px-4 mr-auto ml-auto">
                 <div className="text-gray-600 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-gray-100">
@@ -200,16 +200,10 @@ const Home = () => {
                   questions,and connect with like minded developers to grow your
                   network.
                 </p>
-                {/* <a
-                  href="https://www.creative-tim.com/learning-lab/tailwind-starter-kit#/presentation"
-                  className="font-bold text-gray-800 mt-8"
-                >
-                  Check Tailwind Starter Kit!
-                </a> */}
               </div>
 
               <div className="w-full md:w-4/12 px-4 mr-auto ml-auto">
-                <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg bg-pink-600">
+                <div className="relative flex flex-col min-w-0 break-word w-full mb-6 shadow-lg rounded-lg bg-white">
                   <img
                     alt="..."
                     src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1051&q=80"
@@ -235,8 +229,9 @@ const Home = () => {
                       Growing With Like Minds
                     </h4>
                     <p className="text-md font-light mt-2 text-black">
-                      learning and grow with other participants, it helps you learn faster.
-                      Support one another in the learning journey.<br />
+                      learning and grow with other participants, it helps you
+                      learn faster. Support one another in the learning journey.
+                      <br />
                       <span className="font-bold">Never Walk Alone</span>
                     </p>
                   </blockquote>
@@ -281,11 +276,11 @@ const Home = () => {
                   <div className="text-pink-600 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-pink-300">
                     <i className="bi bi-braces-asterisk"></i>
                   </div>
-                  <h3 className="text-3xl font-semibold">A growing company</h3>
+                  <h3 className="text-3xl font-semibold">A growing platform</h3>
                   <p className="mt-4 text-lg leading-relaxed text-gray-600">
-                    The extension comes with three pre-built pages to help you
-                    get started faster. You can change the text and images and
-                    you're good to go.
+                    The platform comes with well structured word problem to aid your growth and
+                    get started faster. 
+                    
                   </p>
                   <ul className="list-none mt-6">
                     <li className="py-2">
@@ -297,7 +292,7 @@ const Home = () => {
                         </div>
                         <div>
                           <h4 className="text-gray-600">
-                            Carefully crafted components
+                            Carefully crafted problems
                           </h4>
                         </div>
                       </div>
@@ -311,7 +306,7 @@ const Home = () => {
                         </div>
                         <div>
                           <h4 className="text-gray-600">
-                            Amazing page examples
+                            Built in Terminal
                           </h4>
                         </div>
                       </div>
@@ -324,7 +319,7 @@ const Home = () => {
                           </span>
                         </div>
                         <div>
-                          <h4 className="text-gray-600">Dynamic components</h4>
+                          <h4 className="text-gray-600">Level assertation</h4>
                         </div>
                       </div>
                     </li>
@@ -339,7 +334,7 @@ const Home = () => {
           <div className="container mx-auto px-4">
             <div className="flex flex-wrap justify-center text-center mb-24">
               <div className="w-full lg:w-6/12 px-4">
-                <h2 className="text-4xl font-semibold">Meet Our DevOps</h2>
+                <h2 className="text-4xl font-semibold">Meet Our Developers</h2>
                 <p className="text-lg leading-relaxed m-4 text-gray-600">
                   According to the National Oceanic and Atmospheric
                   Administration, Ted, Scambos, NSIDClead scentist, puts the
