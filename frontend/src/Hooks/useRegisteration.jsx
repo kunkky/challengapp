@@ -12,7 +12,7 @@ const useRegisteration = (details, url, Authtype) => {
         password: details.password,
         phone: details.phone,
         type: Authtype,
-        level: "starter"
+        level: "beginner"
 
     }
 

@@ -88,7 +88,7 @@ const Home = () => {
           >
             <span
               id="blackOverlay"
-              className="w-full h-full absolute opacity-75 bg-black hover:bg-slate-600"
+              className="w-full h-full absolute opacity-75 bg-black"
             ></span>
           </div>
           <div className="container relative mx-auto">
@@ -96,13 +96,11 @@ const Home = () => {
               <div className="w-full lg:w-6/12 px-4 ml-auto mr-auto text-center">
                 <div className="pr-12">
                   <h1 className="text-white font-semibold text-5xl">
-                    Welcome to the ultimate Tech Challenge website, where
-                    innovation meets competition!
+                    Welcome to the ultimate Tech Challenge website!
                   </h1>
                   <p className="mt-4 text-lg text-gray-300">
                     Get ready to embark on a journey of innovation, learning,
-                    and growth. Join the Tech Challenge community and be a part
-                    of shaping the future through technology. Are you up for the
+                    and growth. Are you up for the
                     challenge?
                   </p>
                 </div>
@@ -143,9 +141,8 @@ const Home = () => {
                       Mentorship and Feedback
                     </h6>
                     <p className="mt-2 mb-4 text-gray-600">
-                      Receive guidance from experienced mentors who are eager to
-                      share their knowledge and provide feedback on your
-                      solutions. Grow not only as a developer but also as a
+                      Grow not only as a developer but also as a
+                    Grow not only as a developer but also as a
                       critical thinker and problem solver.
                     </p>
                   </div>
@@ -158,13 +155,12 @@ const Home = () => {
                     <div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-blue-400">
                       <i className="bi bi-journal-code"></i>
                     </div>
-                    <h6 className="text-xl font-semibold">Real-world Impact</h6>
+                   <h6 className="text-xl font-semibold">Real-world Impact</h6>
                     <p className="mt-2 mb-4 text-gray-600">
-                      Our challenges aren't just theoretical exercises. They're
-                      often based on real-world problems faced by industries and
-                      communities. By participating, you're contributing to
+                    By participating, you're contributing to
                       innovative solutions that can make a tangible impact on
                       the world
+                      communities.
                     </p>
                   </div>
                 </div>
@@ -178,11 +174,9 @@ const Home = () => {
                     </div>
                     <h6 className="text-xl font-semibold">Skill Levels</h6>
                     <p className="mt-2 mb-4 text-gray-600">
-                      Our Challenges are tailored to cater to participants of
-                      all skill levels, from beginners taking their first steps
-                      in tech to intermediate then to seasoned professionals
-                      looking for the next big challenge. Choose challenges that
+                     Choose challenges that
                       match your skill level and progressively level up.
+                      looking for the next big challenge.
                     </p>
                   </div>
                 </div>
@@ -200,9 +194,7 @@ const Home = () => {
                     <p className="mt-2 mb-4 text-gray-600">
                       We present questions in various formats including multiple
                       choice, coding challenges, debugging scenarios,
-                      algorithmic puzzles, and design problems. This keeps
-                      participants engaged and provides a holistic learning
-                      experience.
+                      algorithmic puzzles, and design problems.
                     </p>
                   </div>
                 </div>
@@ -219,9 +211,7 @@ const Home = () => {
                     </h6>
                     <p className="mt-2 mb-4 text-gray-600">
                       We offer an in-browser coding environment that supports
-                      multiple programming languages. Participants can write,
-                      compile, and test their code directly on the platform,
-                      making it easier to tackle coding challenges.
+                      multiple programming languages.
                     </p>
                   </div>
                 </div>
@@ -238,8 +228,7 @@ const Home = () => {
                     </h6>
                     <p className="mt-2 mb-4 text-gray-600">
                       We give participants the ability to track their challenge
-                      history, progress, and completion status. This offers a
-                      sense of achievement and a roadmap for continuous growth.
+                      history, progress, and completion status. 
                     </p>
                   </div>
                 </div>
@@ -258,8 +247,7 @@ const Home = () => {
                 <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-gray-700">
                   Collaboration is the heart of innovation. Engage with other
                   participants through forums, chat rooms, and collaborative
-                  coding spaces. Form teams, brainstorm ideas, and collectively
-                  solve challenges that require multidisciplinary expertise.
+                  coding spaces.
                 </p>
                 <p className="text-lg font-light leading-relaxed mt-0 mb-4 text-gray-700">
                   Participation in discussion forums, share insight, ask
@@ -291,14 +279,9 @@ const Home = () => {
                       className="text-pink-600 fill-current"
                     ></polygon>
                   </svg>
-                  <h4 className="text-xl font-bold text-white">
+                  <h4 className="text-xl font-bold text-black">
                     Top Notch Services
                   </h4>
-                  <p className="text-md font-light mt-2 text-white">
-                    The Arctic Ocean freezes every winter and much of the
-                    sea-ice then thaws every summer, and that process will
-                    continue whatever happens.
-                  </p>
                 </blockquote>
               </div>
             </div>
@@ -406,11 +389,11 @@ const Home = () => {
               </div>
             </div>
 
-            <div className="flex flex-wrap">
-              <div className="flex flex-wrap justify-between w-full px-6">
+            <div className="">
+              <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-5 w-full px-6">
                 {teamMembers.map((teamMember) => {
                   return (
-                    <div className="w-full p-2 md:w-6/12 lg:w-3/12 lg:mb-4 mb-12 px-4 bg-gray-100 md:mr-2 hover:bg-gray-950 hover:text-white rounded-lg">
+                    <div className=" w-full p-2 px-4 bg-gray-100 hover:bg-gray-950 hover:shadow-lg hover:text-white rounded-lg">
                       <img
                         alt="img"
                         src={teamMember.imgSrc}

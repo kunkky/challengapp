@@ -65,7 +65,7 @@ const CodeEditor = () => {
             //set solution
             setSolution(question[0].solution);
             console.log(typeof answer);
-            if(question[0].answer===answer){
+            if(question[0].answer==answer){
                 setResult(`You are correct the answer is ${question[0].answer}`)
                console.log(result);
             }
@@ -142,7 +142,7 @@ const CodeEditor = () => {
 
                     question && question.length > 0 ? question.map((questionItem, index) => (
                         <div className='p-5 overflow-auto h-[80%]' key={index}>
-                            <div className="">{questionItem.question}</div>
+                            <div dangerouslySetInnerHTML={{ __html: questionItem.question }} />
                         </div>
                     )):<div>Question Preveiw</div>
                 
