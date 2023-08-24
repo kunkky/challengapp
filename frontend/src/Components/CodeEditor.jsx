@@ -111,7 +111,8 @@ const CodeEditor = () => {
                 {
                     result !== null ?
                         <div>
-                            <div className='capitalize'>{result}</div>
+                            <div dangerouslySetInnerHTML={{ __html: result }} />
+                           
                             <button onClick={showSolution} className=' text-green-900'>Show Solution</button>
                         </div>
                         : null
