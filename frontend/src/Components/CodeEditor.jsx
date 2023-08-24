@@ -106,13 +106,12 @@ const CodeEditor = () => {
                 <pre>{output}</pre>
             </div>
                 {
-                    solutionScreen===true?<div>{solution}</div>:null
+                    solutionScreen === true ? <div dangerouslySetInnerHTML={{ __html: solution }} />:null
                 }
                 {
                     result !== null ?
                         <div>
-                            <div dangerouslySetInnerHTML={{ __html: result }} />
-                           
+                            <div className='capitalize'>{result}</div>
                             <button onClick={showSolution} className=' text-green-900'>Show Solution</button>
                         </div>
                         : null
