@@ -19,12 +19,13 @@ const Home = () => {
       imgSrc:
         "https://scontent.flos1-1.fna.fbcdn.net/v/t39.30808-6/343324053_757820185794519_2169248705563550875_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=09cbfe&_nc_eui2=AeG6f7nrQaXNec7ktxHAMJaEpaOMy7Ft786lo4zLsW3vznxZqvgGb5XcTeoiO6guPsbkiZdIVcHM3fZaLYY1B84_&_nc_ohc=dTNL8OCMB_gAX9MjJgX&_nc_zt=23&_nc_ht=scontent.flos1-1.fna&oh=00_AfC5__3zmWcRzS9tRzBDpG6o6fVqnGdnlmxU-DVTSnLpRA&oe=64EA721E",
       stack: "Fullstack Developer",
-    },
+    }, 
     {
-      nameTitle: "Adenusi David",
-      imgSrc: team1,
+      nameTitle: "Bello Idowu",
+      imgSrc: team6,
       stack: "Frontend Developer",
     },
+   
     {
       nameTitle: "Paseda Modupe",
       imgSrc: team2,
@@ -48,11 +49,6 @@ const Home = () => {
       stack: "Frontend Developer",
     },
     {
-      nameTitle: "Bello Idowu",
-      imgSrc: team6,
-      stack: "Backend Developer",
-    },
-    {
       nameTitle: "Folorunsho Quazeem",
       imgSrc: team7,
       stack: "Frontend Developer",
@@ -67,6 +63,11 @@ const Home = () => {
       nameTitle: "Afolabi Omobalanle",
       imgSrc: team9,
       stack: "Backend Developer",
+    },
+    {
+      nameTitle: "Adenusi David",
+      imgSrc: team1,
+      stack: "Frontend Developer",
     },
   ];
   return (
