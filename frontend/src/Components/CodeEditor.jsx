@@ -106,7 +106,7 @@ const CodeEditor = () => {
                 <pre>{output}</pre>
             </div>
                 {
-                    solutionScreen===true?<div>{solution}</div>:null
+                    solutionScreen === true ? <div dangerouslySetInnerHTML={{ __html: solution }} />:null
                 }
                 {
                     result !== null ?
