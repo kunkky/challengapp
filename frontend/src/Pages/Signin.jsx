@@ -141,7 +141,6 @@ const Signin = () => {
 
                             <Link to='/signup'>  New user sign Up? </Link> 
 
-                             New here? <Link to='/signup' className='cursor-pointer text-blue-600'> Register here </Link>
 
                           </p>
                       </form>

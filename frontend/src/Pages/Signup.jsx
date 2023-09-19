@@ -30,9 +30,7 @@ const Signup = () => {
             fullname: '',
             stack: '',
             confirmPassword: '',
-            phone: '',
-            checkbox: false,
-            
+            phone: '',            
         },
         validationSchema: Yup.object({
             password: Yup.string().matches(PassRegEx, 'Password must include Uppercase, Lower Case and Special Character').required('Password is Required'),
@@ -41,7 +39,6 @@ const Signup = () => {
             fullname: Yup.string().required('Full Name is required'),
             stack: Yup.string().required('Please Select a Stack'),
             phone: Yup.string().matches(phoneRegExp, 'Phone number is not valid').required("Valid Phone is needed"),
-           checked: Yup.boolean().oneOf([true], 'Please accept'),
 
         }),
         onSubmit: values => {
@@ -230,24 +227,6 @@ const Signup = () => {
                                 ) : null}
                             </div>
 
-                            <div>
-                              <input
-
-                                    id="checkbox"
-                                    name="checkbox"
-                                    type="checkbox"
-                                    onChange={formik.handleChange}
-                                    onBlur={formik.handleBlur}
-                                    value={formik.values.checkbox}
-
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
-                                <span htmlFor="terms" className="font-light text-gray-500 dark:text-gray-300">I accept the <Link to="#" className="font-medium text-blue-600 hover:underline dark:text-blue-500" >Terms and Conditions</Link></span>
-
-                                {formik.touched.checkbox && formik.errors.checkbox ? (
-                                    <div className='text-red-600 text-sm'>{formik.errors.checkbox}</div>
-                                ) : null}
-                            </div>
-                        
 
                             {
                                 loading === true ?

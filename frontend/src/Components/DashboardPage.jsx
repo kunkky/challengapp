@@ -60,7 +60,7 @@ const DashboardPage = () => {
          
             <Link to="/challenge/HTML" className='bg-[#121212] p-3 rounded text-white border-0'>Take Challenge</Link>
           </div>
-        </div> */}
+        </div> 
 
         <div className="bg-slate-50 p-10 rounded-lg flex justify-between items-center col-span-1 flex-row">
           <div className="">
@@ -71,7 +71,7 @@ const DashboardPage = () => {
             <NavLink to="/challenge/java script" className='bg-[#121212] p-3 rounded text-white border-0'>Take Challenge</NavLink>
           </div>
         </div>
-
+*/}
         <div className="bg-slate-50 p-10 rounded-lg flex justify-between items-center col-span-1 flex-row">
           <div className="">
             <img src={JsLogo} alt="" className='w-[150px]' />
@@ -81,7 +81,7 @@ const DashboardPage = () => {
             <NavLink to="/challenge/java script" className='bg-[#121212] p-3 rounded text-white border-0'>Take Challenge</NavLink>
           </div>
         </div>
-
+{/* 
         <div className="bg-slate-50 p-10 rounded-lg flex justify-between items-center col-span-1 flex-row">
           <div className="">
             <img src={CssLogo} alt="" className='w-[150px]' />
@@ -90,7 +90,7 @@ const DashboardPage = () => {
 
             <NavLink to="/challenge/css" className='bg-[#121212] p-3 rounded text-white border-0'>Take Challenge</NavLink>
           </div>
-        </div>
+        </div> */}
 
 
 
