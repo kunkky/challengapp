@@ -13,7 +13,7 @@ app.use(cookieParser());
 //handle cors for local work please remove on deployment
 app.use(cors(
     corsOptions = {
-        origin: 'http://localhost:3000', // Change to your React app's origin
+        origin: '*', // Change to your React app's origin
         credentials: true,
     }
 ));
