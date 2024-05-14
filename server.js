@@ -7,6 +7,7 @@ const cors = require('cors');
 const { questionRouter } = require("./routes/questionRoutes");
 const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
+dotenv.config({ path: ".env" });
 
 app.use(cookieParser());
 //handle cors for local work please remove on deployment
@@ -44,3 +45,4 @@ mongoose.connect(MONGOL).then(() => {
 }).catch((err) => {
     console.log("database connection failed " + err);
 })
+ 
